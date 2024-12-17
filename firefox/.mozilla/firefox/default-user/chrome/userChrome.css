@@ -1,0 +1,126 @@
+:root {
+  --font: 12px 'Noto', 'Noto Sans';
+  --bg1: #262626;
+  --bg2: #333;
+  --text1: #c5c8c6;
+  --text2: #f5f5ee;
+  
+  /* Tab */
+  --tab-selected-bgcolor: var(--bg2) !important;
+
+   /* Navbar */
+  --toolbar-bgcolor: var(--bg1) !important;
+  --focus-outline: unset !important;
+  
+  /* Bottom black seperator*/
+  --chrome-content-separator-color: var(--bg2) !important;
+  
+  /* Padding/misc overrides */
+  --tab-min-height: 0px !important;
+  --toolbarbutton-inner-padding: 0px !important;
+  --tab-border-radius: 0px !important;
+  --tab-block-margin: 0px !important;
+  
+  --urlbar-container-height: unset !important;
+}
+
+/* Split second color when loading a website */
+#main-window,
+browser[type="content-primary"],
+browser[type="content"],
+tabbrowser#content,
+#content,
+browser[type="content"] > html,
+#TabsToolbar {
+  background: var(--bg1) !important;
+}
+
+/* Window Borders 
+#main-window[sizemode="normal"] {
+  padding: 2px !important;
+  border: 1px solid var(--bg2);
+  background: var(--bg1) !important;
+  height:calc(100% - 6px)!important;
+  width:calc(100% - 6px)!important;
+}*/
+
+/* ------------------- Tabs ------------------- */
+
+/* Margin between pinned and regular tabs */
+#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) > #tabbrowser-arrowscrollbox
+> .tabbrowser-tab:nth-child(1 of :not([pinned], [hidden])) {
+  margin-inline-start: 0px !important;
+}
+
+/* Space between tabs */
+.tabbrowser-tab {
+  padding: 0px !important;
+  --tab-label-mask-size: 2em !important;
+}
+
+/* Fill gap in pinned tabs */
+.tab-content {
+  :root:not([uidensity=compact]) &[pinned] {
+    padding: 0 12px !important;;
+  }
+}
+
+/* Force height */
+#TabsToolbar-customization-target
+{
+  max-height: 16px !important;
+}
+
+/* Hide shit */
+.tab-close-button,
+.tab-icon-image:not([pinned]),
+.tab-secondary-label {
+  display: none !important;
+}
+
+/* Font & center label*/
+.tab-label {
+  font: var(--font) !important;
+  color: var(--text1);
+  margin: auto !important;
+}
+
+/* Hover/active text */
+.tab-stack .tab-content[selected] .tab-label,
+.tabbrowser-tab:hover  .tab-label {
+  color: var(--text2);
+}
+
+/* Persistent sound icon */
+.tab-icon-overlay {
+  &[indicator-replaces-favicon] {
+    opacity: 1 !important;
+  }
+}
+
+/* Box shadow will always been shit */
+#tabbrowser-tabs:not([noshadowfortests]) .tab-background:is([selected],
+[multiselected]) {
+  box-shadow: unset !important;
+}
+
+/* ------------------ Navbar ------------------ */
+
+/* Nav bar height */
+#nav-bar {
+  max-height: 16px !important;
+}
+
+/* Url input bar */
+#urlbar,
+#urlbar-background,
+.urlbar-input-container {
+  background: transparent !important;
+  max-height: 16px !important;
+  min-height: 16px !important;
+  box-shadow: unset !important;
+  border-radius: unset !important;
+  border: unset !important;
+}
+
+
