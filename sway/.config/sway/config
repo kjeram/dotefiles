@@ -58,11 +58,14 @@ input "type:pointer" {
 #
 # Example configuration:
 #
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
+exec swayidle -w \
+   timeout 600 'swaymsg "output * power off"' \
+   resume 'swaymsg "output * power on"' \
+   before-sleep 'swaylock -f -c 000000'
+
+# Lock the screen
+bindsym $mod+Escape exec 'swaylock -f -c 000000'
+
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
@@ -309,7 +312,7 @@ default_floating_border pixel 1
 # Client                border      backgr.     text         indic.      child_brd.
 client.focused          $color8     $color0     $cursorColor $color8     $color8
 client.unfocused        $color0     $background $foreground  $color0     $color0
-client.focused_inactive $color0     $background $foreground  $color0     $color0
+client.focused_inactive $color0     $color0     $foreground  $color0     $color0
 client.urgent           $color8     $background $foreground  $color9     $color9
 client.placeholder      $color14    $background $foreground  $color14    $color6
 # client.background       $background
