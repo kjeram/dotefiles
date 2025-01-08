@@ -321,7 +321,8 @@ output $op_rm background $color9 solid_color
 ### Bar
 bar {
     position bottom
-    status_command while date +'%d/%m/%Y %H:%M:%S'; do sleep 1; done
+    # status_command while date +'%d/%m/%Y %H:%M:%S'; do sleep 1; done
+    status_command while ~/.config/sway/status_bar.sh; do sleep 1; done
     colors {
         background $background
         statusline $foreground
