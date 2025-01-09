@@ -1,19 +1,67 @@
 ### Variables
+
+set $font "xft:Noto Sans 10"
+
+## Colors
+# special
+set $foreground   c5c8c6
+set $background   151515
+set $cursorColor  ffffff
+# black
+set $color0       262626
+set $color8       333333
+# red
+set $color1       a54242
+set $color9       cc6666
+# green
+set $color2       8c9440
+set $color10      b5bd68
+# yellow
+set $color3       de935f
+set $color11      f0c674
+# blue
+set $color4       5f819d
+set $color12      81a2be
+# magenta
+set $color5       85678f
+set $color13      b294bb
+# cyan
+set $color6       5e8d87
+set $color14      8abeb7
+# hwite
+set $color7       707880
+set $color15      c5c8c6
+
 # Your preferred terminal emulator
 set $term kitty
+
 # Your preferred application launcher
-set $menu wmenu-run
+# set $menu wmenu-run
+
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
+
 # Output
 set $op_lm DP-1
 set $op_rm DP-3
 set $op_tv HDMI-A-1
+
+set $wp ~/Pictures/background.jpg
+
+# Opacity
+set $opacity 0.9
+# E6 is 0.9
+set $opacity_hex E6
+
+# Window Opacity
+# for_window [class=".*"] opacity 1
+for_window [app_id="$term"] opacity $opacity
 
 
 ### Output configuration
@@ -26,10 +74,12 @@ set $op_tv HDMI-A-1
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-output $op_lm resolution 1920x1200 position 0,0
-output $op_rm resolution 1920x1200 position 1920,0
-output $op_tv resolution 1920x1080 position 3840,0
+output $op_lm resolution 1920x1200 position 0 0
+output $op_rm resolution 1920x1200 position 1920 0
+output $op_tv resolution 1920x1080 position 3840 0
 output $op_tv disable
+# output * background $background solid_color
+output * bg $wp fill
 
 
 ### Input configuration
@@ -61,10 +111,10 @@ input "type:pointer" {
 exec swayidle -w \
    timeout 600 'swaymsg "output * power off"' \
    resume 'swaymsg "output * power on"' \
-   before-sleep 'swaylock -f -c 000000'
+   before-sleep 'swaylock -f -i $wp'
 
 # Lock the screen
-bindsym $mod+Escape exec 'swaylock -f -c 000000'
+bindsym $mod+Escape exec 'swaylock -f -i $wp'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -76,16 +126,33 @@ mouse_warping none
 focus_follows_mouse no
 popup_during_fullscreen smart
 
+### Font
+font $font
+title_align center
+
+### Gaps
+gaps inner 10
+gaps outer 0
+
+### Border style
+default_border pixel 1
+default_floating_border pixel 1
+# hide_edge_borders none
+
 
 ### Basics
     # Start a terminal
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+Control+c kill
+    bindsym $mod+Shift+c kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+d exec wmenu-run \
+        -f $font \
+	-N $background$opacity_hex \
+	-n $foreground \
+	-S $color1
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -93,6 +160,9 @@ popup_during_fullscreen smart
     # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
     floating_modifier $mod normal
+
+    # Kill tabs with middle click
+    bindsym button2 kill
 
     # Reload the configuration file
     bindsym $mod+Shift+F5 reload
@@ -123,11 +193,11 @@ popup_during_fullscreen smart
     bindsym $mod+b splith
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
+    # bindsym $mod+s layout stacking
     # bindsym $mod+w layout tabbed
     # bindsym $mod+e layout toggle split
     bindsym $mod+a layout tabbed
-    bindsym $mod+x layout toggle split
+    bindsym $mod+tab layout toggle split
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
@@ -141,17 +211,19 @@ popup_during_fullscreen smart
     # Move focus to the parent container
     # bindsym $mod+a focus parent
 
+    bindsym $mod+plus opacity plus 0.05
+    bindsym $mod+minus opacity minus 0.05
 
 ### Scratchpad
     # Sway has a "scratchpad", which is a bag of holding for windows.
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+Shift+s move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    bindsym $mod+s scratchpad show
 
 
 ### Workspaces
@@ -161,16 +233,26 @@ popup_during_fullscreen smart
     set $ws_3 3
     set $ws_4 4
     set $ws_5 5
+    set $ws_6 6
+    set $ws_7 7
+    set $ws_8 8
+    set $ws_9 9
+    set $ws_0 0
     set $ws_q Q
     set $ws_w W
     set $ws_e E
     set $ws_r R
+    set $ws_t T
+    set $ws_y Y
+    set $ws_u U
+    set $ws_i I
+    set $ws_o O
+    set $ws_p P
     
     workspace $ws_1 output $op_lm
     workspace $ws_2 output $op_lm
     workspace $ws_3 output $op_rm
     workspace $ws_4 output $op_rm
-    # workspace $ws_5 output $op_tv
     workspace $ws_q output $op_lm
     workspace $ws_w output $op_lm
     workspace $ws_e output $op_rm
@@ -182,10 +264,21 @@ popup_during_fullscreen smart
     bindsym $mod+3 workspace $ws_3
     bindsym $mod+4 workspace $ws_4
     bindsym $mod+5 workspace $ws_5
+    bindsym $mod+6 workspace $ws_6
+    bindsym $mod+7 workspace $ws_6
+    bindsym $mod+8 workspace $ws_8
+    bindsym $mod+9 workspace $ws_9
+    bindsym $mod+0 workspace $ws_0
     bindsym $mod+q workspace $ws_q
     bindsym $mod+w workspace $ws_w
     bindsym $mod+e workspace $ws_e
     bindsym $mod+r workspace $ws_r
+    bindsym $mod+t workspace $ws_t
+    bindsym $mod+y workspace $ws_y
+    bindsym $mod+u workspace $ws_u
+    bindsym $mod+i workspace $ws_i
+    bindsym $mod+o workspace $ws_o
+    bindsym $mod+p workspace $ws_p
     
     # move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace $ws_1
@@ -193,10 +286,21 @@ popup_during_fullscreen smart
     bindsym $mod+Shift+3 move container to workspace $ws_3
     bindsym $mod+Shift+4 move container to workspace $ws_4
     bindsym $mod+Shift+5 move container to workspace $ws_5
+    bindsym $mod+Shift+6 move container to workspace $ws_6
+    bindsym $mod+Shift+7 move container to workspace $ws_7
+    bindsym $mod+Shift+8 move container to workspace $ws_8
+    bindsym $mod+Shift+9 move container to workspace $ws_9
+    bindsym $mod+Shift+0 move container to workspace $ws_0
     bindsym $mod+Shift+q move container to workspace $ws_q
     bindsym $mod+Shift+w move container to workspace $ws_w
     bindsym $mod+Shift+e move container to workspace $ws_e
     bindsym $mod+Shift+r move container to workspace $ws_r
+    bindsym $mod+Shift+t move container to workspace $ws_t
+    bindsym $mod+Shift+y move container to workspace $ws_y
+    bindsym $mod+Shift+u move container to workspace $ws_u
+    bindsym $mod+Shift+i move container to workspace $ws_i
+    bindsym $mod+Shift+o move container to workspace $ws_o
+    bindsym $mod+Shift+p move container to workspace $ws_p
  
     # move focused containter to workspace and move to workspace
     bindsym $mod+Control+1 move container to workspace number $ws_1; workspace number $ws_1
@@ -204,10 +308,21 @@ popup_during_fullscreen smart
     bindsym $mod+Control+3 move container to workspace number $ws_3; workspace number $ws_3
     bindsym $mod+Control+4 move container to workspace number $ws_4; workspace number $ws_4
     bindsym $mod+Control+5 move container to workspace number $ws_5; workspace number $ws_5
+    bindsym $mod+Control+6 move container to workspace number $ws_6; workspace number $ws_6
+    bindsym $mod+Control+7 move container to workspace number $ws_7; workspace number $ws_7
+    bindsym $mod+Control+8 move container to workspace number $ws_8; workspace number $ws_8
+    bindsym $mod+Control+9 move container to workspace number $ws_9; workspace number $ws_9
+    bindsym $mod+Control+0 move container to workspace number $ws_0; workspace number $ws_0
     bindsym $mod+Control+q move container to workspace number $ws_q; workspace number $ws_q
     bindsym $mod+Control+w move container to workspace number $ws_w; workspace number $ws_w
     bindsym $mod+Control+e move container to workspace number $ws_e; workspace number $ws_e
     bindsym $mod+Control+r move container to workspace number $ws_r; workspace number $ws_r
+    bindsym $mod+Control+t move container to workspace number $ws_t; workspace number $ws_t
+    bindsym $mod+Control+y move container to workspace number $ws_y; workspace number $ws_y
+    bindsym $mod+Control+u move container to workspace number $ws_u; workspace number $ws_u
+    bindsym $mod+Control+i move container to workspace number $ws_i; workspace number $ws_i
+    bindsym $mod+Control+o move container to workspace number $ws_o; workspace number $ws_o
+    bindsym $mod+Control+p move container to workspace number $ws_p; workspace number $ws_p
  
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
@@ -254,60 +369,25 @@ mode "resize" {
 bindsym $mod+z mode "resize"
 
 ### Utilities
-    # Special keys to adjust volume via PulseAudio
     bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ togglj
-    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
-    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+    # bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+    # bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+    # bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
+    # mpd Keybinds
+    bindsym XF86AudioRaiseVolume exec --no-startup-id mpc volume +1
+    bindsym XF86AudioLowerVolume exec --no-startup-id mpc volume -1
+    bindsym XF86AudioStop exec --no-startup-id mpc stop
+    bindsym XF86AudioPrev exec --no-startup-id mpc prev
+    bindsym XF86AudioNext exec --no-startup-id mpc next
+    bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+
     # Special keys to adjust brightness via brightnessctl
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    # bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    # bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
-
-### Colors
-# special
-set $foreground   #c5c8c6
-set $background   #151515
-set $cursorColor  #ffffff
-# black
-set $color0       #262626
-set $color8       #333333
-# red
-set $color1       #a54242
-set $color9       #cc6666
-# green
-set $color2       #8c9440
-set $color10      #b5bd68
-# yellow
-set $color3       #de935f
-set $color11      #f0c674
-# blue
-set $color4       #5f819d
-set $color12      #81a2be
-# magenta
-set $color5       #85678f
-set $color13      #b294bb
-# cyan
-set $color6       #5e8d87
-set $color14      #8abeb7
-# hwite
-set $color7       #707880
-set $color15      #c5c8c6
-
-### Font
-font xft:Noto Sans 10
-title_align center
-
-### Gaps
-gaps inner 10
-gaps outer 0
-
-### Border style
-default_border pixel 1
-default_floating_border pixel 1
-# hide_edge_borders none
 
 # Client                border      backgr.     text         indic.      child_brd.
 client.focused          $color8     $color0     $cursorColor $color8     $color8
@@ -316,7 +396,7 @@ client.focused_inactive $color0     $color0     $foreground  $color0     $color0
 client.urgent           $color8     $background $foreground  $color9     $color9
 client.placeholder      $color14    $background $foreground  $color14    $color6
 # client.background       $background
-output $op_rm background $color9 solid_color
+
 
 ### Bar
 bar {
@@ -324,7 +404,7 @@ bar {
     # status_command while date +'%d/%m/%Y %H:%M:%S'; do sleep 1; done
     status_command while ~/.config/sway/status_bar.sh; do sleep 1; done
     colors {
-        background $background
+        background $background$opacity_hex
         statusline $foreground
 	#focused_background $background
 	#focused_statusline $foreground
@@ -333,7 +413,7 @@ bar {
 	focused_workspace  $color8     $color8     $cursorColor
         active_workspace   $color8     $color8     $color15
         inactive_workspace $color8     $background $color15
-	urgent_workspace   $color8     $background $color15
+	urgent_workspace   $color9     $background $color15
 	binding_mode       $color8     $background $color15
     }
 }
