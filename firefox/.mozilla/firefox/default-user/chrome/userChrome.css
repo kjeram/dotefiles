@@ -30,7 +30,7 @@
   --color7:       #707880;
   --color15:      #c5c8c6;
 
-  --tab-height: 28px;
+  --tab-height: 27px;
   --urlbar-height: var(--tab-height) !important;
   --urlbar-container-height: var(--tab-height) !important;
 
@@ -150,7 +150,8 @@ spacer,
 .tab-icon-image:not([pinned]),
 .tab-secondary-label,
 #tabs-newtab-button,
-#reader-mode-button {
+#reader-mode-button,
+.tab-icon-overlay {
   display: none !important;
 }
 #navigator-toolbox {
