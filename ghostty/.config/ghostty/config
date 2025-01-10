@@ -1,0 +1,5 @@
+font-family = Noto Sans Mono
+font-size = 10
+window-decoration = false
+resize-overlay = never
+theme = Tomorrow Custom
