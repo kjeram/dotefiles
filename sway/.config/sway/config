@@ -1,35 +1,76 @@
 #--------------#
 # Theme colors #
 #--------------#
+    # # special
+    # set $foreground   c5c8c6
+    # set $background   151515
+    # set $cursorColor  ffffff
+    # # black
+    # set $color0       262626
+    # set $color8       333333
+    # # red
+    # set $color1       a54242
+    # set $color9       cc6666
+    # # green
+    # set $color2       8c9440
+    # set $color10      b5bd68
+    # # yellow
+    # set $color3       de935f
+    # set $color11      f0c674
+    # # blue
+    # set $color4       5f819d
+    # set $color12      81a2be
+    # # magenta
+    # set $color5       85678f
+    # set $color13      b294bb
+    # # cyan
+    # set $color6       5e8d87
+    # set $color14      8abeb7
+    # # hwite
+    # set $color7       707880
+    # set $color15      c5c8c6
 
-    # special
-    set $foreground   c5c8c6
-    set $background   151515
-    set $cursorColor  ffffff
-    # black
-    set $color0       262626
-    set $color8       333333
-    # red
-    set $color1       a54242
-    set $color9       cc6666
-    # green
-    set $color2       8c9440
-    set $color10      b5bd68
-    # yellow
-    set $color3       de935f
-    set $color11      f0c674
-    # blue
-    set $color4       5f819d
-    set $color12      81a2be
-    # magenta
-    set $color5       85678f
-    set $color13      b294bb
-    # cyan
-    set $color6       5e8d87
-    set $color14      8abeb7
-    # hwite
-    set $color7       707880
-    set $color15      c5c8c6
+    # catppuccin-mocha
+    set $rosewater f5e0dc
+    set $flamingo  f2cdcd
+    set $pink      f5c2e7
+    set $mauve     cba6f7
+    set $red       f38ba8
+    set $maroon    eba0ac
+    set $peach     fab387
+    set $yellow    f9e2af
+    set $green     a6e3a1
+    set $teal      94e2d5
+    set $sky       89dceb
+    set $sapphire  74c7ec
+    set $blue      89b4fa
+    set $lavender  b4befe
+    set $text      cdd6f4
+    set $subtext1  bac2de
+    set $subtext0  a6adc8
+    set $overlay2  9399b2
+    set $overlay1  7f849c
+    set $overlay0  6c7086
+    set $surface2  585b70
+    set $surface1  45475a
+    set $surface0  313244
+    set $base      1e1e2e
+    set $mantle    181825
+    set $crust     11111b
+
+#--------------#
+# Cursor theme #
+#--------------#
+
+    set $cursor catppuccin-mocha-red-cursors
+    seat seat0 xcursor_theme $cursor
+    exec_always gsettings set org.gnome.desktop.interface cursor-theme $cursor
+
+#-----------#
+# GTK theme #
+#-----------#
+
+    exec_always gsettings set org.gnome.desktop.interface gtk-theme catppuccin-mocha-red-standard+default
 
 #---------#
 # Mod key #
@@ -40,16 +81,146 @@
     # Windows/Command/Super key
     set $mod Mod4
 
-#-----------#
-# Variables #
-#-----------#
+#----------#
+# Terminal #
+#----------#
 
-    # Terminal emulator
     set $term ghostty
 
-#----------#
-# Movement #
-#----------#
+#----------------------#
+# Output configuration #
+#----------------------#
+
+    # Monitors/Outputs
+    set $op_lm DP-1
+    set $op_rm DP-3
+    set $op_tv HDMI-A-1
+
+    # Current Wallpaper
+    set $wp ~/Pictures/background.jpg
+
+    output $op_lm resolution 1920x1200 position 0 0
+    output $op_rm resolution 1920x1200 position 1920 0
+    # output $op_tv resolution 1920x1080 position 0 0
+    output $op_tv disable
+    # output * background $background solid_color
+    output * bg $wp fill
+
+#--------------------#
+# Idle configuration #
+#--------------------#
+
+    # Screensaver after 10m
+    exec swayidle -w \
+       timeout 600 'swaymsg "output * power off"' \
+       resume 'swaymsg "output * power on"' \
+       before-sleep 'swaylock -f -i $wp'
+
+    # Lock the screen
+    bindsym $mod+Escape exec 'swaylock -f -i $wp'
+
+#---------------------#
+# Input configuration #
+#---------------------#
+
+    input "type:keyboard" {
+       xkb_layout no
+    }
+
+    input "type:pointer" {
+       accel_profile "flat"
+       pointer_accel 0.7
+    }
+
+    # Hide cursor after 30 seconds
+    seat seat0 hide_cursor "30000"
+
+    bindsym $mod+Shift+plus seat seat0 cursor set 0 0
+
+    input "type:touchpad" {
+        events disabled
+    }
+
+#----------------#
+# Window opacity #
+#----------------#
+
+    set $opacity 0.95
+    set $opacity_hex E6
+    #NOTE: E6 is 0.9 in decimals
+
+    # Global
+    # for_window [class=".*"] opacity 1
+
+    # Current terminal
+    for_window [app_id="$term"] opacity $opacity
+
+    # Set opacity keybinds
+    bindsym $mod+plus opacity plus 0.05
+    bindsym $mod+minus opacity minus 0.05
+
+#------------------#
+# Borders and gaps #
+#------------------#
+
+    gaps inner 10
+    gaps outer 0
+
+    default_border pixel 1
+    default_floating_border normal 1
+    # hide_edge_borders none
+
+#------------------#
+# Floating windows #
+#------------------#
+
+    for_window [app_id="About"]       floating enable
+    for_window [app_id="bubble"]      floating enable
+    for_window [app_id="dialog"]      floating enable
+    for_window [app_id="menu"]        floating enable
+    for_window [app_id="page-info"]   floating enable
+    for_window [app_id="pop-up"]      floating enable
+    for_window [app_id="Preferences"] floating enable
+    for_window [app_id="task_dialog"] floating enable
+    for_window [app_id="termfloat"]   floating enable
+    for_window [app_id="toolbox"]     floating enable
+    for_window [app_id="webconsole"]  floating enable
+
+    for_window [title = "About Mozilla Firefox"] floating enable
+    for_window [window_role = "About"] floating enable
+    for_window [app_id="firefox" title="Library"] floating enable, border pixel 1, sticky enable
+
+    for_window [class="^Steam$" title="^Friends$"] floating enable
+    for_window [class="^Steam$" title="Steam - News"] floating enable
+    for_window [class="^Steam$" title=".* - Chat"] floating enable
+    for_window [class="^Steam$" title="^Settings$"] floating enable
+    for_window [class="^Steam$" title=".* - event started"] floating enable
+    for_window [class="^Steam$" title=".* CD key"] floating enable
+    for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+    for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+    for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+    for_window [title="^Steam Keyboard$"] floating enable
+
+    bindsym $mod+b border toggle
+
+#------#
+# Misc #
+#------#
+
+    mouse_warping none
+    focus_follows_mouse no
+    popup_during_fullscreen smart
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+#---------------------#
+# General keybindings #
+#---------------------#
 
     # Direction keys
     set $left h
@@ -68,110 +239,8 @@
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+$right move right
 
-#----------------------#
-# Output configuration #
-#----------------------#
-
-    # Monitors/Outputs
-    set $op_lm DP-1
-    set $op_rm DP-3
-    set $op_tv HDMI-A-1
-
-    # Current Wallpaper
-    set $wp ~/Pictures/background.jpg
-
-    output $op_lm resolution 1920x1200 position 0 0
-    output $op_rm resolution 1920x1200 position 1920 0
-    # output $op_tv resolution 1920x1080 position 3840 0
-    output $op_tv disable
-    # output * background $background solid_color
-    output * bg $wp fill
-
-#--------------------#
-# Idle configuration #
-#--------------------#
-
-    # Screensaver after 10m
-    exec swayidle -w \
-       timeout 600 'swaymsg "output * power off"' \
-       resume 'swaymsg "output * power on"' \
-       before-sleep 'swaylock -f -i $wp'
-
-    # Lock the screen
-    bindsym $mod+Escape exec 'swaylock -f -i $wp'
-
-
-#----------------#
-# Window opacity #
-#----------------#
-
-    set $opacity 0.9
-    set $opacity_hex E6
-    #NOTE: E6 is 0.9 in decimals
-
-    # Global
-    # for_window [class=".*"] opacity 1
-
-    # Current terminal
-    for_window [app_id="$term"] opacity $opacity
-
-    # Set opacity
-    bindsym $mod+plus opacity plus 0.05
-    bindsym $mod+minus opacity minus 0.05
-
-
-#---------------------#
-# Input configuration #
-#---------------------#
-
-    input "type:keyboard" {
-       xkb_layout no
-    }
-
-    input "type:pointer" {
-       accel_profile "flat"
-       pointer_accel 0.7
-}
-
-#------#
-# Misc #
-#------#
-
-    mouse_warping none
-    focus_follows_mouse no
-    popup_during_fullscreen smart
-
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
-
-#------#
-# Font #
-#------#
-
-    # Variable also used in swaybar (I think)
-    set $font "xft:Noto Sans 10"
-
-    font $font
-    title_align center
-
-#------------------#
-# Borders and gaps #
-#------------------#
-
-    gaps inner 10
-    gaps outer 0
-
-    default_border pixel 2
-    default_floating_border pixel 2
-    # hide_edge_borders none
-
-#-------------#
-# Keybindings #
-#-------------#
+    bindsym $mod+m workspace next
+    bindsym $mod+n workspace prev
 
     # Reload the configuration file
     bindsym $mod+Shift+F5 reload
@@ -183,11 +252,7 @@
     bindsym $mod+Return exec $term
 
     # Start your launcher
-    bindsym $mod+d exec wmenu-run \
-        -f $font \
-	-N $background$opacity_hex \
-	-n $foreground \
-	-S $color1
+    bindsym $mod+d exec wmenu-run -f $font -N $base -n $text -S $red -s $crust
 
     # Kill focused window
     bindsym $mod+Shift+c kill
@@ -201,6 +266,10 @@
     # bindsym $mod+e layout toggle split
     bindsym $mod+a layout tabbed
     bindsym $mod+tab layout toggle split
+
+    # Layout stuff
+    bindsym $mod+c splitv
+    bindsym $mod+v splith
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
@@ -219,6 +288,133 @@
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+s scratchpad show
+
+    # Switch to TV
+    bindsym $mod+Control+period \
+         output $op_tv enable; \
+	 output $op_tv resolution 1920x1080 position 0 0; \
+         output $op_lm disable; \
+         output $op_rm disable
+
+    # Reset back to monitors
+    bindsym $mod+Control+comma \
+         output $op_rm enable; \
+         output $op_lm enable; \
+         output $op_tv disable; \
+
+    # Resizing containers
+    mode "resize" {
+        bindsym $left resize shrink width 10px
+        bindsym $down resize grow height 10px
+        bindsym $up resize shrink height 10px
+        bindsym $right resize grow width 10px
+
+        # Return to default mode
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
+
+    # bindsym $mod+r mode "resize"
+    bindsym $mod+z mode "resize"
+
+    # Mute/unmute
+    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+    # bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+    # bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+    # bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
+    # mpc Keybinds
+    bindsym XF86AudioRaiseVolume exec --no-startup-id mpc volume +1
+    bindsym XF86AudioLowerVolume exec --no-startup-id mpc volume -1
+    bindsym XF86AudioStop exec --no-startup-id mpc stop
+    bindsym XF86AudioPrev exec --no-startup-id mpc prev
+    bindsym XF86AudioNext exec --no-startup-id mpc next
+    bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+
+    # Special keys to adjust brightness via brightnessctl
+    # bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    # bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+
+    bindsym $mod+Shift+x exec hyprpicker -a
+
+    # Special key to take a screenshot with grim
+    bindsym Print exec grim
+
+#------#
+# Font #
+#------#
+
+    # Variable also used in swaybar (I think)
+    set $font "xft:Noto Sans 8"
+
+    font $font
+    title_align center
+
+#--------------#
+# Window style #
+#--------------#
+
+    # # client                border      backgr.     text         indic.      child_brd.
+    # client.focused          $color8     $color0     $cursorColor $color8     $color8
+    # client.unfocused        $color0     $background $foreground  $color0     $color0
+    # client.focused_inactive $color0     $color0     $foreground  $color0     $color0
+    # client.urgent           $color8     $background $foreground  $color9     $color9
+    # client.placeholder      $color14    $background $foreground  $color14    $color6
+    # # client.background       $background
+
+    # target                 title     bg    text   indicator  border
+    client.focused           $lavender $base $text  $lavender  $lavender 
+    client.focused_inactive  $overlay0 $base $text  $overlay0  $overlay0
+    client.unfocused         $overlay0 $base $text  $overlay0  $overlay0
+    client.urgent            $peach    $base $peach $overlay0  $peach
+    client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+    client.background        $base
+    
+#----------#
+# Sway-bar #
+#----------#
+
+    # bar {
+    #     position bottom
+    #     font $font
+    #     tray_output none
+    #     strip_workspace_numbers yes
+    #     status_command while date +'%a %d %b %Y (w%-V) %H:%M:%S'; do sleep 1; done
+    #     # status_command while ~/.config/sway/status_bar.sh; do sleep 1; done
+    #     colors {
+    #         background $background$opacity_hex
+    #         statusline $foreground
+    #         #focused_background $background
+    #         #focused_statusline $foreground
+    #         #separator          $foreground
+    #         # client           border      backgr.     text
+    #         focused_workspace  $color8     $color8     $cursorColor
+    #         active_workspace   $color8     $color8     $color15
+    #         inactive_workspace $color8     $background $color15
+    #         urgent_workspace   $color9     $background $color15
+    #         binding_mode       $color8     $background $color15
+    #     }
+    # }
+
+    bar {
+        position bottom
+        font $font
+        tray_output none
+        strip_workspace_numbers yes
+        status_command while date +'%a %d %b %Y (w%-V) %H:%M:%S'; do sleep 1; done
+        colors {
+            background         $base
+            statusline         $text
+            focused_statusline $text
+            focused_separator  $base
+    
+            # target           border bg        text
+            focused_workspace  $base  $mauve    $crust
+            active_workspace   $base  $surface2 $text
+            inactive_workspace $base  $base     $text
+            urgent_workspace   $base  $red      $crust
+      }
+    }
 
 #------------#
 # Workspaces #
@@ -324,98 +520,3 @@
     # Move workspaces
     bindsym $mod+greater move workspace to output right
     bindsym $mod+less move workspace to output left
- 
-#------------------------------#
-# Switch to TV output and back #
-#------------------------------#
-
-    # Switch to TV
-    bindsym $mod+Control+period \
-         output $op_tv enable; \
-         output $op_lm disable; \
-         output $op_rm disable
-
-    # Reset back to monitors
-    bindsym $mod+Control+comma \
-         output $op_rm enable; \
-         output $op_lm enable; \
-         output $op_tv disable; \
-
-#---------------------#
-# Resizing containers #
-#---------------------#
-
-    mode "resize" {
-        bindsym $left resize shrink width 10px
-        bindsym $down resize grow height 10px
-        bindsym $up resize shrink height 10px
-        bindsym $right resize grow width 10px
-
-        # Return to default mode
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-    }
-
-    # bindsym $mod+r mode "resize"
-    bindsym $mod+z mode "resize"
-
-#-----------#
-# Utilities #
-#-----------#
-
-    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ togglj
-    # bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-    # bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
-    # bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
-
-    # mpd Keybinds
-    bindsym XF86AudioRaiseVolume exec --no-startup-id mpc volume +1
-    bindsym XF86AudioLowerVolume exec --no-startup-id mpc volume -1
-    bindsym XF86AudioStop exec --no-startup-id mpc stop
-    bindsym XF86AudioPrev exec --no-startup-id mpc prev
-    bindsym XF86AudioNext exec --no-startup-id mpc next
-    bindsym XF86AudioPlay exec --no-startup-id mpc toggle
-
-    # Special keys to adjust brightness via brightnessctl
-    # bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-    # bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
-    # Special key to take a screenshot with grim
-    bindsym Print exec grim
-
-#--------------#
-# Window style #
-#--------------#
-
-    # client                border      backgr.     text         indic.      child_brd.
-    client.focused          $color8     $color0     $cursorColor $color8     $color8
-    client.unfocused        $color0     $background $foreground  $color0     $color0
-    client.focused_inactive $color0     $color0     $foreground  $color0     $color0
-    client.urgent           $color8     $background $foreground  $color9     $color9
-    client.placeholder      $color14    $background $foreground  $color14    $color6
-    # client.background       $background
-
-#----------#
-# Sway-bar #
-#----------#
-
-    bar {
-        position bottom
-        font $font
-        tray_output none
-        strip_workspace_numbers yes
-        status_command while date +'%a %d %b %Y (w%-V) %H:%M:%S'; do sleep 1; done
-        # status_command while ~/.config/sway/status_bar.sh; do sleep 1; done
-        colors {
-            background $background$opacity_hex
-            statusline $foreground
-            #focused_background $background
-            #focused_statusline $foreground
-	    #separator          $foreground
-	    # client           border      backgr.     text
-	    focused_workspace  $color8     $color8     $cursorColor
-            active_workspace   $color8     $color8     $color15
-            inactive_workspace $color8     $background $color15
-	    urgent_workspace   $color9     $background $color15
-	    binding_mode       $color8     $background $color15
-        }
-    }
