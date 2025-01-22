@@ -153,7 +153,8 @@
     # for_window [class=".*"] opacity 1
 
     # Current terminal
-    for_window [app_id="$term"] opacity $opacity
+    # NOTE: Opacity set in term config
+    # for_window [app_id="$term"] opacity $opacity
 
     # Set opacity keybinds
     bindsym $mod+plus opacity plus 0.05
