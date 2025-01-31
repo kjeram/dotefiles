@@ -1,3 +1,4 @@
+
 #--------------#
 # Theme colors #
 #--------------#
@@ -101,9 +102,9 @@
 
     output $op_lm resolution 1920x1200 position 0 0
     output $op_rm resolution 1920x1200 position 1920 0
-    # output $op_tv resolution 1920x1080 position 0 0
+    output $op_tv resolution 1920x1080 position 3840 0
     output $op_tv disable
-    # output * background $background solid_color
+
     output * bg $wp fill
 
 #--------------------#
@@ -117,7 +118,7 @@
        before-sleep 'swaylock -f -i $wp'
 
     # Lock the screen
-    bindsym $mod+Escape exec 'swaylock -f -i $wp'
+    bindsym $mod+Escape exec 'swaylock -f -F -e -i $wp'
 
 #---------------------#
 # Input configuration #
@@ -175,6 +176,8 @@
 # Floating windows #
 #------------------#
 
+    for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
+
     for_window [app_id="About"]       floating enable
     for_window [app_id="bubble"]      floating enable
     for_window [app_id="dialog"]      floating enable
@@ -203,6 +206,7 @@
     for_window [title="^Steam Keyboard$"] floating enable
 
     bindsym $mod+b border toggle
+    bindsym $mod+Control+s sticky toggle
 
 #------#
 # Misc #
@@ -245,6 +249,8 @@
 
     # Reload the configuration file
     bindsym $mod+Shift+F5 reload
+
+    bindsym $mod+Shift+F9 exec swaynag -t warning -m 'Do you really want to suspend?' -z 'No' '$0' -z 'Yes, suspend' 'systemctl suspend'
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+F4 exec swaynag -t warning -m 'Do you really want to exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
@@ -293,7 +299,6 @@
     # Switch to TV
     bindsym $mod+Control+period \
          output $op_tv enable; \
-	 output $op_tv resolution 1920x1080 position 0 0; \
          output $op_lm disable; \
          output $op_rm disable
 
@@ -301,7 +306,7 @@
     bindsym $mod+Control+comma \
          output $op_rm enable; \
          output $op_lm enable; \
-         output $op_tv disable; \
+         output $op_tv disable;
 
     # Resizing containers
     mode "resize" {
@@ -367,7 +372,7 @@
     client.focused           $lavender $base $text  $lavender  $lavender 
     client.focused_inactive  $overlay0 $base $text  $overlay0  $overlay0
     client.unfocused         $overlay0 $base $text  $overlay0  $overlay0
-    client.urgent            $peach    $base $peach $overlay0  $peach
+    client.urgent            $peach    $base $peach $peach     $peach
     client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
     client.background        $base
     
@@ -401,6 +406,7 @@
         position bottom
         font $font
         tray_output none
+	wrap_scroll yes
         strip_workspace_numbers yes
         status_command while date +'%a %d %b %Y (w%-V) %H:%M:%S'; do sleep 1; done
         colors {
@@ -521,3 +527,9 @@
     # Move workspaces
     bindsym $mod+greater move workspace to output right
     bindsym $mod+less move workspace to output left
+
+#--------------------------#
+# DISPLAY/WALYLAND_DISPLAY #
+#--------------------------#
+
+    include /etc/sway/config.d/*
