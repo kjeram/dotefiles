@@ -91,3 +91,9 @@
 }
 
 #urlbar-background { background-color: var(--toolbar-bgcolor) !important;}
+
+#urlbar > #urlbar-background,
+#searchbar:focus-within {
+  outline: unset !important;
+  box-shadow: unset !important;
+}
