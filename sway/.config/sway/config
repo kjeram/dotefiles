@@ -1,3 +1,11 @@
+#--------#
+# Swayfx #
+#--------#
+
+    # shadows enable
+    # shadow_color #000000ff
+    # shadow_blur_radius 4
+    # corner_radius 6
 
 #--------------#
 # Theme colors #
@@ -205,16 +213,19 @@
     for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
     for_window [title="^Steam Keyboard$"] floating enable
 
-    bindsym $mod+b border toggle
+    bindsym $mod+g border toggle
+    bindsym $mod+Shift+g border csd
     bindsym $mod+Control+s sticky toggle
 
 #------#
 # Misc #
 #------#
 
+    primary_selection disabled
     mouse_warping none
     focus_follows_mouse no
     popup_during_fullscreen smart
+    # allow_tearing yes|no
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -247,6 +258,9 @@
     bindsym $mod+m workspace next
     bindsym $mod+n workspace prev
 
+    bindsym $mod+b exec waybar
+    bindsym $mod+Shift+b exec pkill waybar
+
     # Reload the configuration file
     bindsym $mod+Shift+F5 reload
 
@@ -260,6 +274,7 @@
 
     # Start your launcher
     bindsym $mod+d exec wmenu-run -f $font -N $base -n $text -S $red -s $crust
+    bindsym $mod+Shift+d exec wofi --show drun
 
     # Kill focused window
     bindsym $mod+Shift+c kill
@@ -384,44 +399,22 @@
     #     position bottom
     #     font $font
     #     tray_output none
+    #     wrap_scroll yes
     #     strip_workspace_numbers yes
     #     status_command while date +'%a %d %b %Y (w%-V) %H:%M:%S'; do sleep 1; done
-    #     # status_command while ~/.config/sway/status_bar.sh; do sleep 1; done
     #     colors {
-    #         background $background$opacity_hex
-    #         statusline $foreground
-    #         #focused_background $background
-    #         #focused_statusline $foreground
-    #         #separator          $foreground
-    #         # client           border      backgr.     text
-    #         focused_workspace  $color8     $color8     $cursorColor
-    #         active_workspace   $color8     $color8     $color15
-    #         inactive_workspace $color8     $background $color15
-    #         urgent_workspace   $color9     $background $color15
-    #         binding_mode       $color8     $background $color15
-    #     }
+    #         background         $base
+    #         statusline         $text
+    #         focused_statusline $text
+    #         focused_separator  $base
+    #
+    #         # target           border bg        text
+    #         focused_workspace  $base  $mauve    $crust
+    #         active_workspace   $base  $surface2 $text
+    #         inactive_workspace $base  $base     $text
+    #         urgent_workspace   $base  $red      $crust
+    #   }
     # }
-
-    bar {
-        position bottom
-        font $font
-        tray_output none
-	wrap_scroll yes
-        strip_workspace_numbers yes
-        status_command while date +'%a %d %b %Y (w%-V) %H:%M:%S'; do sleep 1; done
-        colors {
-            background         $base
-            statusline         $text
-            focused_statusline $text
-            focused_separator  $base
-    
-            # target           border bg        text
-            focused_workspace  $base  $mauve    $crust
-            active_workspace   $base  $surface2 $text
-            inactive_workspace $base  $base     $text
-            urgent_workspace   $base  $red      $crust
-      }
-    }
 
 #------------#
 # Workspaces #
@@ -465,7 +458,7 @@
     bindsym $mod+4 workspace number $ws_4
     bindsym $mod+5 workspace number $ws_5
     bindsym $mod+6 workspace number $ws_6
-    bindsym $mod+7 workspace number $ws_6
+    bindsym $mod+7 workspace number $ws_7
     bindsym $mod+8 workspace number $ws_8
     bindsym $mod+9 workspace number $ws_9
     bindsym $mod+0 workspace number $ws_0
