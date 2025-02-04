@@ -1,19 +1,23 @@
 :root {
-  --tab-height: 24px;
+  --tab-height: 22px;
   --font-size: 12px;
   --urlbar-height: var(--tab-height) !important;
   --urlbar-container-height: var(--tab-height) !important;
+  --tab-hover-background-color: unset !important;
+
+  /* wm active border color */
+  /*--lwt-tab-line-color: #b4befe !important;*/
 }
 
+/* Global text size */
 * {
   font-size: var(--font-size);
 }
 
 /* ------------------- Tabs ------------------- */
 
-/* Change selected outline color on inactive window */
-.tab-background:-moz-window-inactive {
-  &:is([selected], [multiselected]) {
+.tab-background {
+  &:not([selected], [multiselected]) {
     outline-color: var(--toolbarbutton-active-background) !important;
   }
 }
@@ -50,6 +54,7 @@
 #new-tab-button,
 .tab-secondary-label,
 #tabs-newtab-button,
+.titlebar-buttonbox,
 .tabbrowser-tab:not([pinned]) .tab-icon-stack {
   display: none !important;
 }
@@ -76,22 +81,37 @@
   padding: 0px !important;
 }
 
-/* Remove the shitty outline on selected tabs */
+/* Remove the rounding */
 .tab-background {
   box-shadow: unset !important;
   border-radius: unset !important;
-  /*margin: -1px !important;*/
+}
+
+/* Background tabbar */
+.browser-toolbox-background {
+  background: var(--toolbar-bgcolor) !important;
 }
 
 /* ------------------- Navbar ------------------- */
 
+/* Force height */
 #nav-bar,
 #urlbar-container {
   min-height: unset !important;
 }
 
-#urlbar-background { background-color: var(--toolbar-bgcolor) !important;}
+/* Set background */
+#urlbar-background {
+  background-color: var(--toolbar-bgcolor) !important;
+}
 
+/* Border top */
+#nav-bar {
+  border-top-color: var(--toolbarbutton-active-background) !important;
+  margin-top: -1px !important;
+}
+
+/* Remove url bar focus border */
 #urlbar > #urlbar-background,
 #searchbar:focus-within {
   outline: unset !important;
