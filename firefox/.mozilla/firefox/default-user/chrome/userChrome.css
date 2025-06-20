@@ -1,6 +1,10 @@
 :root {
-  --tab-height: 22px;
-  --font-size: 12px;
+  --tab-height: 24px;
+  --font-size: 14px;
+
+  --background: #262626;
+  --foreground: #333333;
+
   --urlbar-height: var(--tab-height) !important;
   --urlbar-container-height: var(--tab-height) !important;
   --tab-hover-background-color: unset !important;
@@ -17,8 +21,10 @@
 /* ------------------- Tabs ------------------- */
 
 .tab-background {
-  &:not([selected], [multiselected]) {
-    outline-color: var(--toolbarbutton-active-background) !important;
+  &:is([selected], [multiselected]) {
+    background-color: var(--foreground) !important;
+    box-shadow: unset !important;
+    outline: unset !important;
   }
 }
 
@@ -54,6 +60,11 @@
 #new-tab-button,
 .tab-secondary-label,
 #tabs-newtab-button,
+#back-button,
+#forward-button,
+#reload-button,
+#page-action-buttons,
+.tab-loading-burst,
 .titlebar-buttonbox,
 .tabbrowser-tab:not([pinned]) .tab-icon-stack {
   display: none !important;
@@ -83,37 +94,55 @@
 
 /* Remove the rounding */
 .tab-background {
+  /* Remove borders */
+  &:not([selected], [multiselected]) {
+    outline-color: transparent !important;
+  }
   box-shadow: unset !important;
   border-radius: unset !important;
 }
 
 /* Background tabbar */
 .browser-toolbox-background {
-  background: var(--toolbar-bgcolor) !important;
+  background: var(--background) !important;
 }
 
 /* ------------------- Navbar ------------------- */
 
 /* Force height */
 #nav-bar,
+#urlbar:not([focused]),
 #urlbar-container {
   min-height: unset !important;
+  height: calc(var(--tab-height) + 1px) !important;
+}
+
+/* URL bar overflow fix */
+#urlbar:not([focused]) #urlbar-background {
+  display: none !important;
 }
 
 /* Set background */
-#urlbar-background {
-  background-color: var(--toolbar-bgcolor) !important;
+#nav-bar {
+  background-color: var(--background) !important;
 }
 
-/* Border top */
+/* Remove top border */
 #nav-bar {
-  border-top-color: var(--toolbarbutton-active-background) !important;
   margin-top: -1px !important;
 }
 
-/* Remove url bar focus border */
-#urlbar > #urlbar-background,
-#searchbar:focus-within {
-  outline: unset !important;
-  box-shadow: unset !important;
+/* Convoluted fix for buttons */
+toolbar .toolbarbutton-1 {
+  > .toolbarbutton-icon,
+  > .toolbarbutton-text,
+  > .toolbarbutton-badge-stack {
+    padding: 4px !important;
+    /*border-radius: unset !important;*/
+  }
+  > .toolbarbutton-icon {
+    /* horizontal padding + actual icon width */
+    width: calc(2 * var(--toolbarbutton-inner-padding) + 8px) !important;
+    height: calc(2 * var(--toolbarbutton-inner-padding) + 8px) !important;
+  }
 }
