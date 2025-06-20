@@ -1,0 +1,96 @@
+@import "mocha.css";
+
+* {
+  border-radius: 15;
+  font-family: "Noto";
+  font-weight: unset;
+  font-size: 14px;
+  padding: 0;
+}
+
+window#waybar {
+  border-radius: 0;
+  background: @base;
+  color: @text;
+}
+
+#workspaces button {
+  color: @overlay0;
+}
+
+#workspaces button.visible {
+  color: @lavender;
+}
+
+#workspaces button.urgent {
+  color: @crust;
+  background: @green;
+}
+
+#workspaces button:hover {
+  background: @surface0;
+  color: @text;
+}
+
+#workspaces button.active {
+  color: @crust;
+  background: @lavender;
+}
+
+#mpd,
+#window,
+#clock,
+#network,
+#bluetooth,
+#idle_inhibitor,
+#scratchpad,
+#mode,
+#custom-btop,
+#custom-yazi,
+#workspaces {
+  background: @base;
+  background: @surface0;
+  opacity: 0.8;
+  padding: 0px 10px;
+  margin: 0px 3px;
+}
+
+#window {
+  color: @green;
+}
+
+#clock {
+  color: @peach;
+}
+
+#network {
+  color: @yellow;
+}
+
+#bluetooth {
+  color: @blue;
+}
+
+#idle_inhibitor {
+  color: @rosewater;
+}
+
+#mpd {
+  color: @maroon;
+}
+
+#scratchpad {
+  color: @teal;
+}
+
+#mode {
+  color: @pink;
+}
+
+#custom-btop {
+  color: @sapphire;
+}
+
+#custom-yazi {
+  color: @red;
+}

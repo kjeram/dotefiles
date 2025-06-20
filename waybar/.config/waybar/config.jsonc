@@ -1,0 +1,132 @@
+// -*- mode: jsonc -*-
+{
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "spacing": 0,
+    "modules-left": [
+        "idle_inhibitor",
+	"custom/btop",
+	"custom/yazi",
+        "sway/scratchpad",
+	"hyprland/scratchpad",
+        "sway/mode",
+        "sway/window",
+	"hyprland/window",
+    ],
+    "modules-center": [
+        "sway/workspaces",
+	"hyprland/workspaces",
+    ],
+    "modules-right": [
+        "mpd",
+	"bluetooth",
+        "network",
+        "clock",
+    ],
+
+    "custom/btop": {
+        "format": " ",
+	"on-click": "ghostty -e btop &",
+	"tooltip": true,
+	"tooltip-format": "Launch btop"
+     },
+     "custom/yazi": {
+	"format": "🗄︎",
+	"on-click": "ghostty -e yazi &",
+	"tooltip": true,
+	"tooltip-format": "Launch yazi"
+    },
+
+    // Sway
+    "sway/workspaces": {
+        "format": "{name}",
+	"enable-bar-scroll": true,
+    },
+    "sway/mode": {
+        "format": "{}"
+    },
+    "sway/window": {
+	"all-outputs": true
+    },
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+
+    // Hyprland
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "separate-outputs": true,
+        "on-scroll-up": "hyprctl dispatch workspace m-1",
+        "on-scroll-down": "hyprctl dispatch workspace m+1"
+    },
+    "hyprland/window": {
+    },
+
+    "mpd": {
+        "format": "{stateIcon} {artist} - {title} @ {volume}%",
+        "format-disconnected": "",
+	"format-paused": "(paused) {stateIcon} {artist} - {title} @ {volume}%",
+        "format-stopped": "♬",
+        "interval": 1,
+	"on-click": "ghostty -e ncmpcpp &",
+	"on-click-right": "mpc toggle",
+	"on-click-middle": "mpc stop",
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "clock": {
+	"format": "{:%a %d %b %Y (w%V) %H:%M:%S}",
+	"interval": 1,
+	"tooltip": false
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%)",
+        "format-ethernet": "{ipaddr}/{cidr}",
+        //"tooltip-format": "{ifname} via {gwaddr}",
+	"tooltip": false,
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "bluetooth": {
+	    "format-off": "",
+	    "format-disabled": "",
+	    "format-on": "",
+	    "format-connected": " {device_alias}",
+	    "on-click-middle": "bluetoothctl disconnect"
+    },
+    },
+    "custom/power": {
+        "format" : "⏻ ",
+		"tooltip": false,
+		"menu": "on-click",
+		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+		"menu-actions": {
+			"shutdown": "shutdown",
+			"reboot": "reboot",
+			"suspend": "systemctl suspend",
+			"hibernate": "systemctl hibernate"
+		}
+    }
+}
