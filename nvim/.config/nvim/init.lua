@@ -52,21 +52,40 @@ ColorMyPencils()
 ----------------------
 -- General settings --
 ----------------------
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- Make copy-paste less of a hassle
+vim.o.clipboard = "unnamedplus"
 
 -- Set line numbers
 vim.o.number = true
 
--- Make copy-paste less of a hassle
-vim.o.clipboard = "unnamedplus"
--- Alias ctrl-c to yank
-vim.keymap.set("v", "<C-c>", "y")
-vim.keymap.set("v", "<C-v>", "<S-p>")
+-- Enable break indent
+vim.o.breakindent = true
+
+-- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+-- Configure how new splits should be opened
+vim.o.splitright = true
+vim.o.splitbelow = true
+
+-- Show which line your cursor is on
+vim.o.cursorline = true
+
+-- Display certain whitespace characters
+vim.o.list = true
+
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.o.scrolloff = 10
 
 --------------
 -- Keybinds --
 --------------
 
--- Reload config
+-- Reload config (doesn't work)
 vim.keymap.set("n", "<leader>rrr", function() vim.cmd [[source ~/.config/nvim/init.lua]] end)
 
 -- Open file explorer
