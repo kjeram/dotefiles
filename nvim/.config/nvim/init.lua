@@ -30,6 +30,38 @@ require("lazy").setup({
     -- add your plugins here --
     ---------------------------
     { "catppuccin/nvim", name = "catppuccin", priority = 1000, },
+
+    {
+      "folke/which-key.nvim",
+      event = "VeryLazy",
+      opts = { delay = 0, },
+      keys = {
+        {
+          "<leader>?",
+          function()
+            require("which-key").show({ global = false })
+          end,
+          desc = "Buffer Local Keymaps (which-key)",
+        },
+      },
+    },
+
+   {
+      "CopilotC-Nvim/CopilotChat.nvim",
+      dependencies = {
+        { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+        { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+      },
+      build = "make tiktoken", -- Only on MacOS or Linux
+      opts = {
+        -- See Configuration section for options
+      },
+      -- See Commands section for default commands if you want to lazy load on them
+    },
+
+    -----------------
+    -- EOF plugins --
+    -----------------
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -81,23 +113,40 @@ vim.o.list = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
 
---------------
--- Keybinds --
---------------
+----------------------
+-- Special Keybinds --
+----------------------
 
--- Reload config (doesn't work)
-vim.keymap.set("n", "<leader>rrr", function() vim.cmd [[source ~/.config/nvim/init.lua]] end)
+-- Clear highlights on search when pressing <Esc> in normal mode
+--  See `:help hlsearch`
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Open file explorer
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+---------------------
+-- Leader Keybinds --
+---------------------
+local wk = require("which-key")
 
--- Tab navigation (shift+vimkeys)
-vim.keymap.set("n", "<leader><S-h>", vim.cmd.tabp)
-vim.keymap.set("n", "<leader><S-l>", vim.cmd.tabn)
--- New tab
-vim.keymap.set("n", "<leader>nt", vim.cmd.tabnew)
--- Close tab
-vim.keymap.set("n", "<leader>qt", vim.cmd.tabclose)
+local function keymap_set(mode, lhs, rhs, desc)
+  vim.keymap.set(mode, lhs, rhs)
+  wk.add({ { lhs, desc = desc } })
+end
 
--- Split panels
+keymap_set("n", "<leader>rrr",
+  function() vim.cmd [[source ~/.config/nvim/init.lua]] end,
+  "Reload config"
+)
+
+keymap_set("n", "<leader>pv", vim.cmd.Ex, "Open Netrw")
+
+keymap_set("n", "<leader><S-h>", vim.cmd.tabp, "Previous Tab")
+keymap_set("n", "<leader><S-l>", vim.cmd.tabn, "Next Tab")
+
+keymap_set("n", "<leader>nt", vim.cmd.tabnew, "New Tab")
+keymap_set("n", "<leader>qt", vim.cmd.tabclose, "Close Tab")
+
+keymap_set("n", "<leader>-", vim.cmd.vsplit, "Vertical split")
+keymap_set("n", "<leader>_", vim.cmd.split, "Horizontal split") 
+keymap_set("n", "<leader><Tab>", "<C-w>w", "Go to Last Split")
+
+keymap_set("n", "<leader>cpc", "<cmd>CopilotChat<CR>", "Open Copilot Chat")
 
