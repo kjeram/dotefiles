@@ -29,9 +29,14 @@ require("lazy").setup({
     ---------------------------
     -- add your plugins here --
     ---------------------------
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000, },
 
-    {
+    { -- Soothing pastel theme for the high-spirited! Something like that...
+       "catppuccin/nvim",
+       name = "catppuccin",
+       priority = 1000, -- Ensure this is loaded before all other plugins
+    },
+
+    { -- Popup menu for keybinds (because I have short-term memory loss)
       "folke/which-key.nvim",
       event = "VeryLazy",
       opts = { delay = 0, },
@@ -46,7 +51,38 @@ require("lazy").setup({
       },
     },
 
-   {
+    {
+      "nvim-neo-tree/neo-tree.nvim",
+      branch = "v3.x",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+      },
+      keys = {
+        { "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "Toggle Neo-tree" },
+      },
+      lazy = false, -- neo-tree will lazily load itself
+      opts = {},
+    },
+
+    { -- Makes new lines in lua not tabbed (not really)
+      "nvim-treesitter/nvim-treesitter",
+      build = ":TSUpdate",
+      opts = {
+        ensure_installed = { "lua", "python", "go", },
+        highlight = { enable = true },
+        indent = { enable = true },
+      },
+    },
+
+    { -- Language Server Protocol
+      "neovim/nvim-lspconfig",
+       dependencies = {
+         { "mason-org/mason.nvim", opts = {} },
+       },
+    },
+
+    { -- Copilot Chat (I can no longer code without this (help me))
       "CopilotC-Nvim/CopilotChat.nvim",
       dependencies = {
         { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
@@ -78,6 +114,7 @@ function ColorMyPencils(color)
   vim.cmd.colorscheme(color)
   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+  vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 end
 ColorMyPencils()
 
@@ -89,6 +126,12 @@ vim.g.maplocalleader = " "
 
 -- Make copy-paste less of a hassle
 vim.o.clipboard = "unnamedplus"
+
+vim.o.expandtab = true      -- Use spaces instead of tabs
+vim.o.shiftwidth = 4        -- Number of spaces per indentation
+vim.o.tabstop = 4           -- Number of spaces per tab
+vim.o.smartindent = true    -- Smart auto-indenting
+vim.o.autoindent = true     -- Copy indent from current line when starting new one
 
 -- Set line numbers
 vim.o.number = true
