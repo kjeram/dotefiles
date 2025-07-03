@@ -2,10 +2,10 @@
 # Swayfx #
 #--------#
 
-    # shadows enable
-    # shadow_color #000000ff
-    # shadow_blur_radius 4
-    # corner_radius 6
+    shadows enable
+    shadow_color #000000ff
+    shadow_blur_radius 4
+    corner_radius 8
 
 #--------------#
 # Theme colors #
@@ -106,7 +106,8 @@
     set $op_tv HDMI-A-1
 
     # Current Wallpaper
-    set $wp ~/Pictures/background.jpg
+    set $wp ~/Pictures/ouptup.jpg
+    # set $wp ~/Pictures/EE01F02D-1413-436C-AB05-410F224A5B7B.mov
 
     output $op_lm resolution 1920x1200 position 0 0
     output $op_rm resolution 1920x1200 position 1920 0

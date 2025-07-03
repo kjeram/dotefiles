@@ -1,6 +1,6 @@
 // -*- mode: jsonc -*-
 {
-    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "position": "top", // Waybar position (top|bottom|left|right)
     "spacing": 0,
     "modules-left": [
         "idle_inhibitor",

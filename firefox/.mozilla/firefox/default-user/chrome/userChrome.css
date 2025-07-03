@@ -2,12 +2,14 @@
   --tab-height: 24px;
   --font-size: 14px;
 
-  --background: #262626;
-  --foreground: #333333;
+  --background: #1e1e2e;
+  --foreground: #313244;
+  --text: #cdd6f4;
 
   --urlbar-height: var(--tab-height) !important;
   --urlbar-container-height: var(--tab-height) !important;
   --tab-hover-background-color: unset !important;
+  --toolbarbutton-icon-fill: var(--text) !important;
 
   /* wm active border color */
   /*--lwt-tab-line-color: #b4befe !important;*/
@@ -63,7 +65,8 @@
 #back-button,
 #forward-button,
 #reload-button,
-#page-action-buttons,
+#reader-mode-button,
+#star-button-box,
 .tab-loading-burst,
 .titlebar-buttonbox,
 .tabbrowser-tab:not([pinned]) .tab-icon-stack {
@@ -74,6 +77,7 @@
 .tab-label {
   font-size: calc(var(--font-size) - 2px);
   margin: auto !important;
+  color: var(--text);
 }
 
 /* Tab text glitch */
@@ -99,7 +103,7 @@
     outline-color: transparent !important;
   }
   box-shadow: unset !important;
-  border-radius: unset !important;
+  border-radius: 8px !important;/* unset !important;*/
 }
 
 /* Background tabbar */
@@ -123,13 +127,18 @@
 }
 
 /* Set background */
-#nav-bar {
+#nav-bar, #urlbar-zoom-button {
   background-color: var(--background) !important;
 }
 
 /* Remove top border */
 #nav-bar {
   margin-top: -1px !important;
+}
+
+/* Nav bar text color */
+.urlbar-input-container {
+  color: var(--text);
 }
 
 /* Convoluted fix for buttons */
