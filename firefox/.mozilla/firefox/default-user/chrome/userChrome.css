@@ -2,82 +2,49 @@
   --tab-height: 24px;
   --font-size: 14px;
 
-  --background: #1e1e2e;
-  --foreground: #313244;
-  --text: #cdd6f4;
-
-  --urlbar-height: var(--tab-height) !important;
-  --urlbar-container-height: var(--tab-height) !important;
-  --tab-hover-background-color: unset !important;
-  --toolbarbutton-icon-fill: var(--text) !important;
-
-  /* wm active border color */
-  /*--lwt-tab-line-color: #b4befe !important;*/
-}
-
-/* Global text size */
-* {
-  font-size: var(--font-size);
-}
+  --tab-min-height: var(--tab-height) !important;
 
 /* ------------------- Tabs ------------------- */
 
-.tab-background {
-  &:is([selected], [multiselected]) {
-    background-color: var(--foreground) !important;
-    box-shadow: unset !important;
-    outline: unset !important;
-  }
-}
-
-/* Fix moving tab glitch */
-#tabbrowser-tabs {
-  &[orient="horizontal"] {
-    &[movingtab] {
-      padding-bottom: 0px !important;
-      margin-bottom: 0px !important;
-    }
-  }
-}
-
-/* Tab spacing between pinned and regular tabs */
-#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs])[orient="horizontal"] >
-#tabbrowser-arrowscrollbox >
-.tabbrowser-tab:nth-child(1 of :not([pinned], [hidden])) {
-  margin-inline-start: unset !important;
+/* Fix tab offset */
+#TabsToolbar {
+  margin: 0 2px -2px;
 }
 
 /* Force height */
-#tabbrowser-tabs,
-.tab-background,
-.tab-content,
-#tab-label {
-  min-height: unset !important;
-  height: var(--tab-height) !important;
-  margin: unset !important;
+#TabsToolbar-customization-target {
+  max-height: calc(var(--tab-height) + 8px);
+  height: calc(var(--tab-height) + 8px);
 }
-
-/* Hide shit */
-.tab-close-button,
-#new-tab-button,
-.tab-secondary-label,
-#tabs-newtab-button,
-#back-button,
-#forward-button,
-#reload-button,
-#reader-mode-button,
-#star-button-box,
-.tab-loading-burst,
-.titlebar-buttonbox,
-.tabbrowser-tab:not([pinned]) .tab-icon-stack {
-  display: none !important;
+.tab-background {
+  max-height: var(--tab-height);
+  height:  var(--tab-height);
+}
+.tab-content {
+  max-height: calc(var(--tab-height) + 8px);
+  height: calc(var(--tab-height) + 8px);
+}
+.tab-label-container {
+  #tabbrowser-tabs:not([secondarytext-unsupported], [orient=vertical]) & {
+    height: var(--tab-height) !important;
+  }
 }
 
 /* Font & center label*/
 .tab-label {
-  font-size: calc(var(--font-size) - 2px);
+  font-size: var(--font-size);
   margin: auto !important;
-  color: var(--text);
+}
+
+/* Hide shit */
+.tabbrowser-tab:not([pinned]) .tab-icon-stack,
+.tab-loading-burst ,
+.tab-close-button,
+#new-tab-button,
+.tab-secondary-label,
+.tab-audio-button,
+#tabs-newtab-button {
+  display: none !important;
 }
 
 /* Tab text glitch */
@@ -90,68 +57,30 @@
     }
   }
 }
-
-/* Space between tabs */
-.tabbrowser-tab {
-  padding: 0px !important;
-}
-
-/* Remove the rounding */
-.tab-background {
-  /* Remove borders */
-  &:not([selected], [multiselected]) {
-    outline-color: transparent !important;
-  }
-  box-shadow: unset !important;
-  border-radius: 8px !important;/* unset !important;*/
-}
-
-/* Background tabbar */
-.browser-toolbox-background {
-  background: var(--background) !important;
-}
-
 /* ------------------- Navbar ------------------- */
 
 /* Force height */
-#nav-bar,
-#urlbar:not([focused]),
+#nav-bar {
+  height: calc(var(--tab-height) + 8px);
+}
 #urlbar-container {
   min-height: unset !important;
-  height: calc(var(--tab-height) + 1px) !important;
 }
-
-/* URL bar overflow fix */
-#urlbar:not([focused]) #urlbar-background {
-  display: none !important;
+#urlbar:not([breakout][breakout-extend]) {
+  min-height: unset !important;
+  height: calc(var(--tab-height) + 4px) !important;
 }
-
-/* Set background */
-#nav-bar, #urlbar-zoom-button {
-  background-color: var(--background) !important;
-}
-
-/* Remove top border */
-#nav-bar {
-  margin-top: -1px !important;
-}
-
-/* Nav bar text color */
-.urlbar-input-container {
-  color: var(--text);
-}
-
-/* Convoluted fix for buttons */
-toolbar .toolbarbutton-1 {
-  > .toolbarbutton-icon,
-  > .toolbarbutton-text,
-  > .toolbarbutton-badge-stack {
-    padding: 4px !important;
-    /*border-radius: unset !important;*/
+#urlbar[breakout][breakout-extend] {
+  > .urlbar-input-container {
+  height: calc(var(--tab-height) + 8px) !important;
   }
-  > .toolbarbutton-icon {
-    /* horizontal padding + actual icon width */
-    width: calc(2 * var(--toolbarbutton-inner-padding) + 8px) !important;
-    height: calc(2 * var(--toolbarbutton-inner-padding) + 8px) !important;
-  }
+  > .urlbar-input-container {
+  height: calc(var(--tab-height) + 8px) !important;
+  padding-block: unset !important; 
+    }
+}
+
+/* Hide shit */
+.urlbar-go-button {
+  display: none;
 }
