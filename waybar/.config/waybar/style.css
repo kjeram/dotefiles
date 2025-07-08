@@ -8,7 +8,7 @@
 }
 
 window#waybar {
-  background: linear-gradient(to bottom, rgba(30, 30, 46, 0.6) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(30, 30, 46, 0.6) 0%, transparent 100%);
   color: @text;
 }
 
@@ -35,15 +35,17 @@ window#waybar {
   background: @lavender;
 }
 
+#idle_inhibitor,
+#temperature,
+#custom-gpu,
+#memory,
 #mpd,
 #window,
 #clock,
 #network,
 #bluetooth,
-#idle_inhibitor,
 #scratchpad,
 #mode,
-#custom-btop,
 #custom-yazi,
 #workspaces {
   background: rgba(30, 30, 46, 0.95); /*@base;*/
@@ -55,6 +57,26 @@ window#waybar {
 
 #window {
   color: @green;
+}
+
+#idle_inhibitor {
+  color: @rosewater;
+}
+
+#cpu, #temperature {
+  color: @sapphire;
+}
+
+#temperature.critical {
+  color: @red;
+}
+
+#custom-gpu {
+  color: @maroon;
+}
+
+#memory {
+  color: @yellow;
 }
 
 #clock {
@@ -69,10 +91,6 @@ window#waybar {
   color: @blue;
 }
 
-#idle_inhibitor {
-  color: @rosewater;
-}
-
 #mpd {
   color: @maroon;
 }
@@ -83,12 +101,4 @@ window#waybar {
 
 #mode {
   color: @pink;
-}
-
-#custom-btop {
-  color: @sapphire;
-}
-
-#custom-yazi {
-  color: @red;
 }
