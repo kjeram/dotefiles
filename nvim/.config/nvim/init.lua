@@ -51,18 +51,36 @@ require("lazy").setup({
       },
     },
 
-    {
-      "nvim-neo-tree/neo-tree.nvim",
-      branch = "v3.x",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "MunifTanjim/nui.nvim",
+    --{
+    --  "nvim-neo-tree/neo-tree.nvim",
+    --  branch = "v3.x",
+    --  dependencies = {
+    --    "nvim-lua/plenary.nvim",
+    --    "MunifTanjim/nui.nvim",
+    --  },
+    --  keys = {
+    --    { "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "Toggle Neo-tree" },
+    --  },
+    --  lazy = false, -- neo-tree will lazily load itself
+    --  opts = {
+    --    filesystem = {
+    --      filtered_item = {
+    --        visible = true,
+    --      },
+    --    },
+    --  },
+    --},
+
+    { -- Maybe a little oil? Two fat cocks... togehter... Oil?
+      "stevearc/oil.nvim",
+      opts = {
+        view_options = {
+          show_hidden = true, -- Show hidden files
+        },
       },
       keys = {
-        { "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "Toggle Neo-tree" },
+        { "<leader>fo", "<cmd>Oil<cr>", desc = "Open Oil" },
       },
-      lazy = false, -- neo-tree will lazily load itself
-      opts = {},
     },
 
     { -- Makes new lines in lua not tabbed (not really)
