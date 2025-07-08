@@ -10,34 +10,6 @@
 #--------------#
 # Theme colors #
 #--------------#
-    # # special
-    # set $foreground   c5c8c6
-    # set $background   151515
-    # set $cursorColor  ffffff
-    # # black
-    # set $color0       262626
-    # set $color8       333333
-    # # red
-    # set $color1       a54242
-    # set $color9       cc6666
-    # # green
-    # set $color2       8c9440
-    # set $color10      b5bd68
-    # # yellow
-    # set $color3       de935f
-    # set $color11      f0c674
-    # # blue
-    # set $color4       5f819d
-    # set $color12      81a2be
-    # # magenta
-    # set $color5       85678f
-    # set $color13      b294bb
-    # # cyan
-    # set $color6       5e8d87
-    # set $color14      8abeb7
-    # # hwite
-    # set $color7       707880
-    # set $color15      c5c8c6
 
     # catppuccin-mocha
     set $rosewater f5e0dc
@@ -84,7 +56,7 @@
 #---------#
 # Mod key #
 #---------#
-    
+
     # Alt key
     # set $mod Mod1
     # Windows/Command/Super key
@@ -121,10 +93,10 @@
 #--------------------#
 
     # Screensaver after 10m
-    exec swayidle -w \
-       timeout 600 'swaymsg "output * power off"' \
-       resume 'swaymsg "output * power on"' \
-       before-sleep 'swaylock -f -i $wp'
+    # exec swayidle -w \
+    #    timeout 600 'swaymsg "output * power off"' \
+    #    resume 'swaymsg "output * power on"' \
+    #    before-sleep 'swaylock -f -i $wp'
 
     # Lock the screen
     bindsym $mod+Escape exec 'swaylock -f -F -e -i $wp'
@@ -178,45 +150,34 @@
     gaps outer 0
 
     default_border pixel 1
-    default_floating_border normal 1
+    default_floating_border pixel 1
     # hide_edge_borders none
 
 #------------------#
 # Floating windows #
 #------------------#
 
+    # Flameshot screenshot tool
     for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
 
-    for_window [app_id="About"]       floating enable
-    for_window [app_id="bubble"]      floating enable
-    for_window [app_id="dialog"]      floating enable
-    for_window [app_id="menu"]        floating enable
-    for_window [app_id="page-info"]   floating enable
-    for_window [app_id="pop-up"]      floating enable
-    for_window [app_id="Preferences"] floating enable
-    for_window [app_id="task_dialog"] floating enable
-    for_window [app_id="termfloat"]   floating enable
-    for_window [app_id="toolbox"]     floating enable
-    for_window [app_id="webconsole"]  floating enable
+    for_window [app_id="About"]       floating enable, border pixel 1
+    for_window [window_role="About"]  floating enable, border pixel 1
+    for_window [app_id="bubble"]      floating enable, border pixel 1
+    for_window [app_id="dialog"]      floating enable, border pixel 1
+    for_window [app_id="menu"]        floating enable, border pixel 1
+    for_window [app_id="page-info"]   floating enable, border pixel 1
+    for_window [app_id="pop-up"]      floating enable, border pixel 1
+    for_window [app_id="Preferences"] floating enable, border pixel 1
+    for_window [app_id="task_dialog"] floating enable, border pixel 1
+    for_window [app_id="termfloat"]   floating enable, border pixel 1
+    for_window [app_id="toolbox"]     floating enable, border pixel 1
+    for_window [app_id="webconsole"]  floating enable, border pixel 1
+    for_window [title="Save As"]      floating enable, border pixel 1
 
-    for_window [title = "About Mozilla Firefox"] floating enable
-    for_window [window_role = "About"] floating enable
-    for_window [app_id="firefox" title="Library"] floating enable, border pixel 1, sticky enable
-
-    for_window [class="^Steam$" title="^Friends$"] floating enable
-    for_window [class="^Steam$" title="Steam - News"] floating enable
-    for_window [class="^Steam$" title=".* - Chat"] floating enable
-    for_window [class="^Steam$" title="^Settings$"] floating enable
-    for_window [class="^Steam$" title=".* - event started"] floating enable
-    for_window [class="^Steam$" title=".* CD key"] floating enable
-    for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
-    for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
-    for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
-    for_window [title="^Steam Keyboard$"] floating enable
 
     bindsym $mod+g border toggle
     bindsym $mod+Shift+g border csd
-    bindsym $mod+Control+s sticky toggle
+    bindsym $mod+Control+g sticky toggle
 
 #------#
 # Misc #
@@ -256,14 +217,14 @@
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+$right move right
 
-    bindsym $mod+m workspace next
-    bindsym $mod+n workspace prev
+    #bindsym $mod+m workspace next
+    #bindsym $mod+n workspace prev
 
     bindsym $mod+b exec waybar
     bindsym $mod+Shift+b exec pkill waybar
 
     # Reload the configuration file
-    bindsym $mod+Shift+F5 reload
+    bindsym $mod+Shift+Control+r reload
 
     bindsym $mod+Shift+F9 exec swaynag -t warning -m 'Do you really want to suspend?' -z 'No' '$0' -z 'Yes, suspend' 'systemctl suspend'
 
@@ -274,8 +235,8 @@
     bindsym $mod+Return exec $term
 
     # Start your launcher
-    bindsym $mod+d exec wmenu-run -f $font -N $base -n $text -S $red -s $crust
-    bindsym $mod+Shift+d exec wofi --show drun
+    bindsym $mod+space exec wofi --show drun
+    bindsym $mod+Alt+space exec wmenu-run -f $font -N $base -n $text -S $red -s $crust
 
     # Kill focused window
     bindsym $mod+Shift+c kill
@@ -287,7 +248,7 @@
     # bindsym $mod+s layout stacking
     # bindsym $mod+w layout tabbed
     # bindsym $mod+e layout toggle split
-    bindsym $mod+a layout tabbed
+    bindsym $mod+Shift+tab layout tabbed
     bindsym $mod+tab layout toggle split
 
     # Layout stuff
@@ -295,22 +256,26 @@
     bindsym $mod+v splith
 
     # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+    bindsym $mod+Alt+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    bindsym $mod+Control+space focus mode_toggle
 
     # Sway has a "scratchpad", which is a bag of holding for windows.
     # You can send windows there and get them back later.
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+s move scratchpad
+    bindsym $mod+Shift+m move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+s scratchpad show
+    bindsym $mod+m scratchpad show
+
+    # Start/Stop mouse controller
+    bindsym $mod+x exec antimicrox --hidden
+    bindsym $mod+Shift+x exec pkill antimicrox
 
     # Switch to TV
     bindsym $mod+Control+period \
@@ -324,20 +289,54 @@
          output $op_lm enable; \
          output $op_tv disable;
 
+    set $alt_left a
+    set $alt_up w
+    set $alt_right d
+    set $alt_down s
+
     # Resizing containers
     mode "resize" {
-        bindsym $left resize shrink width 10px
-        bindsym $down resize grow height 10px
-        bindsym $up resize shrink height 10px
-        bindsym $right resize grow width 10px
+        bindsym $left  resize shrink width  10px
+        bindsym $down  resize grow   height 10px
+        bindsym $up    resize shrink height 10px
+        bindsym $right resize grow   width  10px
+
+        bindsym Shift+$left  resize shrink width  50px
+        bindsym Shift+$down  resize grow   height 50px
+        bindsym Shift+$up    resize shrink height 50px
+        bindsym Shift+$right resize grow   width  50px
+
+        bindsym Control+$left  resize shrink width  1px
+        bindsym Control+$down  resize grow   height 1px
+        bindsym Control+$up    resize shrink height 1px
+        bindsym Control+$right resize grow   width  1px
+
+        bindsym $alt_left  move left  10px
+        bindsym $alt_up    move up    10px
+        bindsym $alt_right move right 10px
+        bindsym $alt_down  move down  10px
+
+        bindsym Shift+$alt_left  move left  50px
+        bindsym Shift+$alt_up    move up    50px
+        bindsym Shift+$alt_right move right 50px
+        bindsym Shift+$alt_down  move down  50px
+
+        bindsym Control+$alt_left  move left  1px
+        bindsym Control+$alt_up    move up    1px
+        bindsym Control+$alt_right move right 1px
+        bindsym Control+$alt_down  move down  1px
 
         # Return to default mode
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym $mod+z mode "default"
     }
 
     # bindsym $mod+r mode "resize"
     bindsym $mod+z mode "resize"
+
+    # Set mouse coords to 0, 0 (30 becuase waybar is in the way)
+    bindsym $mod+Shift+z seat seat0 cursor set 0 30
 
     # Mute/unmute
     bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
@@ -357,7 +356,7 @@
     # bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     # bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
-    bindsym $mod+Shift+x exec hyprpicker -a
+    #bindsym $mod+Shift+x exec hyprpicker -a
 
     # Special key to take a screenshot with grim
     bindsym Print exec grim
@@ -367,7 +366,7 @@
 #------#
 
     # Variable also used in swaybar (I think)
-    set $font "xft:Noto Sans 8"
+    set $font "xft:Noto Sans 12"
 
     font $font
     title_align center
@@ -376,14 +375,6 @@
 # Window style #
 #--------------#
 
-    # # client                border      backgr.     text         indic.      child_brd.
-    # client.focused          $color8     $color0     $cursorColor $color8     $color8
-    # client.unfocused        $color0     $background $foreground  $color0     $color0
-    # client.focused_inactive $color0     $color0     $foreground  $color0     $color0
-    # client.urgent           $color8     $background $foreground  $color9     $color9
-    # client.placeholder      $color14    $background $foreground  $color14    $color6
-    # # client.background       $background
-
     # target                 title     bg    text   indicator  border
     client.focused           $lavender $base $text  $lavender  $lavender 
     client.focused_inactive  $overlay0 $base $text  $overlay0  $overlay0
@@ -391,7 +382,7 @@
     client.urgent            $peach    $base $peach $peach     $peach
     client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
     client.background        $base
-    
+
 #----------#
 # Sway-bar #
 #----------#
@@ -421,6 +412,12 @@
 # Workspaces #
 #------------#
 
+    # Keybinds in use are:
+    # 1, 2, 3, 4, 5, 6, 7, 8, 9, 0
+    # q, w, e, r, t, y, u, i, o, p
+    # a, s, d, f
+    # All variations of the mod key + Shift and Control are also used.
+
     # We use variables to avoid repeating the names in multiple places.
     set $ws_1 "1:1"
     set $ws_2 "2:2"
@@ -442,7 +439,11 @@
     set $ws_i "18:I"
     set $ws_o "19:O"
     set $ws_p "20:P"
-    
+    set $ws_a "21:A"
+    set $ws_s "22:S"
+    set $ws_d "23:D"
+    set $ws_f "24:F"
+
     workspace $ws_1 output $op_lm
     workspace $ws_2 output $op_lm
     workspace $ws_3 output $op_rm
@@ -451,7 +452,11 @@
     workspace $ws_w output $op_lm
     workspace $ws_e output $op_rm
     workspace $ws_r output $op_rm
- 
+    workspace $ws_a output $op_lm
+    workspace $ws_s output $op_lm
+    workspace $ws_d output $op_rm
+    workspace $ws_f output $op_rm
+
     # switch to workspace
     bindsym $mod+1 workspace number $ws_1
     bindsym $mod+2 workspace number $ws_2
@@ -473,7 +478,11 @@
     bindsym $mod+i workspace number $ws_i
     bindsym $mod+o workspace number $ws_o
     bindsym $mod+p workspace number $ws_p
-    
+    bindsym $mod+a workspace number $ws_a
+    bindsym $mod+s workspace number $ws_s
+    bindsym $mod+d workspace number $ws_d
+    bindsym $mod+f workspace number $ws_f
+
     # move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number $ws_1
     bindsym $mod+Shift+2 move container to workspace number $ws_2
@@ -495,7 +504,11 @@
     bindsym $mod+Shift+i move container to workspace number $ws_i
     bindsym $mod+Shift+o move container to workspace number $ws_o
     bindsym $mod+Shift+p move container to workspace number $ws_p
- 
+    bindsym $mod+Shift+a move container to workspace number $ws_a
+    bindsym $mod+Shift+s move container to workspace number $ws_s
+    bindsym $mod+Shift+d move container to workspace number $ws_d
+    bindsym $mod+Shift+f move container to workspace number $ws_f
+
     # move focused containter to workspace and move to workspace
     bindsym $mod+Control+1 move container to workspace number $ws_1, workspace number $ws_1
     bindsym $mod+Control+2 move container to workspace number $ws_2, workspace number $ws_2
@@ -517,6 +530,10 @@
     bindsym $mod+Control+i move container to workspace number $ws_i, workspace number $ws_i
     bindsym $mod+Control+o move container to workspace number $ws_o, workspace number $ws_o
     bindsym $mod+Control+p move container to workspace number $ws_p, workspace number $ws_p
+    bindsym $mod+Control+a move container to workspace number $ws_a, workspace number $ws_a
+    bindsym $mod+Control+s move container to workspace number $ws_s, workspace number $ws_s
+    bindsym $mod+Control+d move container to workspace number $ws_d, workspace number $ws_d
+    bindsym $mod+Control+f move container to workspace number $ws_f, workspace number $ws_f
  
     # Move workspaces
     bindsym $mod+greater move workspace to output right
