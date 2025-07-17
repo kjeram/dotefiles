@@ -51,27 +51,7 @@ require("lazy").setup({
       },
     },
 
-    --{
-    --  "nvim-neo-tree/neo-tree.nvim",
-    --  branch = "v3.x",
-    --  dependencies = {
-    --    "nvim-lua/plenary.nvim",
-    --    "MunifTanjim/nui.nvim",
-    --  },
-    --  keys = {
-    --    { "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "Toggle Neo-tree" },
-    --  },
-    --  lazy = false, -- neo-tree will lazily load itself
-    --  opts = {
-    --    filesystem = {
-    --      filtered_item = {
-    --        visible = true,
-    --      },
-    --    },
-    --  },
-    --},
-
-    { -- Maybe a little oil? Two fat cocks... togehter... Oil?
+    { -- Maybe a little oil?
       "stevearc/oil.nvim",
       opts = {
         view_options = {
@@ -173,6 +153,18 @@ vim.o.list = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
+
+---------------------
+-- Custom commands --
+---------------------
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
 
 ----------------------
 -- Special Keybinds --
