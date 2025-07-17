@@ -31,9 +31,26 @@ require("lazy").setup({
     ---------------------------
 
     { -- Theme
-       "catppuccin/nvim",
-       name = "catppuccin",
-       priority = 1000, -- Ensure this is loaded before all other plugins
+      "catppuccin/nvim",
+      name = "catppuccin",
+      priority = 1000, -- Ensure this is loaded before all other plugins
+      integrations = {
+        lualine = true,
+        gitsigns = true,
+        copilot_vim = true,
+      },
+    },
+
+    {
+      "nvim-lualine/lualine.nvim",
+      opts = {
+        options = {
+          theme = "catppuccin",
+          icons_enabled = false,
+          component_separators = { left = "|", right = "|" },
+          section_separators = { left = "", right = "" },
+        },
+      },
     },
 
     { -- Popup menu for keybinds
@@ -112,6 +129,7 @@ require("lazy").setup({
         -- See Configuration section for options
       },
     },
+
     -- { -- Language Server Protocol
     --   "neovim/nvim-lspconfig",
     --    dependencies = { { "mason-org/mason.nvim", opts = {} }, },
