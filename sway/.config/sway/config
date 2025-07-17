@@ -237,11 +237,11 @@
     bindsym $mod+Return exec $term
 
     # Start your launcher
-    bindsym $mod+space exec wofi --show drun
+    bindsym $mod+space exec rofi -show drun
     bindsym $mod+Alt+space exec wmenu-run -f $font -N $base -n $text -S $red -s $crust
 
     # Emoji picker
-    bindsym $mod++Shift+backspace exec rofimoji --prompt "Emoji" --selector wofi --clipboarder wl-copy --action copy
+    bindsym $mod++Shift+backspace exec rofimoji --prompt "Emoji" --selector rofi --clipboarder wl-copy --action copy
 
     # Kill focused window
     bindsym $mod+Shift+c kill
