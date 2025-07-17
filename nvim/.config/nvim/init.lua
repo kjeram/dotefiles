@@ -228,6 +228,9 @@ vim.o.smartcase = true
 vim.o.splitright = true
 vim.o.splitbelow = true
 
+-- Always show the gutter
+vim.o.signcolumn = "yes"
+
 -- Show which line your cursor is on
 vim.o.cursorline = true
 
