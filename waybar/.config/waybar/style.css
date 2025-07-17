@@ -1,62 +1,47 @@
 @import "mocha.css";
 
 * {
-  border-radius: 8;
-  font-family: "Noto";
-  font-size: 14px;
-  padding: 0;
+  border-radius: 0;
+  padding: 0 2px;
+  min-height: 0;
 }
 
-window#waybar {
-  background: linear-gradient(to top, rgba(30, 30, 46, 0.6) 0%, transparent 100%);
+#waybar {
   color: @text;
+  font-family: "Noto Sans Mono", "SymbolsNerdFont";
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#waybar > box {
+  background: rgba(30, 30, 46, 0.95); /* @base; */
+  border-top: 1px solid @overlay0;
+  margin-top: 2px;
+  box-shadow: 0 0 2px black;
+}
+
+#custom-arch {
+  color: @blue;
+  font-weight: bold;
 }
 
 #workspaces button {
-  color: @overlay0;
+  color: @text;
+  font-weight: bold;
 }
 
 #workspaces button.visible {
-  color: @lavender;
-}
-
-#workspaces button.urgent {
-  color: @crust;
-  background: @green;
-}
-
-#workspaces button:hover {
-  background: @surface0;
-  color: @text;
-}
-
-#workspaces button.active {
-  color: @crust;
+  color: @mantle;
   background: @lavender;
 }
 
-#idle_inhibitor,
-#temperature,
-#custom-gpu,
-#memory,
-#mpd,
-#window,
-#clock,
-#network,
-#bluetooth,
-#scratchpad,
-#mode,
-#custom-yazi,
-#workspaces {
-  background: rgba(30, 30, 46, 0.95); /*@base;*/
-  padding: 0px 8px;
-  margin: 2px 2px;
-  border: 1px solid @overlay0;
-  box-shadow: 0 0 2px #000;
+#workspaces button.urgent {
+  background: @surface0;
+  color: @red;
 }
 
 #window {
-  color: @green;
+  color: @green
 }
 
 #idle_inhibitor {

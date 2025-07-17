@@ -1,43 +1,39 @@
-// -*- mode: jsonc -*-
 {
     "position": "bottom", // Waybar position (top|bottom|left|right)
-    "spacing": 0,
+    "spacing": 5,
     "modules-left": [
-        //"idle_inhibitor",
-        "temperature",
-        "custom/gpu",
-        "memory",
-
+        "custom/arch",
+        "sway/workspaces",
+        "sway/scratchpad",
+        "sway/mode",
+        "hyprland/workspaces",
+        "hyprland/scratchpad",
         "sway/window",
         "hyprland/window"
     ],
     "modules-center": [
-        "sway/scratchpad",
-        "hyprland/scratchpad",
-
-        "sway/workspaces",
-        "hyprland/workspaces",
-
-        "sway/mode"
     ],
     "modules-right": [
         "mpd",
         "bluetooth",
-        "network",
+        //"network",
+        "temperature",
+        "custom/gpu",
+        "memory",
         "clock"
     ],
+
+    "custom/arch": {
+        "format":  "  ",
+        "interval": "once",
+        "tooltip": true,
+        "tooltip-format": "Arch Linux"
+    },
 
     // Sway
     "sway/workspaces": {
         "format": "{name}",
         "enable-bar-scroll": true
-    },
-    "sway/mode": {
-        "format": "{}"
-    },
-    "sway/window": {
-        "max-length": 30,
-        "all-outputs": true
     },
     "sway/scratchpad": {
         "format": "{icon} {count}",
@@ -45,6 +41,13 @@
         "format-icons": ["", ""],
         "tooltip": true,
         "tooltip-format": "{app}: {title}"
+    },
+    "sway/mode": {
+        "format": "{}"
+    },
+    "sway/window": {
+        "max-length": 50,
+        "all-outputs": false
     },
 
     // Hyprland
@@ -55,38 +58,32 @@
         "on-scroll-down": "hyprctl dispatch workspace m+1"
     },
     "hyprland/window": {
+        "max-length": 50
     },
 
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
     "temperature": {
-        "hwmon-path": "/sys/class/hwmon/hwmon6/temp1_input", // CPU Package Temperature
+        "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input", // CPU Package Temperature
         "interval": 1,
         "critical-threshold": 70,
-        "format": "CPU: {temperatureC}°C"
+        "format": "CPU:{temperatureC}°C"
     },
 
     "custom/gpu": {
         "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
         "interval": 1,
-        "format": "GPU: {text}°C"
+        "format": "GPU:{text}°C"
     },
 
     "memory": {
         "interval": 1,
-        "format": "MEM: {percentage}%"
+        "format": "MEM:{percentage}%"
     },
 
     "mpd": {
-        "format": "[{repeatIcon}{randomIcon}{singleIcon}{consumeIcon}{volume}] {artist} - {title}",
-        "format-disconnected": "×",
-        "format-paused": "[p{repeatIcon}{randomIcon}{singleIcon}{consumeIcon}{volume}] {artist} - {title} ",
-        "format-stopped": "♬",
+        //"format": "[{repeatIcon}{randomIcon}{singleIcon}{consumeIcon}{volume}] {artist} - {title}",
+        //"format-paused": "[p{repeatIcon}{randomIcon}{singleIcon}{consumeIcon}{volume}] {artist} - {title} ",
+        "format": "{artist} - {title}",
+        "format-stopped": "",
         "max-length": 30,
         "consume-icons": { "on": "c" },
         "random-icons": { "on": "z" },
@@ -100,7 +97,8 @@
 
 
     "clock": {
-    "format": "{:%d/%m/%y W%V %H:%M:%S}",
+    "format": "{:%H:%M:%S}",
+    "format-alt": "{:%d/%m/%y W%V %H:%M:%S}",
     "interval": 1,
     "tooltip": false
     },
@@ -121,9 +119,10 @@
         "format-off": "",
         "format-disabled": "",
         "format-on": "",
-        "format-connected": " {device_alias}",
+        "format-connected": "{device_alias}",
         "on-click-middle": "bluetoothctl disconnect"
     },
+
     "custom/power": {
         "format" : "⏻ ",
         "tooltip": false,
