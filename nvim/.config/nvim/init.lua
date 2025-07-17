@@ -93,6 +93,33 @@ require("lazy").setup({
       -- See Commands section for default commands if you want to lazy load on them
     },
 
+    { -- Adds git related signs to the gutter, as well as utilities for managing changes
+      'lewis6991/gitsigns.nvim',
+      opts = {
+        signs = {
+          add =          { text = '+' },
+          change =       { text = '~' },
+          delete =       { text = '_' },
+          topdelete =    { text = '-' },
+          changedelete = { text = '~' },
+        },
+        signs_staged = {
+            add =          { text = '|' },
+            change =       { text = '~' },
+            delete =       { text = '_' },
+            topdelete =    { text = '-' },
+            changedelete = { text = '~' },
+        },
+        on_attach = function(bufnr)
+          local gs = package.loaded.gitsigns
+          vim.keymap.set('n', '<leader>ghs', gs.stage_hunk, { buffer = bufnr, desc = "Stage Hunk" })
+          vim.keymap.set('n', '<leader>ghu', gs.undo_stage_hunk, { buffer = bufnr, desc = "Undo Stage Hunk" })
+          vim.keymap.set('n', '<leader>ghr', gs.reset_hunk, { buffer = bufnr, desc = "Reset Hunk" })
+          vim.keymap.set('n', '<leader>ghp', gs.preview_hunk, { buffer = bufnr, desc = "Preview Hunk" })
+        end,
+      },
+    },
+
     -----------------
     -- EOF plugins --
     -----------------
