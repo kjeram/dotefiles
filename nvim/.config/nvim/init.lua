@@ -273,7 +273,7 @@ end
 keymap_set("n", "<leader>fn", vim.cmd.Ex, "[F]ile Explore with [N]etrw")
 
 keymap_set("n", "<leader>qq", vim.cmd.q, "[Q]uit")
-keymap_set("n", "<leader>wq", vim.cmd.qw, "[Q]uit [W]rite")
+keymap_set("n", "<leader>qwq", vim.cmd.wq, "[Q]uit [W]rite [Q]uit")
 keymap_set("n", "<leader>q!", "<cmd>q!<CR>", "Force [Q]uit[!]")
 
 keymap_set("n", "<leader>l", "<cmd>Lazy<CR>", "[L]azy")
