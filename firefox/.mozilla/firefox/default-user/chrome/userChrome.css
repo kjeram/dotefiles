@@ -1,6 +1,6 @@
 :root {
-  --tab-height: 24px;
-  --font-size: 14px;
+  --tab-height: 18px;
+  --font-size: 12px;
 
   --tab-min-height: var(--tab-height) !important;
 
@@ -61,7 +61,8 @@
 
 /* Force height */
 #nav-bar {
-  height: calc(var(--tab-height) + 8px);
+  height: calc(var(--tab-height) + 4px);
+  font-size: var(--font-size);
 }
 #urlbar-container {
   min-height: unset !important;
@@ -72,14 +73,26 @@
 }
 #urlbar[breakout][breakout-extend] {
   > .urlbar-input-container {
-  height: calc(var(--tab-height) + 8px) !important;
+  height: calc(var(--tab-height) + 4px) !important;
   }
   > .urlbar-input-container {
-  height: calc(var(--tab-height) + 8px) !important;
+  height: calc(var(--tab-height) + 4px) !important;
   padding-block: unset !important; 
     }
 }
 
+/* Disalbe urlbar background */
+#urlbar:not([breakout][breakout-extend]) #urlbar-background,
+toolbar .toolbarbutton-1 {
+  &:not([disabled]) {
+    &:is(:hover:active, [open], [checked]) > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
+      background-color: transparent !important;
+    }
+  }
+{
+  background: transparent !important;
+}
+  
 /* Hide shit */
 .urlbar-go-button {
   display: none;
