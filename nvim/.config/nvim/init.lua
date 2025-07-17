@@ -38,8 +38,19 @@ require("lazy").setup({
 
     { -- Popup menu for keybinds
       "folke/which-key.nvim",
-      event = "VeryLazy",
-      opts = { delay = 0, },
+      opts = {
+        delay = 0,
+        spec = {
+          { "<leader>s", group = "[S]earch" },
+          { "<leader>g", group = "[G]it" },
+          { "<leader>f", group = "[F]ile" },
+          { "<leader>t", group = "[T]ab" },
+          { "<leader>w", group = "[W]indow", proxy = "<C-w>" },
+          { "<leader>q", group = "[Q]uit" },
+          { "<leader>c", group = "[C]o[P]ilot" },
+          { "<leader>cp", group = "[C]o[P]ilot" },
+        },
+      },
       keys = {
         {
           "<leader>?",
@@ -51,9 +62,14 @@ require("lazy").setup({
       },
     },
 
-    { -- Fuzzy Finder (files, lsp, etc)
+    { -- File explorer
+      "stevearc/oil.nvim",
+      opts = { view_options = { show_hidden = true,  }, },
+      keys = { { "<leader>fo", "<cmd>Oil<cr>", desc = "[F]ile explore with [O]il" }, },
+    },
+
+    { -- Fuzzy Finder
       'nvim-telescope/telescope.nvim',
-      event = 'VimEnter',
       dependencies = { 'nvim-lua/plenary.nvim', },
       config = function()
         -- Enable Telescope extensions if they are installed
@@ -67,34 +83,22 @@ require("lazy").setup({
         vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
         vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
         vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-        vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
         vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
         vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
         vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
       end,
     },
 
-    { -- File explorer
-      "stevearc/oil.nvim",
-      opts = { view_options = { show_hidden = true,  }, },
-      keys = {
-        { "<leader>fo", "<cmd>Oil<cr>", desc = "[F]ile explorer ([O]il)" },
-      },
-    },
-
-    { -- Makes new lines in lua not tabbed (not really)
+    { -- Syntax highlighting and code parsing
       "nvim-treesitter/nvim-treesitter",
+      lazy = false, -- This plugin does not support lazy loading
+      branch = "main", -- Make sure to specify the main branch
       build = ":TSUpdate",
       opts = {
         ensure_installed = { "lua", "python", "go", },
         highlight = { enable = true },
         indent = { enable = true },
       },
-    },
-
-    { -- Language Server Protocol
-      "neovim/nvim-lspconfig",
-       dependencies = { { "mason-org/mason.nvim", opts = {} }, },
     },
 
     { -- Copilot Chat (I can no longer code without this (help me))
@@ -108,6 +112,10 @@ require("lazy").setup({
         -- See Configuration section for options
       },
     },
+    -- { -- Language Server Protocol
+    --   "neovim/nvim-lspconfig",
+    --    dependencies = { { "mason-org/mason.nvim", opts = {} }, },
+    -- },
 
     { -- Adds git related signs to the gutter, as well as utilities for managing changes
       'lewis6991/gitsigns.nvim',
@@ -146,15 +154,8 @@ require("lazy").setup({
         "LazyGitFilter",
         "LazyGitFilterCurrentFile",
       },
-      -- optional for floating window border decoration
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-      },
-      -- setting the keybinding for LazyGit with 'keys' is recommended in
-      -- order to load the plugin when the command is run for the first time
-      keys = {
-        { "<leader>glg", "<cmd>LazyGit<cr>", desc = "[G]it [L]azy[G]it" }
-      },
+      dependencies = { "nvim-lua/plenary.nvim", },
+      keys = { { "<leader>glg", "<cmd>LazyGit<cr>", desc = "[G]it [L]azy[G]it" } },
     },
 
     -----------------
@@ -189,11 +190,11 @@ vim.g.maplocalleader = " "
 -- Make copy-paste less of a hassle
 vim.o.clipboard = "unnamedplus"
 
-vim.o.expandtab = true      -- Use spaces instead of tabs
-vim.o.shiftwidth = 4        -- Number of spaces per indentation
-vim.o.tabstop = 4           -- Number of spaces per tab
-vim.o.smartindent = true    -- Smart auto-indenting
-vim.o.autoindent = true     -- Copy indent from current line when starting new one
+vim.o.expandtab = true   -- Use spaces instead of tabs
+vim.o.shiftwidth = 4     -- Number of spaces per indentation
+vim.o.tabstop = 4        -- Number of spaces per tab
+vim.o.smartindent = true -- Smart auto-indenting
+vim.o.autoindent = true  -- Copy indent from current line when starting new one
 
 -- Set line numbers
 vim.o.number = true
@@ -248,16 +249,20 @@ local function keymap_set(mode, lhs, rhs, desc)
   wk.add({ { lhs, desc = desc } })
 end
 
-keymap_set("n", "<leader>fn", vim.cmd.Ex, "[F]ile [N]etrw")
+keymap_set("n", "<leader>fn", vim.cmd.Ex, "[F]ile Explore with [N]etrw")
+
+keymap_set("n", "<leader>qq", vim.cmd.q, "[Q]uit")
+keymap_set("n", "<leader>wq", vim.cmd.qw, "[Q]uit [W]rite")
+keymap_set("n", "<leader>q!", "<cmd>q!<CR>", "Force [Q]uit[!]")
+
+keymap_set("n", "<leader>l", "<cmd>Lazy<CR>", "[L]azy")
 
 keymap_set("n", "<leader>tp", vim.cmd.tabp, "[T]ab [P]revious")
 keymap_set("n", "<leader>tn", vim.cmd.tabn, "[T]ab [N]ext")
-
 keymap_set("n", "<leader>tc", vim.cmd.tabnew, "[T]ab [C]reate")
 keymap_set("n", "<leader>tq", vim.cmd.tabclose, "[T]ab [Q]uit")
 
+keymap_set("n", "<leader>cpc", "<cmd>CopilotChat<CR>", "[C]o[P]ilot [C]hat")
+
 keymap_set("n", "<leader>-", vim.cmd.vsplit, "Vertical split")
 keymap_set("n", "<leader>_", vim.cmd.split, "Horizontal split") 
-keymap_set("n", "<leader><Tab>", "<C-w>w", "Go to Last Split")
-
-keymap_set("n", "<leader>cpc", "<cmd>CopilotChat<CR>", "[C]o[P]ilot [C]hat")
