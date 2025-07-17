@@ -59,7 +59,7 @@ require("lazy").setup({
         },
       },
       keys = {
-        { "<leader>fo", "<cmd>Oil<cr>", desc = "Open Oil" },
+        { "<leader>fo", "<cmd>Oil<cr>", desc = "Open [F]ile [O]il" },
       },
     },
 
@@ -112,10 +112,10 @@ require("lazy").setup({
         },
         on_attach = function(bufnr)
           local gs = package.loaded.gitsigns
-          vim.keymap.set('n', '<leader>ghs', gs.stage_hunk, { buffer = bufnr, desc = "Stage Hunk" })
-          vim.keymap.set('n', '<leader>ghu', gs.undo_stage_hunk, { buffer = bufnr, desc = "Undo Stage Hunk" })
-          vim.keymap.set('n', '<leader>ghr', gs.reset_hunk, { buffer = bufnr, desc = "Reset Hunk" })
-          vim.keymap.set('n', '<leader>ghp', gs.preview_hunk, { buffer = bufnr, desc = "Preview Hunk" })
+          vim.keymap.set('n', '<leader>gs', gs.stage_hunk, { buffer = bufnr, desc = "[G]it [S]tage Hunk" })
+          vim.keymap.set('n', '<leader>gu', gs.undo_stage_hunk, { buffer = bufnr, desc = "[G]it [U]ndo Stage Hunk" })
+          vim.keymap.set('n', '<leader>gr', gs.reset_hunk, { buffer = bufnr, desc = "[G]it [R]eset Hunk" })
+          vim.keymap.set('n', '<leader>gp', gs.preview_hunk, { buffer = bufnr, desc = "[G]it [P]review Hunk" })
         end,
       },
     },
@@ -211,22 +211,16 @@ local function keymap_set(mode, lhs, rhs, desc)
   wk.add({ { lhs, desc = desc } })
 end
 
-keymap_set("n", "<leader>rrr",
-  function() vim.cmd [[source ~/.config/nvim/init.lua]] end,
-  "Reload config"
-)
-
 keymap_set("n", "<leader>pv", vim.cmd.Ex, "Open Netrw")
 
-keymap_set("n", "<leader><S-h>", vim.cmd.tabp, "Previous Tab")
-keymap_set("n", "<leader><S-l>", vim.cmd.tabn, "Next Tab")
+keymap_set("n", "<leader>tp", vim.cmd.tabp, "[T]ab [P]revious")
+keymap_set("n", "<leader>tn", vim.cmd.tabn, "[T]ab [N]ext")
 
-keymap_set("n", "<leader>nt", vim.cmd.tabnew, "New Tab")
-keymap_set("n", "<leader>qt", vim.cmd.tabclose, "Close Tab")
+keymap_set("n", "<leader>tc", vim.cmd.tabnew, "[T]ab [C]reate")
+keymap_set("n", "<leader>tq", vim.cmd.tabclose, "[T]ab [Q]uit")
 
 keymap_set("n", "<leader>-", vim.cmd.vsplit, "Vertical split")
 keymap_set("n", "<leader>_", vim.cmd.split, "Horizontal split") 
 keymap_set("n", "<leader><Tab>", "<C-w>w", "Go to Last Split")
 
-keymap_set("n", "<leader>cpc", "<cmd>CopilotChat<CR>", "Open Copilot Chat")
-
+keymap_set("n", "<leader>cpc", "<cmd>CopilotChat<CR>", "[C]o[P]ilot [C]hat")
