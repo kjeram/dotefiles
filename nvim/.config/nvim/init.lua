@@ -30,13 +30,13 @@ require("lazy").setup({
     -- add your plugins here --
     ---------------------------
 
-    { -- Soothing pastel theme for the high-spirited! Something like that...
+    { -- Theme
        "catppuccin/nvim",
        name = "catppuccin",
        priority = 1000, -- Ensure this is loaded before all other plugins
     },
 
-    { -- Popup menu for keybinds (because I have short-term memory loss)
+    { -- Popup menu for keybinds
       "folke/which-key.nvim",
       event = "VeryLazy",
       opts = { delay = 0, },
@@ -54,15 +54,12 @@ require("lazy").setup({
     { -- Fuzzy Finder (files, lsp, etc)
       'nvim-telescope/telescope.nvim',
       event = 'VimEnter',
-      dependencies = {
-        'nvim-lua/plenary.nvim',
-      },
+      dependencies = { 'nvim-lua/plenary.nvim', },
       config = function()
         -- Enable Telescope extensions if they are installed
         pcall(require('telescope').load_extension, 'fzf')
         pcall(require('telescope').load_extension, 'ui-select')
 
-        -- See `:help telescope.builtin`
         local builtin = require 'telescope.builtin'
         vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
         vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
@@ -77,15 +74,11 @@ require("lazy").setup({
       end,
     },
 
-    { -- Maybe a little oil?
+    { -- File explorer
       "stevearc/oil.nvim",
-      opts = {
-        view_options = {
-          show_hidden = true, -- Show hidden files
-        },
-      },
+      opts = { view_options = { show_hidden = true,  }, },
       keys = {
-        { "<leader>fo", "<cmd>Oil<cr>", desc = "Open [F]ile [O]il" },
+        { "<leader>fo", "<cmd>Oil<cr>", desc = "[F]ile explorer ([O]il)" },
       },
     },
 
@@ -101,9 +94,7 @@ require("lazy").setup({
 
     { -- Language Server Protocol
       "neovim/nvim-lspconfig",
-       dependencies = {
-         { "mason-org/mason.nvim", opts = {} },
-       },
+       dependencies = { { "mason-org/mason.nvim", opts = {} }, },
     },
 
     { -- Copilot Chat (I can no longer code without this (help me))
@@ -116,7 +107,6 @@ require("lazy").setup({
       opts = {
         -- See Configuration section for options
       },
-      -- See Commands section for default commands if you want to lazy load on them
     },
 
     { -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -258,7 +248,7 @@ local function keymap_set(mode, lhs, rhs, desc)
   wk.add({ { lhs, desc = desc } })
 end
 
-keymap_set("n", "<leader>pv", vim.cmd.Ex, "Open Netrw")
+keymap_set("n", "<leader>fn", vim.cmd.Ex, "[F]ile [N]etrw")
 
 keymap_set("n", "<leader>tp", vim.cmd.tabp, "[T]ab [P]revious")
 keymap_set("n", "<leader>tn", vim.cmd.tabn, "[T]ab [N]ext")
