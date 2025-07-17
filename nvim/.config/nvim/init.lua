@@ -209,7 +209,7 @@ vim.g.maplocalleader = " "
 vim.o.clipboard = "unnamedplus"
 
 vim.o.expandtab = true   -- Use spaces instead of tabs
-vim.o.shiftwidth = 4     -- Number of spaces per indentation
+vim.o.shiftwidth = 2     -- Number of spaces per indentation
 vim.o.tabstop = 4        -- Number of spaces per tab
 vim.o.smartindent = true -- Smart auto-indenting
 vim.o.autoindent = true  -- Copy indent from current line when starting new one
