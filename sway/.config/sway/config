@@ -157,6 +157,8 @@
 # Floating windows #
 #------------------#
 
+    for_window [app_id=".*"] border pixel 1
+
     # Flameshot screenshot tool
     for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
 
@@ -229,7 +231,7 @@
     bindsym $mod+Shift+F9 exec swaynag -t warning -m 'Do you really want to suspend?' -z 'No' '$0' -z 'Yes, suspend' 'systemctl suspend'
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+F4 exec swaynag -t warning -m 'Do you really want to exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+Control+q exec swaynag -t warning -m 'Do you really want to exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
 
     # Start a terminal
     bindsym $mod+Return exec $term
@@ -237,6 +239,9 @@
     # Start your launcher
     bindsym $mod+space exec wofi --show drun
     bindsym $mod+Alt+space exec wmenu-run -f $font -N $base -n $text -S $red -s $crust
+
+    # Emoji picker
+    bindsym $mod++Shift+backspace exec rofimoji --prompt "Emoji" --selector wofi --clipboarder wl-copy --action copy
 
     # Kill focused window
     bindsym $mod+Shift+c kill
