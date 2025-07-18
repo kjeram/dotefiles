@@ -46,9 +46,29 @@ require("lazy").setup({
       opts = {
         options = {
           theme = "catppuccin",
-          icons_enabled = false,
+          icons_enabled = true,
           component_separators = { left = "|", right = "|" },
           section_separators = { left = "", right = "" },
+        },
+        sections = {
+          lualine_a = { function() return vim.fn.mode():sub(1,1):upper() end },
+          lualine_x = {
+            "lsp_status",
+            -- Copilot status component for lualine
+            function()
+              local enabled = vim.fn.exists("*copilot#Enabled") == 1 and vim.fn["copilot#Enabled"]() or nil
+              if enabled == 1 then
+                 return " "
+              elseif enabled == 0 then
+                return " "
+              else
+                return ""
+              end
+            end,
+            -- "encoding",
+            "fileformat",
+            "filetype"
+          },
         },
       },
     },
@@ -63,7 +83,6 @@ require("lazy").setup({
           { "<leader>f", group = "[F]ile" },
           { "<leader>t", group = "[T]ab" },
           { "<leader>w", group = "[W]indow", proxy = "<C-w>" },
-          { "<leader>q", group = "[Q]uit" },
           { "<leader>c", group = "[C]o[P]ilot" },
           { "<leader>cp", group = "[C]o[P]ilot" },
         },
@@ -121,12 +140,22 @@ require("lazy").setup({
     { -- Copilot Chat (I can no longer code without this (help me))
       "CopilotC-Nvim/CopilotChat.nvim",
       dependencies = {
-        { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+        {
+          "github/copilot.vim",
+          config = function()
+            vim.cmd("Copilot disable") -- Start with Copilot disabled
+          end,
+          enabled = true,
+        }, -- or zbirenbaum/copilot.lua
         { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
       },
       build = "make tiktoken", -- Only on MacOS or Linux
       opts = {
-        -- See Configuration section for options
+        window = {
+          layout = "horizontal",
+          height = 0.4,
+        },
+        mappings = { complete = { insert = 'Tab', }, },
       },
     },
 
@@ -272,10 +301,6 @@ end
 
 keymap_set("n", "<leader>fn", vim.cmd.Ex, "[F]ile Explore with [N]etrw")
 
-keymap_set("n", "<leader>qq", vim.cmd.q, "[Q]uit")
-keymap_set("n", "<leader>qwq", vim.cmd.wq, "[Q]uit [W]rite [Q]uit")
-keymap_set("n", "<leader>q!", "<cmd>q!<CR>", "Force [Q]uit[!]")
-
 keymap_set("n", "<leader>l", "<cmd>Lazy<CR>", "[L]azy")
 
 keymap_set("n", "<leader>tp", vim.cmd.tabp, "[T]ab [P]revious")
@@ -283,7 +308,17 @@ keymap_set("n", "<leader>tn", vim.cmd.tabn, "[T]ab [N]ext")
 keymap_set("n", "<leader>tc", vim.cmd.tabnew, "[T]ab [C]reate")
 keymap_set("n", "<leader>tq", vim.cmd.tabclose, "[T]ab [Q]uit")
 
-keymap_set("n", "<leader>cpc", "<cmd>CopilotChat<CR>", "[C]o[P]ilot [C]hat")
+keymap_set("n", "<leader>cpc", "<cmd>CopilotChatToggle<CR>", "[C]o[P]ilot [C]hat")
+vim.keymap.set("n", "<leader>cpt", function()
+  local enabled = vim.fn.exists("*copilot#Enabled") == 1 and vim.fn["copilot#Enabled"]() or nil
+  if enabled == 1 then
+    vim.cmd("Copilot disable")
+  elseif enabled == 0 then
+    vim.cmd("Copilot enable")
+  else
+    print("Invalid Copilot status: " .. tostring(enabled))
+  end
+end, { desc = "[C]o[P]ilot [T]oggle" })
 
 keymap_set("n", "<leader>-", vim.cmd.vsplit, "Vertical split")
 keymap_set("n", "<leader>_", vim.cmd.split, "Horizontal split") 
