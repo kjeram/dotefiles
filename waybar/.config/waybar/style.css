@@ -1,20 +1,21 @@
 @import "mocha.css";
 
+@define-color baseT rgba(30, 30, 46, 0.95);
+
 * {
   border-radius: 0;
   padding: 0 2px;
-  min-height: 0;
+  min-height: 26px;
 }
 
 #waybar {
   color: @text;
-  font-family: "Noto Sans Mono", "SymbolsNerdFont";
-  font-size: 15px;
-  font-weight: bold;
+  font-family: "Noto Sans Mono", "Noto Sans CJK", "SymbolsNerdFont";
+  font-size: 14px;
 }
 
 #waybar > box {
-  background: rgba(30, 30, 46, 0.95); /* @base; */
+  background: @baseT;
   border-top: 1px solid @overlay0;
   margin-top: 2px;
   box-shadow: 0 0 2px black;

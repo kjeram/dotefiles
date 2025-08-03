@@ -1,6 +1,6 @@
 {
     "position": "bottom", // Waybar position (top|bottom|left|right)
-    "spacing": 5,
+    "spacing": 10,
     "modules-left": [
         "custom/arch",
         "sway/workspaces",
@@ -8,14 +8,14 @@
         "sway/mode",
         "hyprland/workspaces",
         "hyprland/scratchpad",
+    ],
+    "modules-center": [
         "sway/window",
         "hyprland/window"
     ],
-    "modules-center": [
-    ],
     "modules-right": [
-        "mpd",
-        "bluetooth",
+        //"mpd",
+        //"bluetooth",
         //"network",
         "temperature",
         "custom/gpu",
@@ -28,6 +28,12 @@
         "interval": "once",
         "tooltip": true,
         "tooltip-format": "Arch Linux"
+    },
+
+    "custom/seperator": {
+        "format":  " | ",
+        "interval": "once",
+        "tooltip": true,
     },
 
     // Sway
@@ -46,7 +52,7 @@
         "format": "{}"
     },
     "sway/window": {
-        "max-length": 50,
+        "max-length": 100,
         "all-outputs": false
     },
 
@@ -62,21 +68,21 @@
     },
 
     "temperature": {
-        "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input", // CPU Package Temperature
+        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input", // CPU Package Temperature
         "interval": 1,
         "critical-threshold": 70,
-        "format": "CPU:{temperatureC}°C"
+        "format": " {temperatureC}°C"
     },
 
     "custom/gpu": {
         "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
         "interval": 1,
-        "format": "GPU:{text}°C"
+        "format": "󰢮 {text}°C"
     },
 
     "memory": {
         "interval": 1,
-        "format": "MEM:{percentage}%"
+        "format": " {percentage}%"
     },
 
     "mpd": {
@@ -97,8 +103,8 @@
 
 
     "clock": {
-    "format": "{:%H:%M:%S}",
-    "format-alt": "{:%d/%m/%y W%V %H:%M:%S}",
+    "format": "󰥔 {:%H:%M:%S}",
+    "format-alt": "󰃭 {:%d/%m/%y 󰕶 W%V 󰥔 %H:%M:%S}",
     "interval": 1,
     "tooltip": false
     },
