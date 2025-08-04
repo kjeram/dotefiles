@@ -83,6 +83,7 @@ require("lazy").setup({
           { "<leader>f", group = "[F]ile" },
           { "<leader>t", group = "[T]ab" },
           { "<leader>w", group = "[W]indow", proxy = "<C-w>" },
+          { "<leader>l", group = "[L]SP" },
           { "<leader>c", group = "[C]o[P]ilot" },
           { "<leader>cp", group = "[C]o[P]ilot" },
         },
@@ -152,7 +153,7 @@ require("lazy").setup({
           config = function()
             vim.cmd("Copilot disable") -- Start with Copilot disabled
           end,
-          enabled = true,
+          enabled = false,
         }, -- or zbirenbaum/copilot.lua
         { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
       },
@@ -166,10 +167,118 @@ require("lazy").setup({
       },
     },
 
-    -- { -- Language Server Protocol
-    --   "neovim/nvim-lspconfig",
-    --    dependencies = { { "mason-org/mason.nvim", opts = {} }, },
-    -- },
+    { -- LSP Plugins
+      -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+      -- used for completion, annotations and signatures of Neovim apis
+      'folke/lazydev.nvim',
+      ft = 'lua',
+      opts = {
+        library = {
+          -- Load luvit types when the `vim.uv` word is found
+          { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        },
+      },
+    },
+
+    {
+      -- Main LSP Configuration
+      'neovim/nvim-lspconfig',
+      dependencies = {
+        { 'mason-org/mason.nvim', opts = {} },
+        'mason-org/mason-lspconfig.nvim',
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
+        { 'j-hui/fidget.nvim', opts = {} },
+        'saghen/blink.cmp',
+      },
+    },
+
+    { -- Main LSP Configuration
+      'neovim/nvim-lspconfig',
+      dependencies = {
+        -- Automatically install LSPs and related tools to stdpath for Neovim
+        -- Mason must be loaded before its dependents so we need to set it up here.
+        -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
+        { 'mason-org/mason.nvim', opts = {} },
+        'mason-org/mason-lspconfig.nvim',
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
+
+        -- Useful status updates for LSP.
+        { 'j-hui/fidget.nvim', opts = {} },
+
+        -- Allows extra capabilities provided by blink.cmp
+        'saghen/blink.cmp',
+      },
+      config = function()
+        vim.api.nvim_create_autocmd('LspAttach', {
+          group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
+          callback = function(event)
+            local map = function(keys, func, desc, mode)
+              mode = mode or 'n'
+              vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+            end
+
+            -- Rename the variable under your cursor.
+            --  Most Language Servers support renaming across files, etc.
+            map('lrn', vim.lsp.buf.rename, '[R]e[n]ame')
+
+            -- Execute a code action, usually your cursor needs to be on top of an error
+            -- or a suggestion from your LSP for this to activate.
+            map('lga', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+
+            -- Find references for the word under your cursor.
+            map('lrr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+
+            -- Jump to the implementation of the word under your cursor.
+            --  Useful when your language has ways of declaring types without an actual implementation.
+            map('lgi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+
+            -- Jump to the definition of the word under your cursor.
+            --  This is where a variable was first declared, or where a function is defined, etc.
+            --  To jump back, press <C-t>.
+            map('lgd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+
+            -- WARN: This is not Goto Definition, this is Goto Declaration.
+            --  For example, in C this would take you to the header.
+            map('lgD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+            -- Fuzzy find all the symbols in your current document.
+            --  Symbols are things like variables, functions, types, etc.
+            map('lO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+
+            -- Fuzzy find all the symbols in your current workspace.
+            --  Similar to document symbols, except searches over your entire project.
+            map('lW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
+
+            -- Jump to the type of the word under your cursor.
+            --  Useful when you're not sure what type a variable is and you want to see
+            --  the definition of its *type*, not where it was *defined*.
+            map('lgt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
+
+          end,
+        })
+
+        local capabilities = require('blink.cmp').get_lsp_capabilities()
+        local servers = { lua_ls = { settings = { Lua = { completion = { callSnippet = 'Replace', }, }, }, }, }
+
+        local ensure_installed = vim.tbl_keys(servers or {})
+        vim.list_extend(ensure_installed, {
+          'stylua', -- Used to format Lua code
+        })
+        require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
+        require('mason-lspconfig').setup {
+          ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+          automatic_installation = false,
+          handlers = {
+            function(server_name)
+              local server = servers[server_name] or {}
+              server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+              require('lspconfig')[server_name].setup(server)
+            end,
+          },
+        }
+      end,
+    },
 
     { -- Adds git related signs to the gutter, as well as utilities for managing changes
       'lewis6991/gitsigns.nvim',
@@ -288,6 +397,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.filetype.add({
+  extension = {
+    sqlx = "sql",
+  },
+})
+
 ----------------------
 -- Special Keybinds --
 ----------------------
@@ -307,8 +422,6 @@ local function keymap_set(mode, lhs, rhs, desc)
 end
 
 keymap_set("n", "<leader>fn", vim.cmd.Ex, "[F]ile Explore with [N]etrw")
-
-keymap_set("n", "<leader>l", "<cmd>Lazy<CR>", "[L]azy")
 
 keymap_set("n", "<leader>tp", vim.cmd.tabp, "[T]ab [P]revious")
 keymap_set("n", "<leader>tn", vim.cmd.tabn, "[T]ab [N]ext")
