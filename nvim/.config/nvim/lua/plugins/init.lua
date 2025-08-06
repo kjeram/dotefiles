@@ -48,18 +48,23 @@ return {
   },
 
   {
+    "folke/snacks.nvim",
+    opts = { dashboard = {}, },
+  },
+
+  {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     config = function() require "plugins.configs.treesitter" end,
   },
 
   {
+    'nvim-telescope/telescope.nvim',
+  {
     "folke/which-key.nvim",
     opts = require "plugins.configs.which-key",
   },
 
-  {
-    'nvim-telescope/telescope.nvim',
     config = function() require "plugins.configs.telescope" end,
   },
 
@@ -71,6 +76,11 @@ return {
       -- { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0 }, }, }, },
     },
     config = function() require "plugins.configs.nvim-lspconfig" end,
+  },
+
+  {
+    "folke/which-key.nvim",
+    opts = require "plugins.configs.which-key",
   },
 
 }
