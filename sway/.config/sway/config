@@ -7,6 +7,13 @@
     shadow_blur_radius 4
     corner_radius 8
 
+#------------#
+# Autostarts #
+#------------#
+
+    exec mpd
+    exec waybar
+
 #--------------#
 # Theme colors #
 #--------------#
@@ -99,7 +106,7 @@
     #    before-sleep 'swaylock -f -i $wp'
 
     # Lock the screen
-    bindsym $mod+Escape exec 'swaylock -f -F -e -i $wp'
+    # bindsym $mod+Escape exec 'swaylock -f -F -e -i $wp'
 
 #---------------------#
 # Input configuration #
@@ -228,7 +235,7 @@
     # Reload the configuration file
     bindsym $mod+Shift+Control+r reload
 
-    bindsym $mod+Shift+F9 exec swaynag -t warning -m 'Do you really want to suspend?' -z 'No' '$0' -z 'Yes, suspend' 'systemctl suspend'
+    bindsym $mod+Shift+Control+p exec swaynag -t warning -m 'Do you really want to suspend?' -z 'No' '$0' -z 'Yes, suspend' 'systemctl suspend'
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+Control+q exec swaynag -t warning -m 'Do you really want to exit sway?' -B 'Yes, exit sway' 'swaymsg exit'
