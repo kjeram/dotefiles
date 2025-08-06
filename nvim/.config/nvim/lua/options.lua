@@ -5,14 +5,20 @@ vim.g.mapleader = " "
 -- o.laststatus = 3
 o.showmode = false
 
+-- Keep screen lines above and below the cursor
+o.scrolloff = 20
+
 -- Make copy-paste less of a hassle
 o.clipboard = "unnamedplus"
+
+-- Display certian whitespace characters
+o.list = true
 
 -- Indenting
 o.expandtab = true
 o.shiftwidth = 2
 o.smartindent = true
-o.tabstop = 2
+o.tabstop = 4
 o.softtabstop = 2
 
 vim.opt.fillchars = { eob = " " }

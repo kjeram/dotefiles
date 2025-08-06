@@ -23,36 +23,57 @@ map(
 -- Clear highlights on search when pressing <Esc> in normal mode
 map("n", "<Esc>", vim.cmd.nohlsearch)
 
-map("n", "<leader>f", vim.cmd.Oil, "File explorer (Oil)")
 
 wk.add{ { "<leader>w", group = "[W]indow", proxy = "<C-w>" }, }
 map("n", "<leader>w", "<C-w>") -- proxy 
 
 map("n", "<C-c>", "<cmd>%y+<CR>") -- copy filecontent
 
-wk.add( { "<leader>c", group = "[C]o[P]ilot" }, { "<leader>cp", group = "[C]o[P]ilot" })
-map("n", "<leader>cpc", "CopilotChatToggle", "[C]o[P]ilot [C]hat", "CopilotChat.nvim")
+map("n", "<leader>e", vim.cmd.Oil, "File [E]xplorer (Oil)")
+
+map("n", "<leader>pc", "CopilotChatToggle", "Co[P]ilot [C]hat", "CopilotChat.nvim")
 
 map("n", "<leader>-", vim.cmd.split, "Horizontal split")
 map("n", "<leader>_", vim.cmd.vsplit, "Vertical split")
 
-wk.add( { "<leader>s", group = "[S]earch" } )
-local tb = require "telescope.builtin"
-map("n", "<leader>sh", tb.help_tags, '[S]end [H]elp')
-map("n", "<leader>sk", tb.keymaps, '[S]earch [K]eymaps')
-map("n", "<leader>sf", tb.find_files, '[S]earch [F]iles')
-map("n", "<leader>ss", tb.builtin, '[S]earch [S]elect Telescope')
-map("n", "<leader>sw", tb.grep_string, '[S]earch current [W]ord')
-map("n", "<leader>sg", tb.live_grep,  '[S]earch by [G]rep')
-map("n", "<leader>sr", tb.resume,  '[S]earch [R]esume')
-map("n", "<leader>s.", tb.oldfiles,  '[S]earch Recent Files ("." for repeat)')
-map("n", "<leader><leader>", tb.buffers, '[ ] Findexisting buffers')
+local gitsigns = require "gitsigns"
+
+wk.add( { "<leader>g", group = "[G]it" } )
+map("n", "<leader>gl", "LazyGit", "[G]it [L]azyGit", "lazygit.nvim")
+map("n", "<leader>gs", gitsigns.stage_hunk, "[G]it [S]tage Hunk")
+map("n", "<leader>gr", gitsigns.reset_hunk, "[G]it [R]eset Hunk")
+map("n", "<leader>gp", gitsigns.preview_hunk, "[G]it [P]review Hunk")
+map("n", "<leader>gi", gitsigns.preview_hunk_inline, "[G]it Preview Hunk [I]nline")
+
+local telescope = require "telescope.builtin"
+
+map("n", "<leader><leader>", telescope.buffers, '[ ] Findexisting buffers')
+
+wk.add( { "<leader>f", group = "[F]ind" } )
+map("n", "<leader>fh", telescope.help_tags, '[F]ind [H]elp')
+map("n", "<leader>fk", telescope.keymaps, '[F]ind [K]eymaps')
+map("n", "<leader>ff", telescope.find_files, '[F]ind [F]iles')
+map("n", "<leader>fs", telescope.builtin, '[F]ind [S]elect Telescope')
+map("n", "<leader>fw", telescope.grep_string, '[F]ind current [W]ord')
+map("n", "<leader>fg", telescope.live_grep,  '[F]ind by [G]rep')
+map("n", "<leader>fr", telescope.resume,  '[F]ind [R]esume')
+map("n", "<leader>f.", telescope.oldfiles,  '[F]ind Recent Files ("." for repeat)')
 
 wk.add( { "<leader>l", group = "[L]SP" } )
 map("n", "<leader>lr", vim.lsp.buf.rename, "[R]ename")
+map("n", "<leader>lO", telescope.lsp_document_symbols, "[O]pen Document Symbols")
+map("n", "<leader>lO", telescope.lsp_dynamic_workspace_symbols, "Open [W]orkspace Symbols")
+
 wk.add( { "<leader>lg", group = "[L]SP [G]oto" } )
 map("n", "<leader>lga", vim.lsp.buf.code_action, "[G]oto Code [A]ction")
-map("n", "<leader>lgr", tb.lsp_references, "[G]oto [R]eferences")
+map("n", "<leader>lgr", telescope.lsp_references, "[G]oto [R]eferences")
+map("n", "<leader>lgd", telescope.lsp_definitions, "[G]oto [D]efinition")
 
-wk.add( { "<leader>g", group = "[G]it" } )
-map("n", "<leader>glg", "LazyGit", "[G]it [L]azy[G]it", "lazygit.nvim")
+-- map("n", "<leader>lgi", tb.lsp_implementation, "[G]oto [I]mplementation")
+-- map("n", "<leader>lgt", tb.lsp_type_definition, "[G]oto [T]ype Definition")
+-- map("n", "<leader>lgD", tb.lsp_declaration, "[G]oto [D]eclaration")
+
+
+wk.add( { "<leader>c", group = "[C]onfig" } )
+map("n", "<leader>cl", vim.cmd.Lazy, "[C]onfig [L]azy")
+map("n", "<leader>cm", vim.cmd.Mason, "[C]onfig [M]ason")
