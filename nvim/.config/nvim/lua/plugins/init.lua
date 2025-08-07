@@ -1,10 +1,10 @@
 return {
   {
-    'saghen/blink.cmp',
-    dependencies = { 'rafamadriz/friendly-snippets' },
-    version = '1.*',
+    "saghen/blink.cmp",
+    dependencies = { "rafamadriz/friendly-snippets", },
+    version = "1.*",
     opts = require "plugins.configs.blink",
-    opts_extend = { "sources.default" }
+    opts_extend = { "sources.default", }
   },
 
   {
@@ -16,18 +16,18 @@ return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     lazy = true,
-    opts = require "plugins.configs.which-key",
+    opts = require "plugins.configs.copilotchat",
   },
 
   {
-    'lewis6991/gitsigns.nvim',
-     -- opts = require "plugins.configs.gitsigns",
+    "lewis6991/gitsigns.nvim",
+     opts = require "plugins.configs.gitsigns",
   },
 
   {
-    'folke/lazydev.nvim',
-    ft = 'lua',
-    opts = { library = { { path = '${3rd}/luv/library', words = { 'vim%.uv' } }, }, },
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = { library = { { path = "${3rd}/luv/library", words = { "vim%.uv" }, }, }, },
   },
 
   {
@@ -48,32 +48,24 @@ return {
   },
 
   {
-    "folke/snacks.nvim",
-    opts = { dashboard = {}, },
-  },
-
-  {
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     config = function() require "plugins.configs.treesitter" end,
   },
 
   {
-    'nvim-telescope/telescope.nvim',
-  {
-    "folke/which-key.nvim",
-    opts = require "plugins.configs.which-key",
-  },
-
+    "nvim-telescope/telescope.nvim",
     config = function() require "plugins.configs.telescope" end,
   },
 
+  { "xiyaowong/transparent.nvim", },
+
   {
-    'neovim/nvim-lspconfig',
+    "neovim/nvim-lspconfig",
     dependencies = {
-      { 'mason-org/mason.nvim', opts = {}, },
-      'mason-org/mason-lspconfig.nvim',
-      -- { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0 }, }, }, },
+      { "mason-org/mason.nvim", opts = {}, },
+      "mason-org/mason-lspconfig.nvim",
+      -- { "j-hui/fidget.nvim", opts = { notification = { window = { winblend = 0 }, }, }, },
     },
     config = function() require "plugins.configs.nvim-lspconfig" end,
   },
