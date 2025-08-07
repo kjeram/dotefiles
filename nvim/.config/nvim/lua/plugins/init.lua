@@ -21,7 +21,7 @@ return {
 
   {
     "lewis6991/gitsigns.nvim",
-     opts = require "plugins.configs.gitsigns",
+    opts = require "plugins.configs.gitsigns",
   },
 
   {
@@ -67,7 +67,7 @@ return {
       "mason-org/mason-lspconfig.nvim",
       -- { "j-hui/fidget.nvim", opts = { notification = { window = { winblend = 0 }, }, }, },
     },
-    config = function() require "plugins.configs.nvim-lspconfig" end,
+    config = function() require "plugins.configs.lspconfig" end,
   },
 
   {

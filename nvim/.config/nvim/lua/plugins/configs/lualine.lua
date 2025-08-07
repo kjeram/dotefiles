@@ -1,12 +1,11 @@
 require("lualine").setup {
   options = {
-    theme = "catppuccin",
     icons_enabled = true,
     component_separators = { left = "|", right = "|" },
     section_separators = { left = "", right = "" },
   },
   sections = {
-    lualine_a = { function() return vim.fn.mode():sub(1,1):upper() end },
+    lualine_a = { function() return vim.fn.mode():sub(1, 1):upper() end },
     lualine_x = {
       "lsp_status",
       -- -- Copilot status component for lualine

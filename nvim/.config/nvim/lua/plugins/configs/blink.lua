@@ -1,16 +1,17 @@
 return {
   keymap = {
-    preset = 'enter',
-    ['<C-k>'] = { 'select_prev', 'fallback' },
-    ['<C-j>'] = { 'select_next', 'fallback' },
+    preset = "super-tab",
+    ["<C-k>"] = { "scroll_documentation_up", },
+    ["<C-j>"] = { "scroll_documentation_down", },
   },
   fuzzy = { implementation = "lua" },
   completion = {
-    ghost_text = { enabled = true },
+    menu = { border = "none", },
     documentation = {
       auto_show = true,
       auto_show_delay_ms = 200,
-      window = { border = "rounded" },
+      window = { scrollbar = false, },
     },
+    list = { selection = { auto_insert = false, }, },
   },
 }

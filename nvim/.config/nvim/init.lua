@@ -24,6 +24,7 @@ require("lazy").setup({
 })
 
 vim.cmd.colorscheme("catppuccin-mocha")
+vim.cmd.TransparentEnable()
 
 -- maps load after lazy due to dependencies
 -- mainly which-key

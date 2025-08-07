@@ -2,36 +2,33 @@ local o = vim.o
 
 vim.g.mapleader = " "
 
--- o.laststatus = 3
-o.showmode = false
-
--- Keep screen lines above and below the cursor
 o.scrolloff = 20
-
--- Make copy-paste less of a hassle
-o.clipboard = "unnamedplus"
-
--- Display certian whitespace characters
+o.cursorline = true
+o.showmode = false
+o.number = true
+o.wrap = false
+o.breakindent = true
 o.list = true
 
--- Indenting
+o.list = true -- Display certian whitespace characters
+o.splitbelow = true
+o.splitright = true
+o.termguicolors = true
+
+o.signcolumn = "yes"
+o.clipboard = "unnamedplus"
+o.mouse = "a"
+
+o.undofile = true
+o.swapfile = false
+
+o.ignorecase = true
+o.smartcase = true
+
 o.expandtab = true
 o.shiftwidth = 2
 o.smartindent = true
 o.tabstop = 4
 o.softtabstop = 2
 
-vim.opt.fillchars = { eob = " " }
-o.ignorecase = true
-o.smartcase = true
-o.mouse = "a"
-
-o.number = true
-
-o.signcolumn = "yes"
-o.splitbelow = true
-o.splitright = true
-o.termguicolors = true
-o.timeoutlen = 400
-o.undofile = true
-o.cursorline = true
+o.winborder = "rounded"
