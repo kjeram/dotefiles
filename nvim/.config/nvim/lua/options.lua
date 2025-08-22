@@ -32,3 +32,4 @@ o.tabstop = 4
 o.softtabstop = 2
 
 o.winborder = "rounded"
+vim.g.health = { style = 'float' }

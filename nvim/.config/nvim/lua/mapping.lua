@@ -27,7 +27,7 @@ map(
 map("n", "<Esc>", vim.cmd.nohlsearch)
 
 -- Enter normal mode from terminal mode
-map('t', '<Esc><Esc>', '<C-\\><C-n>', 'Exit terminal mode')
+map('t', '<Esc><Esc>', "<C-\\><C-n>", 'Exit terminal mode')
 
 -- Copy entire filecontent
 map("n", "<C-c>", "<cmd>%y+<CR>")
@@ -64,6 +64,7 @@ map("n", "<leader>fk", telescope.keymaps, '[K]eymaps')
 map("n", "<leader>ff", telescope.find_files, '[F]iles')
 map("n", "<leader>fs", telescope.builtin, '[S]elect Telescope')
 map("n", "<leader>fw", telescope.grep_string, 'current [W]ord')
+map("n", "<leader>fd", telescope.diagnostics, '[D]iagnostics')
 -- map("n", "<leader>fg", telescope.live_grep, 'by [G]rep')
 map("n", "<leader>fr", telescope.resume, '[R]esume')
 map("n", "<leader>f.", telescope.oldfiles, 'Recent Files ("." for repeat)')
@@ -72,7 +73,8 @@ wk.add({ "<leader>l", group = "[L]SP" })
 map("n", "<leader>lr", vim.lsp.buf.rename, "[R]ename")
 map("n", "<leader>lf", vim.lsp.buf.format, "[F]ormat")
 map("n", "<leader>lO", telescope.lsp_document_symbols, "[O]pen Document Symbols")
-map("n", "<leader>lO", telescope.lsp_dynamic_workspace_symbols, "Open [W]orkspace Symbols")
+map("n", "<leader>lW", telescope.lsp_dynamic_workspace_symbols, "Open [W]orkspace Symbols")
+map("n", "<leader>ls", vim.cmd.LspInfo, "[S]tatus")
 
 wk.add({ "<leader>lg", group = "[G]oto" })
 map("n", "<leader>lga", vim.lsp.buf.code_action, "Code [A]ction")

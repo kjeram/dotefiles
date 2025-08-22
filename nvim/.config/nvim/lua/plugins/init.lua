@@ -60,14 +60,25 @@ return {
 
   { "xiyaowong/transparent.nvim", },
 
+
+  { "mason-org/mason.nvim", opts = {}, },
+
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      { "mason-org/mason.nvim", opts = {}, },
-      "mason-org/mason-lspconfig.nvim",
-      -- { "j-hui/fidget.nvim", opts = { notification = { window = { winblend = 0 }, }, }, },
-    },
+    dependencies = { "mason-org/mason-lspconfig.nvim", },
     config = function() require "plugins.configs.lspconfig" end,
+  },
+
+  {
+    "mfussenegger/nvim-lint",
+    dependencies = { "rshkarin/mason-nvim-lint", },
+    config = function() require "plugins.configs.lint" end,
+  },
+
+  {
+    "nvimtools/none-ls.nvim",
+    dependencies = { "jay-babu/mason-null-ls.nvim", },
+    config = function() require "plugins.configs.nonels" end,
   },
 
   {

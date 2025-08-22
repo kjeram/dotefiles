@@ -6,6 +6,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    if vim.bo.modifiable then
+      vim.lsp.buf.format({ async = false })
+    end
+  end,
+})
+
 -- vim.api.nvim_create_autocmd({ "VimResized", "WinNew", "WinClosed" }, {
 --   callback = function()
 --     vim.cmd("wincmd =")
