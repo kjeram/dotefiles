@@ -20,6 +20,13 @@ return {
   },
 
   {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function() require 'plugins.configs.copilot' end,
+  },
+
+  {
     "lewis6991/gitsigns.nvim",
     opts = require "plugins.configs.gitsigns",
   },
@@ -42,6 +49,8 @@ return {
     config = function() require "plugins.configs.lualine" end,
   },
 
+  { 'AndreM222/copilot-lualine' },
+
   {
     "stevearc/oil.nvim",
     config = function() require "plugins.configs.oil" end,
@@ -61,7 +70,7 @@ return {
   { "xiyaowong/transparent.nvim", },
 
 
-  { "mason-org/mason.nvim", opts = {}, },
+  { "mason-org/mason.nvim",       opts = {}, },
 
   {
     "neovim/nvim-lspconfig",

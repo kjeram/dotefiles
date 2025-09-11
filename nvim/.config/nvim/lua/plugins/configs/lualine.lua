@@ -1,4 +1,5 @@
 require("lualine").setup {
+  extensions = { "oil", },
   options = {
     icons_enabled = true,
     globalstatus = false,
@@ -13,6 +14,21 @@ require("lualine").setup {
       -- "lsp_status",
       -- "encoding",
       -- "fileformat",
+      {
+        "copilot",
+        symbols = {
+          status = {
+            icons = {
+              -- Bug: enabled and sleep are flipped
+              enabled = " ",
+              sleep = " ", -- auto-trigger disabled
+              disabled = "",
+              warning = " ",
+              unknown = ""
+            },
+          },
+        },
+      },
       "filetype",
     },
     lualine_y = { "progress" },
