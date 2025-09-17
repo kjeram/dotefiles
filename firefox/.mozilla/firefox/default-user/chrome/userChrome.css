@@ -1,8 +1,12 @@
 :root {
-  --tab-height: 18px;
+  --tab-height: 16px;
   --font-size: 12px;
 
   --tab-min-height: var(--tab-height) !important;
+  --toolbar-field-background-color: transparent !important;
+  /* --toolbar-bgcolor: transparent !important; */
+  --toolbar-field-border-color: transparent !important;
+}
 
 /* ------------------- Tabs ------------------- */
 
@@ -16,14 +20,17 @@
   max-height: calc(var(--tab-height) + 8px);
   height: calc(var(--tab-height) + 8px);
 }
+
 .tab-background {
   max-height: var(--tab-height);
-  height:  var(--tab-height);
+  height: var(--tab-height);
 }
+
 .tab-content {
   max-height: calc(var(--tab-height) + 8px);
   height: calc(var(--tab-height) + 8px);
 }
+
 .tab-label-container {
   #tabbrowser-tabs:not([secondarytext-unsupported], [orient=vertical]) & {
     height: var(--tab-height) !important;
@@ -38,7 +45,7 @@
 
 /* Hide shit */
 .tabbrowser-tab:not([pinned]) .tab-icon-stack,
-.tab-loading-burst ,
+.tab-loading-burst,
 .tab-close-button,
 #new-tab-button,
 .tab-secondary-label,
@@ -50,50 +57,57 @@
 /* Tab text glitch */
 @media not (forced-colors) {
   #tabbrowser-tabs[orient="horizontal"] {
+
     & .tabbrowser-tab[visuallyselected]:not([labelendaligned]):hover,
     &:not([closebuttons="activetab"]) .tabbrowser-tab:not([visuallyselected],
-    [labelendaligned]):hover {
+      [labelendaligned]):hover {
       --tab-label-mask-size: 1em !important;
     }
   }
 }
+
 /* ------------------- Navbar ------------------- */
 
 /* Force height */
 #nav-bar {
   height: calc(var(--tab-height) + 4px);
   font-size: var(--font-size);
+  border-top: unset !important;
 }
+
 #urlbar-container {
   min-height: unset !important;
 }
+
 #urlbar:not([breakout][breakout-extend]) {
   min-height: unset !important;
   height: calc(var(--tab-height) + 4px) !important;
 }
+
 #urlbar[breakout][breakout-extend] {
-  > .urlbar-input-container {
-  height: calc(var(--tab-height) + 4px) !important;
+  >.urlbar-input-container {
+    height: calc(var(--tab-height) + 4px) !important;
   }
-  > .urlbar-input-container {
-  height: calc(var(--tab-height) + 4px) !important;
-  padding-block: unset !important; 
-    }
+
+  >.urlbar-input-container {
+    height: calc(var(--tab-height) + 4px) !important;
+    padding-block: unset !important;
+  }
 }
 
 /* Disalbe urlbar background */
 #urlbar:not([breakout][breakout-extend]) #urlbar-background,
 toolbar .toolbarbutton-1 {
   &:not([disabled]) {
-    &:is(:hover:active, [open], [checked]) > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
+    &:is(:hover:active, [open], [checked])> :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
       background-color: transparent !important;
     }
   }
-{
+
   background: transparent !important;
 }
-  
+
 /* Hide shit */
 .urlbar-go-button {
-  display: none;
+  display: None !important;
 }
