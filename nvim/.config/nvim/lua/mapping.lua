@@ -32,6 +32,9 @@ map('t', '<Esc><Esc>', "<C-\\><C-n>", 'Exit terminal mode')
 -- Copy entire filecontent
 map("n", "<C-c>", "<cmd>%y+<CR>")
 
+-- Replace buffer with default register
+map("n", "<C-a>", "ggVGP")
+
 map("n", "Z", function() vim.wo.wrap = not vim.wo.wrap end, "Toggle word wrap")
 
 wk.add { { "<leader>w", group = "[W]indow", proxy = "<C-w>" }, }
