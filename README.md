@@ -20,3 +20,7 @@ The `-t ~` flag and argument is the target directory for stowing. In this case `
 The `<app name>` argument is the app name of whatever you're stowing. Must match a folder in current dir. The folder structure within the the folder is what is being symlinked to the target folder.
 
 The `--adopt` flag is for making errors go away when there a conflict of some sort. It actually moves your existing dotfiles from the target to the source (git repo). Just use this and run `git reset -hard` to undo the changes.
+
+## Install
+
+This repo uses submodules for some configs. Run `git submodule update --init` to init the submodules.
