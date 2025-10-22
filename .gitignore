@@ -3,3 +3,7 @@ lazygit/.config/lazygit/state.yml
 
 # Nvim lock file
 nvim/.config/nvim/lazy-lock.json
+
+# tmux TPM plugins
+tmux/.config/tmux/plugins/*
+!tmux/.config/tmux/plugins/tpm
