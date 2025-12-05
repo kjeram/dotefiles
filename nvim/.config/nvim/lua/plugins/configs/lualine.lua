@@ -19,9 +19,8 @@ require("lualine").setup {
         symbols = {
           status = {
             icons = {
-              -- Bug: enabled and sleep are flipped
-              enabled = " ",
-              sleep = " ", -- auto-trigger disabled
+              enabled = " ",
+              sleep = " ", -- auto-trigger disabled
               disabled = "",
               warning = " ",
               unknown = ""
