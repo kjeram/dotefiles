@@ -1,24 +1,5 @@
 return {
   {
-    "christoomey/vim-tmux-navigator",
-    cmd = {
-      "TmuxNavigateLeft",
-      "TmuxNavigateDown",
-      "TmuxNavigateUp",
-      "TmuxNavigateRight",
-      "TmuxNavigatePrevious",
-      "TmuxNavigatorProcessList",
-    },
-    keys = {
-      { "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
-      { "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
-      { "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
-      { "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
-      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
-    }
-  },
-
-  {
     "saghen/blink.cmp",
     dependencies = { "rafamadriz/friendly-snippets", },
     version = "1.*",
@@ -86,6 +67,12 @@ return {
     config = function() require "plugins.configs.telescope" end,
   },
 
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {},
+  },
+
   { "xiyaowong/transparent.nvim", },
 
 
@@ -107,6 +94,25 @@ return {
     "nvimtools/none-ls.nvim",
     dependencies = { "jay-babu/mason-null-ls.nvim", },
     config = function() require "plugins.configs.nonels" end,
+  },
+
+  {
+    "christoomey/vim-tmux-navigator",
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+      "TmuxNavigatePrevious",
+      "TmuxNavigatorProcessList",
+    },
+    keys = {
+      { "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
+      { "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
+      { "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
+      { "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
+      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+    }
   },
 
   {
