@@ -7,3 +7,6 @@ nvim/.config/nvim/lazy-lock.json
 # tmux TPM plugins
 tmux/.config/tmux/plugins/*
 !tmux/.config/tmux/plugins/tpm
+
+# btop config
+btop/.config/btop.config
