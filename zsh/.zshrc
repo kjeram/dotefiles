@@ -71,15 +71,21 @@ ZSH_THEME="ys-custom"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    autoswitch_virtualenv
     colored-man-pages
+    cp
     git
-    vi-mode
+    zsh-autosuggestions
+    zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+zvm_after_init_commands+=('bindkey '^Y' autosuggest-accept')
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+ZVM_VI_HIGHLIGHT_BACKGROUND=black
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -110,6 +116,7 @@ fi
 
 alias v="nvim"
 alias lg="lazygit"
+alias :q="exit" # muscle memory from vim
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi

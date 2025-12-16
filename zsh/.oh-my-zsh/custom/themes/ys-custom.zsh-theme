@@ -44,6 +44,14 @@ ys_hg_prompt_info() {
 	fi
 }
 
+# Mode prompt
+local mode_prompt='$(zvm_mode_indicator)'
+zvm_mode_indicator() {
+  if [[ "$ZVM_MODE" == "$ZVM_MODE_NORMAL" ]]; then
+    echo -n "%B%F{red}<%b<<%f"
+  fi
+}
+
 # Virtualenv
 local venv_info='$(virtenv_prompt)'
 YS_THEME_VIRTUALENV_PROMPT_PREFIX=" %{$fg[green]%}"
@@ -78,3 +86,5 @@ ${venv_info}\
  \
 [%D{%H:%M:%S}] $exit_code
 %{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
+
+RPROMPT=${mode_prompt}
