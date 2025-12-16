@@ -1,5 +1,4 @@
 return {
-  blink_cmp = { style = 'bordered', },
   keymap = {
     preset = "super-tab",
     ["<C-k>"] = { "scroll_documentation_up", },
