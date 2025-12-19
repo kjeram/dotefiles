@@ -6,6 +6,14 @@
   --toolbar-field-background-color: transparent !important;
   /* --toolbar-bgcolor: transparent !important; */
   --toolbar-field-border-color: transparent !important;
+  --font-family: "Noto Sans" !important;
+  --focus-outline-color: unset !important;
+  --toolbox-bgcolor: transparent !important;
+  --toolbox-bgcolor-inactive: transparent !important;
+}
+
+* {
+  font-family: var(--font-family);
 }
 
 /* ------------------- Tabs ------------------- */
@@ -22,13 +30,7 @@
 }
 
 .tab-background {
-  max-height: var(--tab-height);
-  height: var(--tab-height);
-}
-
-.tab-content {
-  max-height: calc(var(--tab-height) + 8px);
-  height: calc(var(--tab-height) + 8px);
+  border-radius: 4px !important;
 }
 
 .tab-label-container {
@@ -75,39 +77,41 @@
   border-top: unset !important;
 }
 
-#urlbar-container {
-  min-height: unset !important;
-}
-
 #urlbar:not([breakout][breakout-extend]) {
   min-height: unset !important;
   height: calc(var(--tab-height) + 4px) !important;
 }
 
-#urlbar[breakout][breakout-extend] {
-  >.urlbar-input-container {
-    height: calc(var(--tab-height) + 4px) !important;
-  }
-
-  >.urlbar-input-container {
-    height: calc(var(--tab-height) + 4px) !important;
-    padding-block: unset !important;
-  }
-}
-
-/* Disalbe urlbar background */
-#urlbar:not([breakout][breakout-extend]) #urlbar-background,
-toolbar .toolbarbutton-1 {
-  &:not([disabled]) {
-    &:is(:hover:active, [open], [checked])> :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
-      background-color: transparent !important;
-    }
-  }
-
-  background: transparent !important;
-}
-
 /* Hide shit */
-.urlbar-go-button {
+.urlbar-go-button,
+.urlbar-revert-button,
+#star-button-box,
+#stop-reload-button,
+#forward-button,
+#back-button,
+#tracking-protection-icon-container {
   display: None !important;
+}
+
+
+/* Make backgrounds transparent */
+.close-icon,
+#star-button-box,
+.urlbar-icon,
+.urlbar-icon-wrapper,
+toolbar .toolbarbutton-1,
+#tabbrowser-tabs toolbarbutton,
+toolbar toolbarbutton > .toolbarbutton-icon,
+toolbar toolbarbutton > .toolbarbutton-badge-stack,
+.titlebar-button,
+#identity-box,
+.identity-box-button,
+#tracking-protection-icon-container,
+.findbar-textbox~toolbarbutton,
+toolbarbutton.scrollbutton-up,
+toolbarbutton.scrollbutton-down,
+toolbarbutton#scrollbutton-up,
+toolbarbutton#scrollbutton-down{
+  background-color: transparent !important;
+  border-color: transparent !important;
 }
