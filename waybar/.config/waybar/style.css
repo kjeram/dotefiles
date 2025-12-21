@@ -4,31 +4,54 @@
 
 * {
   border-radius: 0;
-  padding: 0 2px;
-  min-height: 26px;
+  padding: 0;
+  min-height: 18px; /* Non unicode characters fuck up the height so 26 is the min height */
 }
 
 #waybar {
   color: @text;
-  font-family: "Noto Sans Mono", "Noto Sans CJK", "SymbolsNerdFont";
-  font-size: 14px;
+  background: @crust;
+  font-family: "Noto Sans Mono", "Noto Sans CJK";
+  font-size: 12px;
 }
 
 #waybar > box {
   background: @baseT;
   border-top: 1px solid @overlay0;
-  margin-top: 2px;
-  box-shadow: 0 0 2px black;
 }
 
-#custom-arch {
+#custom-sep {
+  color: @lavender;
+}
+
+#window {
+  color: @rosewater;
+}
+
+#windowcount {
+  color: @flamingo;
+}
+
+#clock {
+  color: @peach;
+}
+
+#network {
   color: @blue;
-  font-weight: bold;
+}
+
+#network.disconnect {
+  color: @red;
+}
+
+#network.linked {
+  color: @peach;
 }
 
 #workspaces button {
   color: @text;
-  font-weight: bold;
+  border-top: 4px solid @base;
+  border-bottom: 4px solid @base;
 }
 
 #workspaces button.visible {
@@ -37,16 +60,12 @@
 }
 
 #workspaces button.urgent {
-  background: @surface0;
-  color: @red;
+  color: @mantle;
+  background: @red;
 }
 
-#window {
-  color: @green
-}
-
-#idle_inhibitor {
-  color: @rosewater;
+#mpd {
+  color: @maroon;
 }
 
 #cpu, #temperature {
@@ -57,34 +76,10 @@
   color: @red;
 }
 
-#custom-gpu {
-  color: @maroon;
+#custom-gpu, #custom-gputemperature {
+  color: @green;
 }
 
 #memory {
   color: @yellow;
-}
-
-#clock {
-  color: @peach;
-}
-
-#network {
-  color: @yellow;
-}
-
-#bluetooth {
-  color: @blue;
-}
-
-#mpd {
-  color: @maroon;
-}
-
-#scratchpad {
-  color: @teal;
-}
-
-#mode {
-  color: @pink;
 }

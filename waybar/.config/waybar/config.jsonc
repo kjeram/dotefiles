@@ -1,144 +1,122 @@
 {
-    "position": "bottom", // Waybar position (top|bottom|left|right)
-    "spacing": 10,
-    "modules-left": [
-        "custom/arch",
-        "sway/workspaces",
-        "sway/scratchpad",
-        "sway/mode",
-        "hyprland/workspaces",
-        "hyprland/scratchpad",
-    ],
-    "modules-center": [
-        "sway/window",
-        "hyprland/window"
-    ],
-    "modules-right": [
-        //"mpd",
-        //"bluetooth",
-        //"network",
-        "temperature",
-        "custom/gpu",
-        "memory",
-        "clock"
-    ],
+  "position": "bottom",
+  // "spacing": 9,
+  "modules-left": [
+    "custom/space", "custom/space",
+    "hyprland/windowcount",
+    "custom/space", "custom/space",
+    "hyprland/workspaces",
+    "custom/space", "custom/space",
+    "mpd"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "network",
+    "custom/space", "custom/space",
+    "cpu",
+    "temperature",
+    "custom/space", "custom/space",
+    "custom/gpu",
+    "custom/gputemperature",
+    "custom/space", "custom/space",
+    "memory",
+    "custom/space",
+    "custom/space",
+    "clock",
+    "custom/space", "custom/space"
+  ],
+  "custom/space": {
+    "format": " ",
+    "tooltip": false
+  },
+  "custom/sep": {
+    "format": " | ",
+    "tooltip": false
+  },
+  "hyprland/workspaces": {
+    "format": " {name} ",
+    "separate-outputs": true,
+    "enable-bar-scroll": true,
+    "tooltip": false,
+    "cursor": true
+  },
 
-    "custom/arch": {
-        "format":  "  ",
-        "interval": "once",
-        "tooltip": true,
-        "tooltip-format": "Arch Linux"
-    },
-
-    "custom/seperator": {
-        "format":  " | ",
-        "interval": "once",
-        "tooltip": true,
-    },
-
-    // Sway
-    "sway/workspaces": {
-        "format": "{name}",
-        "enable-bar-scroll": true
-    },
-    "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
-    },
-    "sway/mode": {
-        "format": "{}"
-    },
-    "sway/window": {
-        "max-length": 100,
-        "all-outputs": false
-    },
-
-    // Hyprland
-    "hyprland/workspaces": {
-        "format": "{name}",
-        "separate-outputs": true,
-        "on-scroll-up": "hyprctl dispatch workspace m-1",
-        "on-scroll-down": "hyprctl dispatch workspace m+1"
-    },
-    "hyprland/window": {
-        "max-length": 50
-    },
-
-    "temperature": {
-        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input", // CPU Package Temperature
-        "interval": 1,
-        "critical-threshold": 70,
-        "format": " {temperatureC}°C"
-    },
-
-    "custom/gpu": {
-        "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
-        "interval": 1,
-        "format": "󰢮 {text}°C"
-    },
-
-    "memory": {
-        "interval": 1,
-        "format": " {percentage}%"
-    },
-
-    "mpd": {
-        //"format": "[{repeatIcon}{randomIcon}{singleIcon}{consumeIcon}{volume}] {artist} - {title}",
-        //"format-paused": "[p{repeatIcon}{randomIcon}{singleIcon}{consumeIcon}{volume}] {artist} - {title} ",
-        "format": "{artist} - {title}",
-        "format-stopped": "",
-        "max-length": 30,
-        "consume-icons": { "on": "c" },
-        "random-icons": { "on": "z" },
-        "repeat-icons": { "on": "r" },
-        "single-icons": { "on": "s" },
-        "interval": 1,
-        "on-click": "ghostty -e ncmpcpp &",
-        "on-click-right": "mpc toggle",
-        "on-click-middle": "mpc stop"
-    },
-
-
-    "clock": {
-    "format": "󰥔 {:%H:%M:%S}",
-    "format-alt": "󰃭 {:%d/%m/%y 󰕶 W%V 󰥔 %H:%M:%S}",
+  "hyprland/window": {
+    "separate-outputs": true,
+    "max-length": 64,
+    "tooltip": false,
+    "rewrite": {
+      "": "Desktop"
+    }
+  },
+  "hyprland/windowcount": {
+    "format": "({})"
+  },
+  "network": {
+    "format-wifi": "{bandwidthTotalBytes:>} {signalStrength:2}%",
+    "format-ethernet": "{bandwidthTotalBytes:>} ETH",
+    "format-linked": "Connecting...",
+    "format-disconnected": "Disconnected",
+    "justify": "right",
+    "min-length": 13,
+    "interval": 5,
+    "tooltip": false
+  },
+  "mpd": {
+    "format": "{artist} - {title}",
+    "format-disconnected": "",
+    "format-stopped": "",
+    "interval": 5,
+    "max-length": 64,
+    "on-click": "mpc toggle",
+    "on-click-right": "kitty rmpc",
+    "on-click-middle": "mpc stop",
+    "tooltip": false
+  },
+  "cpu": {
+    "format": "{usage:2}% ",
+    "interval": 5,
+    "tooltip": false
+  },
+  "temperature": {
+    "hwmon-path-abs": "/sys/devices/platform/coretemp.0/hwmon/", // CPU Package Temperature
+    "input-filename": "temp1_input",
+    "interval": 5,
+    "critical-threshold": 70,
+    "format": "{temperatureC:2}°C",
+    "tooltip": false
+  },
+  "custom/gpu": {
+    "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+    "interval": 5,
+    "format": "{text:2}% ",
+    "justify": "right",
+    "tooltip": false
+  },
+  "custom/gputemperature": {
+    "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
+    "interval": 5,
+    "format": "{text:2}°C",
+    "tooltip": false
+  },
+  "memory": {
+    "interval": 5,
+    "format": "{used:0.1f}G {percentage:2}%",
+    "tooltip": false
+  },
+  "clock": {
+    "format": "{:%H:%M:%S}",
+    "format-alt": "{:%d/%m/%y W%V %H:%M:%S}",
     "interval": 1,
     "tooltip": false
-    },
-
-
-    "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%)",
-        "format-ethernet": "{ipaddr}/{cidr}",
-        //"tooltip-format": "{ifname} via {gwaddr}",
-        "tooltip": false,
-        "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "Disconnected",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
-    },
-
-    "bluetooth": {
-        "format-off": "",
-        "format-disabled": "",
-        "format-on": "",
-        "format-connected": "{device_alias}",
-        "on-click-middle": "bluetoothctl disconnect"
-    },
-
-    "custom/power": {
-        "format" : "⏻ ",
-        "tooltip": false,
-        "menu": "on-click",
-        "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-        "menu-actions": {
-            "shutdown": "shutdown",
-            "reboot": "reboot",
-            "suspend": "systemctl suspend",
-            "hibernate": "systemctl hibernate"
-        }
-    }
+  },
+  "bluetooth": {
+    "format-off": "",
+    "format-disabled": "",
+    "format-on": "",
+    "format-connected": "{device_alias}",
+    "on-click-middle": "bluetoothctl disconnect"
+  }
 }
