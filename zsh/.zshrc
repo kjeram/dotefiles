@@ -82,10 +82,15 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-zvm_after_init_commands+=('bindkey '^Y' autosuggest-accept')
+zvm_after_init_commands+=(
+  'bindkey '^Y' autosuggest-accept'
+  'bindkey '^P' history-beginning-search-backward'
+  'bindkey '^N' history-beginning-search-forward'
+)
 ZVM_SYSTEM_CLIPBOARD_ENABLED=true
 ZVM_VI_HIGHLIGHT_BACKGROUND=black
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
