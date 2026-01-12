@@ -37,6 +37,8 @@ map("n", "<C-a>", "ggVGP")
 
 map("n", "Z", function() vim.wo.wrap = not vim.wo.wrap end, "Toggle word wrap")
 
+map("n", "<leader><S-D>", vim.diagnostic.open_float)
+
 wk.add { { "<leader>w", group = "[W]indow", proxy = "<C-w>" }, }
 map("n", "<leader>w", "<C-w>")
 
