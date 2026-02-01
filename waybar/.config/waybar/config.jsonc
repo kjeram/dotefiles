@@ -6,6 +6,7 @@
     "hyprland/windowcount",
     "custom/space", "custom/space",
     "hyprland/workspaces",
+    "hyprland/submap",
     "custom/space", "custom/space",
     "mpd"
   ],
@@ -52,22 +53,25 @@
     }
   },
   "hyprland/windowcount": {
-    "format": "({})"
+    "format": "{}  "
+  },
+  "hyprland/submap": {
+    "format": " {}   "
   },
   "network": {
-    "format-wifi": "{bandwidthTotalBytes:>} {signalStrength:2}%",
-    "format-ethernet": "{bandwidthTotalBytes:>} ETH",
+    "format-wifi": "{bandwidthTotalBytes:>} {signalStrength:2}%  ",
+    "format-ethernet": "{bandwidthTotalBytes:>} ETH 󰈀 ",
     "format-linked": "Connecting...",
     "format-disconnected": "Disconnected",
-    "justify": "right",
-    "min-length": 13,
+    "justify": "left",
+    "min-length": 16,
     "interval": 5,
     "tooltip": false
   },
   "mpd": {
-    "format": "{artist} - {title}",
+    "format": "{artist} - {title}  ",
     "format-disconnected": "",
-    "format-stopped": "",
+    "format-stopped": "mpd 󰝛 ",
     "interval": 5,
     "max-length": 64,
     "on-click": "mpc toggle",
@@ -85,7 +89,7 @@
     "input-filename": "temp1_input",
     "interval": 5,
     "critical-threshold": 70,
-    "format": "{temperatureC:2}°C",
+    "format": "{temperatureC:2}°C  ",
     "tooltip": false
   },
   "custom/gpu": {
@@ -98,17 +102,17 @@
   "custom/gputemperature": {
     "exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
     "interval": 5,
-    "format": "{text:2}°C",
+    "format": "{text:2}°C 󰢮 ",
     "tooltip": false
   },
   "memory": {
     "interval": 5,
-    "format": "{used:0.1f}G {percentage:2}%",
+    "format": "{used:0.1f}G {percentage:2}%  ",
     "tooltip": false
   },
   "clock": {
-    "format": "{:%H:%M:%S}",
-    "format-alt": "{:%d/%m/%y W%V %H:%M:%S}",
+    "format": "{:%H:%M:%S} 󱑂 ",
+    "format-alt": "{:%d/%m/%y W%V %H:%M:%S}  ",
     "interval": 1,
     "tooltip": false
   },

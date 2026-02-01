@@ -10,13 +10,12 @@
 
 #waybar {
   color: @text;
-  background: @crust;
   font-family: "Noto Sans Mono", "Noto Sans CJK";
   font-size: 12px;
 }
 
 #waybar > box {
-  background: @baseT;
+  background: @base;
   border-top: 1px solid @overlay0;
 }
 
@@ -30,6 +29,10 @@
 
 #windowcount {
   color: @flamingo;
+}
+
+#submap {
+  color: @teal;
 }
 
 #clock {
