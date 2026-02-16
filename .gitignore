@@ -9,4 +9,4 @@ tmux/.config/tmux/plugins/*
 !tmux/.config/tmux/plugins/tpm
 
 # btop config
-btop/.config/btop.config
+btop/.config/btop/btop.conf
