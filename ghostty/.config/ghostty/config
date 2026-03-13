@@ -1,7 +1,8 @@
 font-family = Noto Sans Mono
 font-size = 13
-window-decoration = false
+window-decoration = none
 macos-titlebar-style = hidden
-background-opacity=0.95
+background-opacity = 0.95
 resize-overlay = never
 theme = catppuccin-mocha.conf
+mouse-hide-while-typing = true
