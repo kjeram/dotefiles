@@ -15,8 +15,12 @@ return {
 
   {
     "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim", branch = "master" },
+    },
+    build = "make tiktoken",
     lazy = true,
-    opts = require "plugins.configs.copilotchat",
+    config = function() require "plugins.configs.copilotchat" end,
   },
 
   {

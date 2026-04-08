@@ -1,7 +1,9 @@
-require 'nvim-treesitter'.install { "lua", "vim", "vimdoc", "python", "go", "sql" }
+local languages = { "lua", "vim", "vimdoc", "python", "go", "sql" }
+
+require 'nvim-treesitter'.install(languages)
 
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { "lua", "vim", "vimdoc", "python", "go", "sql" },
+    pattern = languages,
     callback = function()
       -- syntax highlighting, provided by Neovim
       vim.treesitter.start()
