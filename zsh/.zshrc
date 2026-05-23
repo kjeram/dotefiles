@@ -120,6 +120,7 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias v="nvim"
+alias y="yazi"
 alias lg="lazygit"
 alias :q="exit" # muscle memory from vim
 
