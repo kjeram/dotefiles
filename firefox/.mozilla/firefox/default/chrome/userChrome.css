@@ -93,6 +93,9 @@
   display: None !important;
 }
 
+#trust-icon-container {
+  height: unset !important;
+}
 
 /* Make backgrounds transparent */
 .close-icon,
@@ -105,13 +108,20 @@ toolbar toolbarbutton > .toolbarbutton-icon,
 toolbar toolbarbutton > .toolbarbutton-badge-stack,
 .titlebar-button,
 #identity-box,
+#trust-icon-container,
 .identity-box-button,
 #tracking-protection-icon-container,
 .findbar-textbox~toolbarbutton,
 toolbarbutton.scrollbutton-up,
 toolbarbutton.scrollbutton-down,
 toolbarbutton#scrollbutton-up,
-toolbarbutton#scrollbutton-down{
+toolbarbutton#scrollbutton-down {
   background-color: transparent !important;
   border-color: transparent !important;
+}
+
+/* popout panel */
+
+panel {
+  zoom: 0.999;
 }
