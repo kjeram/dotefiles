@@ -16,6 +16,14 @@
   font-family: var(--font-family);
 }
 
+
+body {
+  @media not -moz-pref("browser.nova.enabled") {
+    background-color: transparent !important;
+  }
+}
+
+
 /* ------------------- Tabs ------------------- */
 
 /* Fix tab offset */
