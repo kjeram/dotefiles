@@ -35,6 +35,9 @@ map("n", "<C-c>", "<cmd>%y+<CR>")
 -- Replace buffer with default register
 map("n", "<C-a>", "ggVGP")
 
+local fn = require "functions"
+map("n", '<Leader>s', fn.switch_case, "[S]witch between snake_case & CamelCase")
+
 map("n", "Z", function() vim.wo.wrap = not vim.wo.wrap end, "Toggle word wrap")
 
 map("n", "<leader><S-D>", vim.diagnostic.open_float)
@@ -44,21 +47,25 @@ map("n", "<leader>w", "<C-w>")
 
 map("n", "<leader>e", vim.cmd.Oil, "File [E]xplorer (Oil)")
 
-wk.add { { "<leader>p", group = "Co[P]ilot", }, }
-map("n", "<leader>pc", "CopilotChatToggle", "[C]hat", "CopilotChat.nvim")
-map("n", "<leader>pt", "Copilot suggestion toggle_auto_trigger", "[T]oggle", "copilot.lua")
+map("n", "<leader>mt", "RenderMarkdown toggle", "[M]arkdown [T]oggle", "render-markdown.nvim")
+
+wk.add { { "<leader>p", group = "CodeCom[p]anion", }, }
+map("n", "<leader>pc", "CodeCompanionChat Toggle", "[C]hat", "codecompanion.nvim")
+-- map("n", "<leader>pt", "Copilot suggestion toggle_auto_trigger", "[T]oggle", "copilot.lua")
+map("v", "<C-a>", "<cmd>CodeCompanionActions<cr>", "[A]sk")
 
 map("n", "<leader>-", vim.cmd.split, "Horizontal split")
 map("n", "<leader>_", vim.cmd.vsplit, "Vertical split")
 
 local gitsigns = require "gitsigns"
-
 wk.add({ "<leader>g", group = "[G]it" })
-map("n", "<leader>gl", "LazyGit", "[L]azyGit", "lazygit.nvim")
 map("n", "<leader>gs", gitsigns.stage_hunk, "[S]tage Hunk")
 map("n", "<leader>gr", gitsigns.reset_hunk, "[R]eset Hunk")
 map("n", "<leader>gp", gitsigns.preview_hunk, "[P]review Hunk")
 map("n", "<leader>gi", gitsigns.preview_hunk_inline, "Preview Hunk [I]nline")
+
+local snacks = require "snacks"
+map("n", "<leader>gl", function() snacks.lazygit() end, "[L]azyGit")
 
 local telescope = require "telescope.builtin"
 
