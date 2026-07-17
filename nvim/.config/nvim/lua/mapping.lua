@@ -65,6 +65,9 @@ map("n", "<leader>gr", gitsigns.reset_hunk, "[R]eset Hunk")
 map("n", "<leader>gp", gitsigns.preview_hunk, "[P]review Hunk")
 map("n", "<leader>gi", gitsigns.preview_hunk_inline, "Preview Hunk [I]nline")
 
+local snacks = require "snacks"
+map("n", "<leader>gb", function() snacks.git.blame_line() end, "[G]it [b]lame")
+
 local telescope = require "telescope.builtin"
 
 -- map("n", "<leader><leader>", telescope.buffers, '[ ] Findexisting buffers')
