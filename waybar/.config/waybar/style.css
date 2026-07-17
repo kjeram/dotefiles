@@ -1,27 +1,55 @@
 @import "mocha.css";
 
-@define-color baseT rgba(30, 30, 46, 0.95);
-
 * {
   border-radius: 0;
   padding: 0;
-  min-height: 18px; /* Non unicode characters fuck up the height so 26 is the min height */
+  min-height: 22px; /* Non unicode characters fuck up the height */
 }
 
 #waybar {
   color: @text;
+  background: @crust;
   font-family: "Noto Sans Mono", "Noto Sans CJK";
   font-size: 12px;
 }
 
-#waybar > box {
-  background: @base;
-  border-top: 1px solid @overlay0;
+/* #waybar > box { */
+/*   background: @mantle; */
+/*   border-top: 1px solid @overlay0; */
+/* } */
+
+#custom-arch {
+  /* font-weight: bold; */
+  color: @blue;
 }
 
-#custom-sep {
+#custom-sep, #custom-sep-alt {
   color: @lavender;
 }
+
+/* #custom-arch, */
+/* #custom-box-l, #custom-box-r, */
+/* #custom-space-alt, */
+/* #custom-sep, #custom-sep-alt, */
+/* #windowcount, */
+/* #clock, */
+/* #network, */
+/* #cpu, #temperature, #custom-cpu-icon, */
+/* #custom-gpu, #custom-gpu-temperature, #custom-gpu-icon, */
+/* #memory { */
+/*   border-top: 1px solid @overlay0; */
+/*   background: @base; */
+/* } */
+
+/* #custom-box-l { */
+/*   border-radius: 4px 0 0 0; */
+/*   border-left: 1px solid @overlay0; */
+/* } */
+/**/
+/* #custom-box-r { */
+/*   border-radius: 0 4px 0 0; */
+/*   border-right: 1px solid @overlay0; */
+/* } */
 
 #window {
   color: @rosewater;
@@ -36,53 +64,49 @@
 }
 
 #clock {
-  color: @peach;
+  color: @mauve;
+}
+
+#clock.time {
+  color: @pink;
 }
 
 #network {
-  color: @blue;
+  color: @sapphire;
 }
 
-#network.disconnect {
-  color: @red;
-}
-
-#network.linked {
-  color: @peach;
+#network.interface {
+  color: @yellow;
 }
 
 #workspaces button {
-  color: @text;
-  border-top: 4px solid @base;
-  border-bottom: 4px solid @base;
+  color: @overlay0;
 }
 
 #workspaces button.visible {
-  color: @mantle;
-  background: @lavender;
+  color: @lavender;
 }
 
 #workspaces button.urgent {
-  color: @mantle;
-  background: @red;
+  color: @red;
 }
 
 #mpd {
   color: @maroon;
 }
 
-#cpu, #temperature {
-  color: @sapphire;
+#cpu, #temperature, #custom-cpu-icon {
+  color: @sky;
 }
 
 #temperature.critical {
   color: @red;
 }
 
-#custom-gpu, #custom-gputemperature {
+#custom-gpu, #custom-gpu-temperature, #custom-gpu-icon {
   color: @green;
 }
 
 #memory {
-  color: @yellow;
+  color: @peach;
 }
