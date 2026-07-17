@@ -11,23 +11,9 @@ require("lualine").setup {
     lualine_b = { "branch", "diff", "diagnostics" },
     lualine_c = { "filename" },
     lualine_x = {
-      -- "lsp_status",
+      "lsp_status",
       -- "encoding",
       -- "fileformat",
-      {
-        "copilot",
-        symbols = {
-          status = {
-            icons = {
-              enabled = " ",
-              sleep = " ", -- auto-trigger disabled
-              disabled = "",
-              warning = " ",
-              unknown = ""
-            },
-          },
-        },
-      },
       "filetype",
     },
     lualine_y = { "progress" },

@@ -47,15 +47,17 @@ map("n", "<leader>w", "<C-w>")
 
 map("n", "<leader>e", vim.cmd.Oil, "File [E]xplorer (Oil)")
 
-wk.add { { "<leader>p", group = "Co[P]ilot", }, }
-map("n", "<leader>pc", "CopilotChatToggle", "[C]hat", "CopilotChat.nvim")
-map("n", "<leader>pt", "Copilot suggestion toggle_auto_trigger", "[T]oggle", "copilot.lua")
+map("n", "<leader>mt", "RenderMarkdown toggle", "[M]arkdown [T]oggle", "render-markdown.nvim")
+
+wk.add { { "<leader>p", group = "CodeCom[p]anion", }, }
+map("n", "<leader>pc", "CodeCompanionChat Toggle", "[C]hat", "codecompanion.nvim")
+-- map("n", "<leader>pt", "Copilot suggestion toggle_auto_trigger", "[T]oggle", "copilot.lua")
+map("v", "<C-a>", "<cmd>CodeCompanionActions<cr>", "[A]sk")
 
 map("n", "<leader>-", vim.cmd.split, "Horizontal split")
 map("n", "<leader>_", vim.cmd.vsplit, "Vertical split")
 
 local gitsigns = require "gitsigns"
-
 wk.add({ "<leader>g", group = "[G]it" })
 map("n", "<leader>gl", "LazyGit", "[L]azyGit", "lazygit.nvim")
 map("n", "<leader>gs", gitsigns.stage_hunk, "[S]tage Hunk")

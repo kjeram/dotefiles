@@ -16,26 +16,28 @@ return {
   },
 
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
+    -- AI assistant
+    "olimorris/codecompanion.nvim",
     dependencies = {
-      { "nvim-lua/plenary.nvim", branch = "master" },
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
     },
-    build = "make tiktoken",
-    lazy = true,
-    config = function() require "plugins.configs.copilotchat" end,
-  },
-
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function() require 'plugins.configs.copilot' end,
+    opts = require "plugins.configs.codecompanion",
   },
 
   {
     -- Git integration
     "lewis6991/gitsigns.nvim",
     opts = require "plugins.configs.gitsigns",
+  },
+
+  {
+    -- Markdown formatter
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {
+      anti_conceal = { enabled = false },
+      file_types = { 'markdown', 'codecompanion' },
+    }
   },
 
   {
@@ -58,8 +60,6 @@ return {
     "nvim-lualine/lualine.nvim",
     config = function() require "plugins.configs.lualine" end,
   },
-
-  { 'AndreM222/copilot-lualine' },
 
   {
     -- File explorer
