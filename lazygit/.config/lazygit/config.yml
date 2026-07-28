@@ -5,6 +5,9 @@ keybinding:
     universal:
         prevTab: 8
         nextTab: 9
+    commits:
+        moveDownCommit: [D, <alt-down>]
+        moveUpCommit: [U, <alt-up>]
 theme:
     activeBorderColor:
         - '#f38ba8'
