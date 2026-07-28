@@ -1,5 +1,6 @@
 return {
   {
+    -- Context menus
     "saghen/blink.cmp",
     dependencies = { "rafamadriz/friendly-snippets", },
     version = "1.*",
@@ -8,6 +9,7 @@ return {
   },
 
   {
+    -- Theme
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,
@@ -31,17 +33,20 @@ return {
   },
 
   {
+    -- Git integration
     "lewis6991/gitsigns.nvim",
     opts = require "plugins.configs.gitsigns",
   },
 
   {
+    -- Nvim config lint fixer
     "folke/lazydev.nvim",
     ft = "lua",
     opts = { library = { { path = "${3rd}/luv/library", words = { "vim%.uv" }, }, }, },
   },
 
   {
+    -- LazyGit
     "kdheepak/lazygit.nvim",
     lazy = true,
     cmd = { "LazyGit", },
@@ -49,6 +54,7 @@ return {
   },
 
   {
+    -- Status bar
     "nvim-lualine/lualine.nvim",
     config = function() require "plugins.configs.lualine" end,
   },
@@ -56,11 +62,13 @@ return {
   { 'AndreM222/copilot-lualine' },
 
   {
+    -- File explorer
     "stevearc/oil.nvim",
     config = function() require "plugins.configs.oil" end,
   },
 
   {
+    -- Better syntax highligher or something idk
     "neovim-treesitter/nvim-treesitter",
     dependencies = { "neovim-treesitter/treesitter-parser-registry" },
     build = ":TSUpdate",
@@ -69,40 +77,47 @@ return {
   },
 
   {
+    -- Navigations
     "nvim-telescope/telescope.nvim",
     config = function() require "plugins.configs.telescope" end,
   },
 
   {
+    -- TODO|FIXME|NOTE highlighter
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {},
   },
 
+  -- Theme agnostic transparency
   { "xiyaowong/transparent.nvim", },
 
-
-  { "mason-org/mason.nvim",       opts = {}, },
+  -- LSP/Linter manager
+  { "mason-org/mason.nvim", opts = {}, },
 
   {
+    -- LSP manager integration
     "neovim/nvim-lspconfig",
     dependencies = { "mason-org/mason-lspconfig.nvim", },
     config = function() require "plugins.configs.lspconfig" end,
   },
 
   {
+    -- Linter integration
     "mfussenegger/nvim-lint",
     dependencies = { "rshkarin/mason-nvim-lint", },
     config = function() require "plugins.configs.lint" end,
   },
 
   {
+    -- Linter to LSP injection or something idk
     "nvimtools/none-ls.nvim",
     dependencies = { "jay-babu/mason-null-ls.nvim", },
     config = function() require "plugins.configs.nonels" end,
   },
 
   {
+    -- Tmux navigations
     "christoomey/vim-tmux-navigator",
     cmd = {
       "TmuxNavigateLeft",
@@ -122,6 +137,7 @@ return {
   },
 
   {
+    -- Command cheatsheet
     "folke/which-key.nvim",
     opts = require "plugins.configs.which-key",
   },
