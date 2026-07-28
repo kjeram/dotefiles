@@ -35,6 +35,9 @@ map("n", "<C-c>", "<cmd>%y+<CR>")
 -- Replace buffer with default register
 map("n", "<C-a>", "ggVGP")
 
+local fn = require "functions"
+map("n", '<Leader>s', fn.switch_case, "[S]witch between snake_case & CamelCase")
+
 map("n", "Z", function() vim.wo.wrap = not vim.wo.wrap end, "Toggle word wrap")
 
 map("n", "<leader><S-D>", vim.diagnostic.open_float)
