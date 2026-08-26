@@ -18,95 +18,24 @@
 /*   border-top: 1px solid @overlay0; */
 /* } */
 
-#custom-arch {
-  /* font-weight: bold; */
-  color: @blue;
-}
+#custom-sep, #custom-sep-alt { color: @lavender; }
 
-#custom-sep, #custom-sep-alt {
-  color: @lavender;
-}
+#workspaces button { color: @overlay0; }
+#workspaces button.visible { color: @lavender; }
+#workspaces button.urgent { color: @red; }
 
-/* #custom-arch, */
-/* #custom-box-l, #custom-box-r, */
-/* #custom-space-alt, */
-/* #custom-sep, #custom-sep-alt, */
-/* #windowcount, */
-/* #clock, */
-/* #network, */
-/* #cpu, #temperature, #custom-cpu-icon, */
-/* #custom-gpu, #custom-gpu-temperature, #custom-gpu-icon, */
-/* #memory { */
-/*   border-top: 1px solid @overlay0; */
-/*   background: @base; */
-/* } */
+/* #custom-arch { color: @blue; } */
+/* #windowcount { color: @flamingo; } */
 
-/* #custom-box-l { */
-/*   border-radius: 4px 0 0 0; */
-/*   border-left: 1px solid @overlay0; */
-/* } */
-/**/
-/* #custom-box-r { */
-/*   border-radius: 0 4px 0 0; */
-/*   border-right: 1px solid @overlay0; */
-/* } */
-
-#window {
-  color: @rosewater;
-}
-
-#windowcount {
-  color: @flamingo;
-}
-
-#submap {
-  color: @teal;
-}
-
-#clock {
-  color: @mauve;
-}
-
-#clock.time {
-  color: @pink;
-}
-
-#network {
-  color: @sapphire;
-}
-
-#network.interface {
-  color: @yellow;
-}
-
-#workspaces button {
-  color: @overlay0;
-}
-
-#workspaces button.visible {
-  color: @lavender;
-}
-
-#workspaces button.urgent {
-  color: @red;
-}
-
-#mpd {
-  color: @maroon;
-}
-
-#cpu, #temperature, #custom-cpu-icon {
-  color: @sky;
-}
-
-#temperature.critical {
-  color: @red;
-}
-
-#custom-gpu, #custom-gpu-temperature, #custom-gpu-icon {
-  color: @green;
-}
-
-#memory {
-  color: @peach;
-}
+#window { color: @rosewater; }
+#submap { color: @teal; }
+#clock { color: @flamingo; }
+#clock.date { color: @mauve; }
+#clock.week { color: @pink; }
+#network { color: @blue; }
+#network.interface { color: @yellow; }
+#mpd { color: @maroon; }
+#cpu, #temperature, #custom-cpu-icon { color: @sapphire; }
+#temperature.critical { color: @red; }
+#custom-gpu, #custom-gpu-temperature, #custom-gpu-icon { color: @green; }
+#memory { color: @peach; }

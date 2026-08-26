@@ -31,9 +31,11 @@
     "custom/space-alt",
     "network#interface",
     "custom/space-alt",
-    "clock",
+    "clock#date",
     "custom/space-alt",
-    "clock#time",
+    "clock#week",
+    "custom/space-alt",
+    "clock",
     "custom/space-alt"
   ],
   "custom/arch": {
@@ -188,11 +190,17 @@
     "tooltip": false
   },
   "clock": {
-    "format": "{:%d/%m/%y W%U}",
-    // "format-alt": " {:%d/%m/%y W%V %H:%M:%S}  ",
+    "format": "{:%H:%M:%S}",
     "interval": 1,
-    "min-length": 12,
-    "max-length": 12,
+    "min-length": 8,
+    "max-length": 8,
+    "tooltip": false
+  },
+  "clock#date": {
+    "format": "{:%d/%m/%y}",
+    "interval": 5,
+    "min-length": 8,
+    "max-length": 8,
     "tooltip-format": "<span size='9pt' font='Noto Sans Mono'>{calendar}</span>",
     "calendar": {
       "mode"          : "year",
@@ -216,11 +224,11 @@
       "on-scroll-down": "shift_down"
       }
   },
-  "clock#time": {
-    "format": "{:%H:%M:%S}",
-    "interval": 1,
-    "min-length": 8,
-    "max-length": 8,
+  "clock#week": {
+    "format": "W{:%U}",
+    "interval": 5,
+    "min-length": 3,
+    "max-length": 3,
     "tooltip": false
   },
   "bluetooth": {
