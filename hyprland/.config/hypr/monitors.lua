@@ -26,6 +26,7 @@ local tv = {
   scale = 2,
   disabled = false,
   bitdepth = 10,
+  cm = "srgb",
 }
 M.tv = tv.output
 

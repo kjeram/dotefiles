@@ -10,7 +10,7 @@ local up_alt = "w"
 local right_alt = "d"
 
 local term = "kitty"
-local bar = "~/Code/Waybar/build/waybar"
+local bar = "waybar"
 -- local bar = waybar
 
 -- Move focus around
