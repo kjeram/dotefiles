@@ -10,6 +10,14 @@ vim.diagnostic.config {
   },
 }
 
+vim.lsp.config('gopls', {
+  settings = {
+    gopls = {
+        buildFlags = {"-tags=integration"}
+    }
+  },
+})
+
 require('mason-lspconfig').setup {
   ensure_installed = {},
   automatic_installation = false,
