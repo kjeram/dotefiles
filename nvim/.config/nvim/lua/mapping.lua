@@ -49,11 +49,6 @@ map("n", "<leader>e", vim.cmd.Oil, "File [E]xplorer (Oil)")
 
 map("n", "<leader>mt", "RenderMarkdown toggle", "[M]arkdown [T]oggle", "render-markdown.nvim")
 
-wk.add { { "<leader>p", group = "CodeCom[p]anion", }, }
-map("n", "<leader>pc", "CodeCompanionChat Toggle", "[C]hat", "codecompanion.nvim")
--- map("n", "<leader>pt", "Copilot suggestion toggle_auto_trigger", "[T]oggle", "copilot.lua")
-map("v", "<C-a>", "<cmd>CodeCompanionActions<cr>", "[A]sk")
-
 map("n", "<leader>-", vim.cmd.split, "Horizontal split")
 map("n", "<leader>_", vim.cmd.vsplit, "Vertical split")
 

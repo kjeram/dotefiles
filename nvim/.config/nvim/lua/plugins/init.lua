@@ -26,16 +26,6 @@ return {
   },
 
   {
-    -- AI assistant
-    "olimorris/codecompanion.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    opts = require "plugins.configs.codecompanion",
-  },
-
-  {
     -- Git integration
     "lewis6991/gitsigns.nvim",
     opts = require "plugins.configs.gitsigns",
