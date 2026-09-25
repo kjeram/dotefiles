@@ -69,8 +69,7 @@ return {
 
   {
     -- Better syntax highligher or something idk
-    "neovim-treesitter/nvim-treesitter",
-    dependencies = { "neovim-treesitter/treesitter-parser-registry" },
+    "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     lazy = false,
     config = function() require "plugins.configs.treesitter" end,
