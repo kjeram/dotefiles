@@ -3,6 +3,8 @@
   --font-size: 12px;
 
   --tab-min-height: var(--tab-height) !important;
+  --tabstrip-min-height: var(--tab-height) !important;
+  --tab-margin-block: 4px !important;
   --toolbar-field-background-color: transparent !important;
   /* --toolbar-bgcolor: transparent !important; */
   --toolbar-field-border-color: transparent !important;
@@ -25,6 +27,10 @@ body {
 
 
 /* ------------------- Tabs ------------------- */
+
+.browser-titlebar, #main-menubar {
+  background-color: var(--toolbar-background-color) !important;;
+}
 
 /* Fix tab offset */
 #TabsToolbar {
