@@ -1,43 +1,32 @@
 return {
   {
-    -- Context menus
+    -- Popup completion
     "saghen/blink.cmp",
-    dependencies = { "rafamadriz/friendly-snippets", },
     version = "1.*",
     opts = require "plugins.configs.blink",
     opts_extend = { "sources.default", }
   },
 
   {
-    -- Theme
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
+    -- Insert and skip over pairs
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
   },
 
   {
-    "folke/snacks.nvim",
+    -- Theme
+    "catppuccin/nvim",
+    name = "catppuccin",
+    -- Theme agnostic transparency
+    dependencies = { "xiyaowong/transparent.nvim", },
     priority = 1000,
-    lazy = false,
-    opts = {
-      -- Git blame
-      git = {}
-    }
   },
 
   {
     -- Git integration
     "lewis6991/gitsigns.nvim",
     opts = require "plugins.configs.gitsigns",
-  },
-
-  {
-    -- Markdown formatter
-    "MeanderingProgrammer/render-markdown.nvim",
-    opts = {
-      anti_conceal = { enabled = false },
-      file_types = { 'markdown', 'codecompanion' },
-    }
   },
 
   {
@@ -68,7 +57,7 @@ return {
   },
 
   {
-    -- Better syntax highligher or something idk
+    -- Better syntax highligher
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     lazy = false,
@@ -88,9 +77,6 @@ return {
     opts = {},
   },
 
-  -- Theme agnostic transparency
-  { "xiyaowong/transparent.nvim", },
-
   -- LSP/Linter manager
   { "mason-org/mason.nvim", opts = {}, },
 
@@ -102,20 +88,6 @@ return {
   },
 
   {
-    -- Linter integration
-    "mfussenegger/nvim-lint",
-    dependencies = { "rshkarin/mason-nvim-lint", },
-    config = function() require "plugins.configs.lint" end,
-  },
-
-  {
-    -- Linter to LSP injection or something idk
-    "nvimtools/none-ls.nvim",
-    dependencies = { "jay-babu/mason-null-ls.nvim", },
-    config = function() require "plugins.configs.nonels" end,
-  },
-
-  {
     -- Tmux navigations
     "christoomey/vim-tmux-navigator",
     cmd = {
@@ -123,15 +95,12 @@ return {
       "TmuxNavigateDown",
       "TmuxNavigateUp",
       "TmuxNavigateRight",
-      "TmuxNavigatePrevious",
-      "TmuxNavigatorProcessList",
     },
     keys = {
-      { "<c-h>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
-      { "<c-j>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
-      { "<c-k>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
-      { "<c-l>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
-      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+      { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+      { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+      { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+      { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
     }
   },
 

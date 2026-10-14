@@ -13,12 +13,26 @@ vim.diagnostic.config {
 vim.lsp.config('gopls', {
   settings = {
     gopls = {
-        buildFlags = {"-tags=integration"}
+      gofumpt = true,
+      usePlaceholders = true,
+
+      hints = {
+        parameterNames = true,
+        rangeVariableTypes = true,
+      },
+
+      buildFlags = {"-tags=integration"}
     }
   },
 })
 
 require('mason-lspconfig').setup {
-  ensure_installed = {},
-  automatic_installation = false,
+  ensure_installed = {
+    "bashls",
+    "gopls",
+    "lua_ls",
+    "pyright",
+    "terraformls",
+  },
+  automatic_installation = true,
 }

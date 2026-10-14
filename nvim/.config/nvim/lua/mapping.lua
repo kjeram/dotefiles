@@ -1,4 +1,8 @@
-local wk = require("which-key")
+local wk = require 'which-key'
+local fn = require 'functions'
+local gs = require 'gitsigns'
+local ts = require 'telescope.builtin'
+
 local function map(mode, lhs, rhs, desc, plugin)
   if desc ~= nil then
     wk.add({ { lhs, desc = desc } })
@@ -6,7 +10,7 @@ local function map(mode, lhs, rhs, desc, plugin)
   if plugin ~= nil then
     -- Load plugins that are lazy
     vim.keymap.set(mode, lhs, function()
-      require("lazy").load({ plugins = { plugin }, })
+      require('lazy').load({ plugins = { plugin }, })
       vim.cmd(rhs)
     end)
   else
@@ -15,87 +19,55 @@ local function map(mode, lhs, rhs, desc, plugin)
 end
 
 map(
-  "n",
-  "<leader>?",
+  'n',
+  '<leader>?',
   function()
-    require("which-key").show({ global = false })
+    require('which-key').show({ global = false })
   end,
-  "Buffer Local Keymaps (which-key)"
+  'Buffer Local Keymaps (which-key)'
 )
 
--- Clear highlights on search when pressing <Esc> in normal mode
-map("n", "<Esc>", vim.cmd.nohlsearch)
+-- QoL
+map('n', '<Esc>', vim.cmd.nohlsearch, 'Clear highlights')
+map('t', '<Esc><Esc>', '<C-\\><C-n>', 'Exit terminal mode')
+map('n', '<C-c>', '<cmd>%y+<CR>', 'Copy entire file content')
+map('n', '<C-a>', 'ggVGP', 'Replace buffer with default register')
+map('n', '<leader><Tab>', '<cmd>buffer #<CR>', 'Switch to alternate buffer')
+map('n', 'Z', function() vim.wo.wrap = not vim.wo.wrap end, 'Toggle word wrap')
 
--- Enter normal mode from terminal mode
-map('t', '<Esc><Esc>', "<C-\\><C-n>", 'Exit terminal mode')
+-- Muscle memory
+map('n', '<leader><S-D>', vim.diagnostic.open_float)
+map('n', '<leader>-', vim.cmd.split, 'Horizontal split')
+map('n', '<leader>_', vim.cmd.vsplit, 'Vertical split')
+map('n', '<leader>w', '<C-w>', '[W]indow')
 
--- Copy entire filecontent
-map("n", "<C-c>", "<cmd>%y+<CR>")
+-- Standalone plugin keys
+map('n', '<Leader>s', fn.switch_case, '[S]witch between snake_case & CamelCase')
+map('n', '<leader>e', vim.cmd.Oil, '[E]xplorer (Oil)')
 
--- Replace buffer with default register
-map("n", "<C-a>", "ggVGP")
+-- Config keys
+wk.add({ '<leader>c', group = '[C]onfig' })
+map('n', '<leader>cl', vim.cmd.Lazy, '[L]azy')
+map('n', '<leader>cm', vim.cmd.Mason, '[M]ason')
 
-local fn = require "functions"
-map("n", '<Leader>s', fn.switch_case, "[S]witch between snake_case & CamelCase")
+-- Git keys
+wk.add({ '<leader>g', group = '[G]it' })
+map('n', '<leader>gl', 'LazyGit', '[L]azyGit', 'lazygit.nvim')
+map('n', '<leader>gs', gs.stage_hunk, '[S]tage Hunk')
+map('n', '<leader>gr', gs.reset_hunk, '[R]eset Hunk')
+map('n', '<leader>gp', gs.preview_hunk, '[P]review Hunk')
+map('n', '<leader>gb', function() gs.blame_line({ full = true }) end, '[G]it [B]lame')
 
-map("n", "Z", function() vim.wo.wrap = not vim.wo.wrap end, "Toggle word wrap")
+--telescope / Find
+wk.add({ '<leader>f', group = '[F]ind' })
+map('n', '<leader>ff', function() ts.find_files({ hidden = true }) end, '[F]iles')
+map('n', '<leader>fr', function() ts.find_files({ cwd = vim.env.HOME, hidden = true }) end, '[R]oot files')
+map('n', '<leader>fg', function() ts.live_grep({ hidden = true }) end, '[G]rep')
+map('n', '<leader>fh', ts.help_tags, '[H]elp')
+map('n', '<leader>fk', ts.keymaps, '[K]eymaps')
+map('n', '<leader>fd', ts.diagnostics, '[D]iagnostics')
+map('n', '<leader>fb', ts.buffers, '[B]uffer')
 
-map("n", "<leader><S-D>", vim.diagnostic.open_float)
-
-wk.add { { "<leader>w", group = "[W]indow", proxy = "<C-w>" }, }
-map("n", "<leader>w", "<C-w>")
-
-map("n", "<leader>e", vim.cmd.Oil, "File [E]xplorer (Oil)")
-
-map("n", "<leader>mt", "RenderMarkdown toggle", "[M]arkdown [T]oggle", "render-markdown.nvim")
-
-map("n", "<leader>-", vim.cmd.split, "Horizontal split")
-map("n", "<leader>_", vim.cmd.vsplit, "Vertical split")
-
-local gitsigns = require "gitsigns"
-wk.add({ "<leader>g", group = "[G]it" })
-map("n", "<leader>gl", "LazyGit", "[L]azyGit", "lazygit.nvim")
-map("n", "<leader>gs", gitsigns.stage_hunk, "[S]tage Hunk")
-map("n", "<leader>gr", gitsigns.reset_hunk, "[R]eset Hunk")
-map("n", "<leader>gp", gitsigns.preview_hunk, "[P]review Hunk")
-map("n", "<leader>gi", gitsigns.preview_hunk_inline, "Preview Hunk [I]nline")
-
-local snacks = require "snacks"
-map("n", "<leader>gb", function() snacks.git.blame_line() end, "[G]it [b]lame")
-
-local telescope = require "telescope.builtin"
-
--- map("n", "<leader><leader>", telescope.buffers, '[ ] Findexisting buffers')
-
-wk.add({ "<leader>f", group = "[F]ind" })
-map("n", "<leader>fh", telescope.help_tags, '[H]elp')
-map("n", "<leader>fk", telescope.keymaps, '[K]eymaps')
-map("n", "<leader>ff", telescope.find_files, '[F]iles')
-map("n", "<leader>fs", telescope.builtin, '[S]elect Telescope')
-map("n", "<leader>fw", telescope.grep_string, 'Current [W]ord')
-map("n", "<leader>fd", telescope.diagnostics, '[D]iagnostics')
--- map("n", "<leader>fg", telescope.live_grep, 'by [G]rep')
-map("n", "<leader>fr", telescope.resume, '[R]esume')
-map("n", "<leader>f.", telescope.oldfiles, 'Recent Files ("." for repeat)')
-
-wk.add({ "<leader>b", group = "[B]uffer" })
-map("n", "<leader>bb", telescope.buffers, 'Opened [B]uffer')
-map("n", "<leader>bc", vim.cmd.bwipeout, '[C]lear')
-map("n", "<leader>bn", vim.cmd.bn, '[N]ext')
-map("n", "<leader>bp", vim.cmd.bp, '[P]revious')
-map("n", "<leader>bd", vim.cmd.bd, '[D]elete')
-
-wk.add({ "<leader>l", group = "[L]SP" })
-map("n", "<leader>lr", vim.lsp.buf.rename, "[R]ename")
-map("n", "<leader>lf", vim.lsp.buf.format, "[F]ormat")
-map("n", "<leader>lO", telescope.lsp_document_symbols, "[O]pen Document Symbols")
-map("n", "<leader>lW", telescope.lsp_dynamic_workspace_symbols, "Open [W]orkspace Symbols")
-map("n", "<leader>ls", vim.cmd.LspInfo, "[S]tatus")
-
-wk.add({ "<leader>lg", group = "[G]oto" })
-map("n", "<leader>lgr", telescope.lsp_references, "[R]eferences")
-map("n", "<leader>lgd", telescope.lsp_definitions, "[D]efinition")
-
-wk.add({ "<leader>c", group = "[C]onfig" })
-map("n", "<leader>cl", vim.cmd.Lazy, "[L]azy")
-map("n", "<leader>cm", vim.cmd.Mason, "[M]ason")
+-- Override Neovim's built-in LSP list mappings with Telescope pickers.
+map('n', 'grr', ts.lsp_references, 'vim.lsp.buf.references() (telescope)')
+map('n', 'gO', ts.lsp_document_symbols, 'vim.lsp.buf.document_symbol() (telescope)')

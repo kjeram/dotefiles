@@ -6,12 +6,13 @@ return {
   },
   fuzzy = { implementation = "lua" },
   completion = {
+    list = { selection = { auto_insert = false, }, },
     menu = { border = "none", },
     documentation = {
       auto_show = true,
       auto_show_delay_ms = 200,
       window = { scrollbar = false, },
     },
-    list = { selection = { auto_insert = false, }, },
   },
+  sources = { default = { "lsp", "path", "buffer", }, },
 }
