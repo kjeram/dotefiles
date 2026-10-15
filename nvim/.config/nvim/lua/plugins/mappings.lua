@@ -1,5 +1,4 @@
 local wk = require 'which-key'
-local fn = require 'functions'
 local gs = require 'gitsigns'
 local ts = require 'telescope.builtin'
 
@@ -27,22 +26,15 @@ map(
   'Buffer Local Keymaps (which-key)'
 )
 
--- QoL
-map('n', '<Esc>', vim.cmd.nohlsearch, 'Clear highlights')
-map('t', '<Esc><Esc>', '<C-\\><C-n>', 'Exit terminal mode')
-map('n', '<C-c>', '<cmd>%y+<CR>', 'Copy entire file content')
-map('n', '<C-a>', 'ggVGP', 'Replace buffer with default register')
-map('n', '<leader><Tab>', '<cmd>buffer #<CR>', 'Switch to alternate buffer')
-map('n', 'Z', function() vim.wo.wrap = not vim.wo.wrap end, 'Toggle word wrap')
-
--- Muscle memory
-map('n', '<leader><S-D>', vim.diagnostic.open_float)
-map('n', '<leader>-', vim.cmd.split, 'Horizontal split')
-map('n', '<leader>_', vim.cmd.vsplit, 'Vertical split')
-map('n', '<leader>w', '<C-w>', '[W]indow')
+-- Add keymaps descriptions
+wk.add({
+  { '<leader>Z', desc = 'Toggle word wrap' },
+  { '<leader>-', desc = 'Horizontal split' },
+  { '<leader>_', desc = 'Vertical split' },
+  { '<leader>s', desc = '[S]witch between snake_case & CamelCase' },
+})
 
 -- Standalone plugin keys
-map('n', '<Leader>s', fn.switch_case, '[S]witch between snake_case & CamelCase')
 map('n', '<leader>e', vim.cmd.Oil, '[E]xplorer (Oil)')
 
 -- Config keys
@@ -58,15 +50,18 @@ map('n', '<leader>gr', gs.reset_hunk, '[R]eset Hunk')
 map('n', '<leader>gp', gs.preview_hunk, '[P]review Hunk')
 map('n', '<leader>gb', function() gs.blame_line({ full = true }) end, '[G]it [B]lame')
 
---telescope / Find
+--Telescope
 wk.add({ '<leader>f', group = '[F]ind' })
 map('n', '<leader>ff', function() ts.find_files({ hidden = true }) end, '[F]iles')
-map('n', '<leader>fr', function() ts.find_files({ cwd = vim.env.HOME, hidden = true }) end, '[R]oot files')
 map('n', '<leader>fg', function() ts.live_grep({ hidden = true }) end, '[G]rep')
 map('n', '<leader>fh', ts.help_tags, '[H]elp')
 map('n', '<leader>fk', ts.keymaps, '[K]eymaps')
 map('n', '<leader>fd', ts.diagnostics, '[D]iagnostics')
 map('n', '<leader>fb', ts.buffers, '[B]uffer')
+
+wk.add({ '<leader>fr', group = '[R]oot' })
+map('n', '<leader>frf', function() ts.find_files({ cwd = vim.env.HOME, hidden = true }) end, '[F]iles')
+map('n', '<leader>frg', function() ts.live_grep({ cwd = vim.env.HOME, hidden = true }) end, '[G]rep')
 
 -- Override Neovim's built-in LSP list mappings with Telescope pickers.
 map('n', 'grr', ts.lsp_references, 'vim.lsp.buf.references() (telescope)')
