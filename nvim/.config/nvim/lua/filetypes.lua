@@ -1,5 +1,11 @@
 vim.filetype.add({
   extension = {
-    sqlx = "sql",
+    sqlx = 'sql',
+  },
+})
+
+vim.filetype.add({
+  extension = {
+    mdx = 'markdown',
   },
 })

@@ -1,8 +1,8 @@
 local lsps = {
   'bashls',
   'gopls',
-  'lua_ls',
   'jsonls',
+  'lua_ls',
   'pyright',
   'terraformls',
 }

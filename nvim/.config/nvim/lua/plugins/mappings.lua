@@ -28,6 +28,7 @@ map(
 
 -- Add keymaps descriptions
 wk.add({
+  { 'grf',       desc = 'vim.lsp.buf.format()' },
   { '<leader>Z', desc = 'Toggle word wrap' },
   { '<leader>-', desc = 'Horizontal split' },
   { '<leader>_', desc = 'Vertical split' },
@@ -65,4 +66,5 @@ map('n', '<leader>frg', function() ts.live_grep({ cwd = vim.env.HOME, hidden = t
 
 -- Override Neovim's built-in LSP list mappings with Telescope pickers.
 map('n', 'grr', ts.lsp_references, 'vim.lsp.buf.references() (telescope)')
+map('n', 'grt', ts.lsp_type_definitions, 'vim.lsp.type_definitions() (telescope)')
 map('n', 'gO', ts.lsp_document_symbols, 'vim.lsp.buf.document_symbol() (telescope)')

@@ -8,10 +8,11 @@ vim.keymap.set('n', '<C-c>', '<cmd>%y+<CR>')
 vim.keymap.set('n', '<C-a>', 'ggVGP')
 -- Switch to alternate buffer
 vim.keymap.set('n', '<leader><Tab>', '<cmd>buffer #<CR>')
--- Toggle word wrap
-vim.keymap.set('n', 'Z', function() vim.wo.wrap = not vim.wo.wrap end)
-
+-- Toggle word wraf
+vim.keymap.set('n', '<leader>Z', function() vim.wo.wrap = not vim.wo.wrap end)
+-- LSP format
 vim.keymap.set('n', 'grf', vim.lsp.buf.format)
+
 vim.keymap.set('n', '<leader><S-D>', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>-', vim.cmd.split)  -- Horizontal split
 vim.keymap.set('n', '<leader>_', vim.cmd.vsplit) -- Vertical split

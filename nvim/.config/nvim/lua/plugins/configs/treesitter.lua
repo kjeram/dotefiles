@@ -1,12 +1,12 @@
 local languages = {
-  "bash",
-  "go",
-  "lua",
-  "markdown",
-  "python",
-  "sql",
-  "vim",
-  "vimdoc",
+  'bash',
+  'go',
+  'lua',
+  'markdown',
+  'python',
+  'sql',
+  'vim',
+  'vimdoc',
 }
 
 require 'nvim-treesitter'.install(languages)
