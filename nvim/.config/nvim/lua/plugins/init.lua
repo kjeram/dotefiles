@@ -57,6 +57,16 @@ return {
   },
 
   {
+    -- Markdown formatter
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {
+      anti_conceal = { enabled = false },
+      file_types = { 'markdown' },
+    }
+  },
+
+
+  {
     -- Better syntax highligher
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",

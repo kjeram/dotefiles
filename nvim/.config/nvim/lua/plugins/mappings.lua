@@ -37,6 +37,7 @@ wk.add({
 
 -- Standalone plugin keys
 map('n', '<leader>e', vim.cmd.Oil, '[E]xplorer (Oil)')
+map("n", "<leader>mt", "RenderMarkdown toggle", "[M]arkdown [T]oggle", "render-markdown.nvim")
 
 -- Config keys
 wk.add({ '<leader>c', group = '[C]onfig' })
