@@ -1,5 +1,6 @@
 # Lazygit state file
 lazygit/.config/lazygit/state.yml
+lazygit/.config/lazygit/github*
 
 # Nvim lock file
 nvim/.config/nvim/lazy-lock.json
