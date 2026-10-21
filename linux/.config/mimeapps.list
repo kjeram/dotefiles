@@ -4,7 +4,7 @@ text/ini=nvim.desktop
 text/log=nvim.desktop
 text/list=nvim.desktop
 text/css=nvim.desktop
-text/html=nvim.desktop
+text/html=firefox.desktop
 
 image/png=imv.desktop
 image/jpg=imv.desktop
