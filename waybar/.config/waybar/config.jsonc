@@ -132,8 +132,8 @@
     "on-click": "mpc toggle",
     "on-click-right": "kitty rmpc",
     "on-click-middle": "mpc stop",
-    "on-scroll-up": "mpc volume +5",
-    "on-scroll-down": "mpc volume -5",
+    // "on-scroll-up": "mpc volume +5",
+    // "on-scroll-down": "mpc volume -5",
     "tooltip": false
   },
   "cpu": {
